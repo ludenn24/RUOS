@@ -1,0 +1,240 @@
+{% extends 'templates/app.twig' %}
+{% block content %}
+<div id="wrapper-content">
+   <div id="page-wrapper">
+      <div class="main-content">
+         <div class="content">
+            {% if OrganizacionController.check %}
+            <div class="section section-padding contact-main" id="organizacion">
+               <div class="container">
+                  <div class="group-title-index">
+                     <h2 class="center-title">Mi Organización Social</h2>
+                     <h4 class="top-title">Hola <b>{{ AuthController.usuario.nombres }}</b>, ingresa los <b>datos</b> requeridos para la organización social</h4>
+                  </div>
+                  <div class="contact-main-wrapper">
+                     <form action="{{ path_for('auth.documento') }}" class="bg-w-form contact-form" method="post" autccomplete="off">
+                        <div class="row">
+                           <div class="col-md-12{{ errors.nom_org ? ' has-error' : '' }}">
+                              <label class="control-label form-label">NOMBRE DE LA ORGANIZACIÓN <span class="highlight">*</span></label>
+                              <input type="text" placeholder="Ingrese el nombre de la organización" id="nom_org" name="nom_org"
+                                 class="form-control form-input" value="{{ old.nom_org }} ">
+                              {% if errors.nom_org %}
+                              <span class="help-block">{{ errors.nom_org | first }}</span>
+                              {% endif %}
+                           </div>
+                           <div class="col-md-6{{ errors.obj_tipo ? ' has-error' : '' }}">
+                              <label class="control-label form-label">TIPO DE ORGANIZACIÓN SOCIAL <span class="highlight">*</span>
+                              </label>
+                              <select class="form-control form-select" id="obj_tipo" name="obj_tipo" onchange="Buscardenominacion(this);" >
+                                 <option value="">Seleccionar el tipo de organización social</option>
+                                 {% for tipo in OrganizacionController.tipoorganizacion %}
+                                 <option value="{{ tipo.codigo }}">{{ tipo.descripcion }}</option>
+                                 {% endfor %}
+                              </select>
+                              {% if errors.obj_tipo %}
+                              <span class="help-block">{{ errors.obj_tipo | first }}</span>
+                              {% endif %}
+                           </div>
+                           <div class="col-md-6{{ errors.obj_denomina ? ' has-error' : '' }}">
+                              <label class="control-label form-label">DENOMINACIÓN DE ORGANIZACIÓN SOCIAL
+                              </label>
+                              <select class="form-control form-select" id="obj_denomina" name="obj_denomina">
+                                 <option value="">Seleccionar una clase</option>
+                              </select>
+                              {% if errors.obj_denomina %}
+                              <span class="help-block">{{ errors.obj_denomina | first }}</span>
+                              {% endif %}
+                           </div>
+                           <div class="col-md-6{{ errors.domicilio_org ? ' has-error' : '' }}">
+                              <label class="control-label form-label">DIRECCIÓN DEL LOCAL DE LA ORGANIZACIÓN <span
+                                 class="highlight">*</span></label>
+                              <input type="text" placeholder="Ingrese la dirección del local de la organización"
+                                 id="domicilio_org" name="domicilio_org" class="form-control form-input"
+                                 value="{{ old.domicilio_org }}">
+                              {% if errors.domicilio_org %}
+                              <span class="help-block">{{ errors.domicilio_org | first }}</span>
+                              {% endif %}
+                           </div>
+                           <div class="col-md-3{{ errors.fecha_cons ? ' has-error' : '' }}">
+                              <label class="control-label form-label">FECHA DE CONSTITUCIÓN</label>
+                              <input type="date" placeholder="" id="fecha_cons" name="fecha_cons" class="form-control form-input"
+                                 value="{{ old.fecha_cons }}">
+                              {% if errors.fecha_cons %}
+                              <span class="help-block">{{ errors.fecha_cons | first }}</span>
+                              {% endif %}
+                           </div>
+                           <div class="col-md-3{{ errors.num_miem ? ' has-error' : '' }}">
+                              <label class="control-label form-label">NÚMERO DE MIEMBROS</label>
+                              <input type="number" placeholder="" id="num_miem" name="num_miem" class="form-control form-input"
+                                 value="{{ old.num_miem }}">
+                              {% if errors.num_miem %}
+                              <span class="help-block">{{ errors.num_miem | first }}</span>
+                              {% endif %}
+                           </div>
+                           <div class="col-md-12{{ errors.fines ? ' has-error' : '' }}">
+                              <div class="contact-question">
+                                 <label class="control-label form-label">FINES DE LA ORGANIZACIÓN <span class="highlight">*</span></label>
+                                 <textarea class="form-control form-input" id="fines" name="fines">{{ old.fines }}</textarea>
+                                 {% if errors.fines %}
+                                 <span class="help-block">{{ errors.fines | first }}</span>
+                                 {% endif %}
+                              </div>
+                           </div>
+                           <div class="col-md-12" style="height: 400px;">
+                              <label class="control-label form-label">UBICACIÓN DEL LOCAL DE LA ORGANIZACIÓN SOCIAL<span class="highlight">*</span>
+                              </label>
+                              <div id="map"></div>
+                           </div>
+                           <input id="longitud" name="longitud" type="hidden" data-content="Usted debe ubicar la organización en el mapa."/>
+                           <input id="latitud"  name="latitud" type="hidden" data-content="Usted debe ubicar la organización en el mapa."/>
+                        </div>
+                        <div class="contact-submit">
+                           <button type="submit" class="btn btn-green center btn-contact btn-bold">
+                           <span>
+                           REGISTRAR INFORMACIÓN
+                           </span>
+                           </button>
+                        </div>
+                        {{ csrf.field | raw }}
+                     </form>
+                  </div>
+               </div>
+            </div>
+            {% else %}
+            <div class="section section-padding contact-main" id="organizacion">
+               <div class="container">
+                  <div class="group-title-index">
+                     <h2 class="center-title"> DATOS DE LA ORGANIZACIÓN SOCIAL</h2>
+                     <h4 class="top-title"><b>Información ingresada para la organización social</b></h4>
+                  </div>
+                  <div class="contact-main-wrapper">
+                     <form action="{{ path_for('organizacion.organizacion') }}" class="bg-w-form contact-form" method="post"
+                        autccomplete="off">
+                        <div class="row">
+                           <div class="col-md-12{{ errors.nom_org ? ' has-error' : '' }}">
+                              <label class="control-label form-label">NOMBRE DE LA ORGANIZACIÓN SOCIAL<span
+                                 class="highlight">*</span></label>
+                              <input type="text" value="{{ OrganizacionController.organizacion.nombre_org }}" id="nom_org" name="nom_org"
+                                 class="form-control form-input">
+                              {% if errors.nom_org %}
+                              <span class="help-block">{{ errors.nom_org | first }}</span>
+                              {% endif %}
+                           </div>
+                           <div class="col-md-6{{ errors.obj_tipo ? ' has-error' : '' }}">
+                              <label class="control-label form-label">TIPO DE ORGANIZACIÓN SOCIAL <span class="highlight">*</span>
+                              </label>
+                              <select class="form-control form-select" id="obj_tipo" name="obj_tipo" onchange="Buscardenominacion(this);" >
+                                 <option value="">Seleccionar el tipo de organización social</option>
+                                 {% for tipo in OrganizacionController.tipoorganizacion %}
+                                 <option {% if tipo.codigo == OrganizacionController.organizacion.tipo_org %} selected {% else %}   {% endif %}
+                                 value="{{ tipo.codigo }}">{{ tipo.descripcion }}</option>
+                                 {% endfor %}
+                              </select>
+                              {% if errors.obj_tipo %}
+                              <span class="help-block">{{ errors.obj_tipo | first }}</span>
+                              {% endif %}
+                           </div>
+                           <div class="col-md-6{{ errors.obj_denomina ? ' has-error' : '' }}">
+                              <label class="control-label form-label">DENOMINACIÓN DE ORGANIZACIÓN SOCIAL<span class="highlight">*</span>
+                              </label>
+                              <select class="form-control form-select" id="obj_denomina" name="obj_denomina">
+                                 <option value="">Seleccionar una clase</option>
+                                 {% for tipoden in OrganizacionController.tipoorganizacionden %}
+                                 <option {% if tipoden.codigo == OrganizacionController.organizacion.tipo_den %} selected {% else %}   {% endif %}
+                                 value="{{ tipoden.codigo }}">{{ tipoden.descripcion }}</option>
+                                 {% endfor %}
+                              </select>
+                              {% if errors.obj_denomina %}
+                              <span class="help-block">{{ errors.obj_denomina | first }}</span>
+                              {% endif %}
+                           </div>
+                           <div class="col-md-6{{ errors.domicilio_org ? ' has-error' : '' }}">
+                              <label class="control-label form-label">DIRECCIÓN DEL LOCAL DE LA ORGANIZACIÓN SOCIAL<span
+                                 class="highlight">*</span></label>
+                              <input type="text" value="{{ OrganizacionController.organizacion.domicilio_org }}" id="domicilio_org"
+                                 name="domicilio_org" class="form-control form-input">
+                              {% if errors.domicilio_org %}
+                              <span class="help-block">{{ errors.domicilio_org | first }}</span>
+                              {% endif %}
+                           </div>
+                           <div class="col-md-3{{ errors.fecha_cons ? ' has-error' : '' }}">
+                              <label class="control-label form-label">FECHA DE CONSTITUCIÓN</label>
+                              <input type="date" value="{{ OrganizacionController.organizacion.fecha_constitucion }}" id="fecha_cons"
+                                 name="fecha_cons" class="form-control form-input">
+                              {% if errors.fecha_cons %}
+                              <span class="help-block">{{ errors.fecha_cons | first }}</span>
+                              {% endif %}
+                           </div>
+                           <div class="col-md-3{{ errors.num_miem ? ' has-error' : '' }}">
+                              <label class="control-label form-label">NÚMERO DE MIEMBROS</label>
+                              <input type="number" value="{{ OrganizacionController.organizacion.num_miem }}" id="num_miem" name="num_miem"
+                                 class="form-control form-input">
+                              {% if errors.num_miem %}
+                              <span class="help-block">{{ errors.num_miem | first }}</span>
+                              {% endif %}
+                           </div>
+                           <div class="col-md-12{{ errors.fines ? ' has-error' : '' }}">
+                              <div class="contact-question">
+                                 <label class="control-label form-label">FINES DE LA ORGANIZACIÓN SOCIAL<span class="highlight">*</span></label>
+                                 <textarea class="form-control form-input" id="fines"
+                                    name="fines">{{ OrganizacionController.organizacion.fines }}</textarea>
+                                 {% if errors.fines %}
+                                 <span class="help-block">{{ errors.fines | first }}</span>
+                                 {% endif %}
+                              </div>
+                           </div>
+                           <div class="col-md-12" style="height: 400px;">
+                              <label class="control-label form-label">UBICACIÓN DEL LOCAL DE LA ORGANIZACIÓN SOCIAL <span class="highlight">*</span>
+                              </label>
+                              <div id="map"></div>
+                           </div>
+                           <input id="longitud"  name="longitud" type="hidden" value="{{ OrganizacionController.organizacion.longitud }}"  data-content="Usted debe ubicar la organización en el mapa."/>
+                           <input id="latitud"  name="latitud" type="hidden" value="{{ OrganizacionController.organizacion.latitud }}"  data-content="Usted debe ubicar la organización en el mapa."/>
+                        </div>
+                        <div class="contact-submit">
+                           <button type="submit" class="btn btn-green center btn-contact">
+                           <span>
+                           ACTUALIZAR INFORMACIÓN
+                           </span>
+                           </button>
+                        </div>
+                        {{ csrf.field | raw }}
+                     </form>
+                  </div>
+               </div>
+            </div>
+            {% endif %}
+         </div>
+      </div>
+   </div>
+</div>
+<div class="footer-top">
+   <div class="container">
+      <div class="footer-top-wrapper">
+         <div class="footer-top-left">
+            <p class="footer-top-focus">CONTINUAR SOLICITUD</p>
+            <p class="footer-top-text">Si los datos de tu organización social están completas, podrás continuar con la solicitud</p>
+         </div>
+         <div class="footer-top-right">
+            <button onclick="window.location.href = '{{ base_url() }}/auth/solicitud'" class="btn btn-blue btn-bold"><span>Continuar</span></button>
+         </div>
+      </div>
+   </div>
+</div>
+<script>
+   $(document).ready(function () {
+       var marker;
+       var coords = {};
+       coords = {
+           {% if(OrganizacionController.organizacion.longitud) %}
+           lng:{{ OrganizacionController.organizacion.longitud }},
+           lat:{{ OrganizacionController.organizacion.latitud }},
+           {% else %}
+           lng: - 77.03146290121919,
+           lat: - 12.045291343726586,
+           {% endif %}};
+           setMapa(coords);
+       });
+</script>
+<script src="{{ base_url() }}/js/organizacion.js"></script>
+{% endblock content %}

@@ -1,0 +1,90 @@
+<div class="section section-padding choose-course">
+    <div class="container">
+
+
+        <a class="btn-404 btn btn-info-dinamic btn-lg btn3d"
+           data-target="#AgregarOrganizacion"
+           id="modalAgregar"
+           data-toggle="modal">
+            <span>AGREGAR ORGANIZACIÓN</span>
+        </a>
+
+        <a class="btn-404 btn btn-default-dinamic btn-lg btn3d"
+           href="../envio/solicitud"
+           id="modalAgregar"
+           data-toggle="modal">
+            <span>SOLICITUD GENERAL</span>
+        </a>
+
+
+        <a class="btn-404 btn btn-default-dinamic btn-lg btn3d"
+           href="../solicitud/distritales"
+           id="modalAgregar"
+           data-toggle="modal">
+            <span>CONSULTA SOLICITUDES</span>
+
+        </a>
+
+
+        <div class="section teacher-course">
+            <div class="container teacher-course-wrapper">
+                <div class="course-table">
+                    <table id="ListOrganizaciones"
+                           class="mayus display compact table table-striped table-bordered dt-responsive ">
+                        <thead>
+                        <tr class="heading-table">
+                            <th>CÓDIGO</th>
+                            <th>ORGANIZACIÓN</th>
+            
+                            <th>TIPO</th>
+                            <th>SOLICITUD</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for organizaciones in OrganizacionController.organizaciones %}
+                            <tr>
+
+                                <td>{{ organizaciones.num_org }}</td>
+                                <td>
+
+                                    <a style="cursor:pointer;overflow: visible;"
+                                       data-target="#EditarOrganizacion"
+                                       id="modalEditar"
+                                       data-toggle="modal"
+                                       data-codigo="{{ organizaciones.codigo }}">
+                                        {{ organizaciones.nombre_org }}
+                                    </a>
+                                </td>
+                                <!--
+                                <td>
+                                    <a style="cursor:pointer;overflow: visible;"
+                                       data-target="#JuntaDirectiva"
+                                       id="modalJuntaDirectiva"
+                                       data-toggle="modal"
+                                       data-codigo="{{ organizaciones.codigo }}"
+                                       data-nombre="{{ organizaciones.nombre_org }}">
+                                        ADMINISTRAR
+                                    </a>
+                                </td>-->
+                                <td>{{ organizaciones.descripcion }}</td>
+                                <td>
+                                    <a class=""
+                                       style="cursor:pointer;overflow: visible;"
+                                       data-target="#ModalSolicitudes"
+                                       data-toggle="modal"
+                                       data-codigo="{{ organizaciones.codigo }}"
+                                       data-nombre="[{{ organizaciones.nombre_org }}]">
+                                        <i class="fa fa-file"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

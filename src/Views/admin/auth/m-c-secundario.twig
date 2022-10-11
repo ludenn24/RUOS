@@ -1,0 +1,384 @@
+{% extends 'admin/templates/app.twig' %}
+{% block content %}
+
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #map {
+            width: 100%;
+            height: 80%;
+            border: solid 2px #cccccc;
+            border-radius: 5px;
+        }
+        #map2 {
+            width: 100%;
+            height: 80%;
+            border: solid 2px #cccccc;
+            border-radius: 5px;
+        }
+        #coords{width: 500px;}
+
+        td.details-control {
+            background: url('{{ base_url() }}/images/details_open.png') no-repeat center center;
+            cursor: pointer;
+        }
+        tr.shown  td.details-control {
+            background: url('{{ base_url() }}/images/details_close.png') no-repeat center center;
+        }
+    </style>
+
+    <body class="hold-transition skin-blue sidebar-mini ">
+    <div class="pace  pace-inactive">
+        <div class="pace-progress" data-progress-text="100%" data-progress="99" style="transform: translate3d(100%, 0px, 0px);">
+            <div class="pace-progress-inner"></div>
+        </div>
+        <div class="pace-activity"></div>
+    </div>
+<div class="wrapper">
+    <header class="main-header">
+        <!-- Logo -->
+        <a href="../admin/dash" class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini"><b>R</b>S</span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"><b style="font-style:oblique;">RUOS</b></span>
+        </a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top" role="navigation">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <!-- User Account: style can be found in dropdown.less -->
+                    <li class="dropdown user user-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="{{ base_url() }}/dist/img/logini.jpg" class="user-image" alt="User Image">
+                            <span class="hidden-xs"><?php echo $_SESSION['ses_correouser'];?></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- User image -->
+                            <li class="user-header">
+                                <img src="{{ base_url() }}/dist/img/logini.jpg" class="img-circle" alt="User Image">
+                                <p>
+                                    {{ AdminController.admin.nombres }}
+                                    <small>{{ AdminController.admin.dni }}</small>
+                                    <small>Administrador</small>
+                                </p>
+                            </li>
+                            <!-- Menu Footer-->
+                            <li class="user-footer" style="border: 1px solid #3C8DBC;">
+                                <div class="pull-right">
+                                    <a href="#" class="btn btn-default btn-flat" id="changeses" style="border: 1px solid #3C8DBC;">Cerrar sesión</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- Control Sidebar Toggle Button -->
+                    <li>
+                        <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <aside class="main-sidebar">
+        {% include 'admin/templates/menu.twig' %}
+    </aside>
+
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1 id="tipodesol">
+                SOLICITUDES
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-book"></i> [ASIENTO SECUNDARIO]</a></li>
+            </ol>
+        </section>
+            <section class="content">
+                <div class="row">
+
+                    <div class="col-xs-12">
+                         <div class="box">
+
+                        <div class="box-body">
+                            <div class="margin">
+                                <div class="btn-group">
+                                    <h4 class="box-title">Filtros de solicitudes: </h4>
+                                </div>
+                                <div class="btn-group">
+                                    <button onclick="ListarSolicitudes()" type="button" class="btn btn-block btn-default btn-flat">Todos</button>
+                                </div>
+                                <div class="btn-group">
+                                    <button onclick="ListarSolicitudes(2)" type="button" class="btn btn-block btn-warning btn-flat">Pendientes</button>
+                                </div>
+                                <div class="btn-group">
+                                    <button onclick="ListarSolicitudes(3)"type="button" class="btn btn-block btn-success btn-flat">Aprobados</button>
+                                </div>
+                                <div class="btn-group">
+                                    <button onclick="ListarSolicitudes(1)"type="button" class="btn btn-block  btn-primary btn-flat">Incompletos</button>
+                                </div>
+                                <div class="btn-group">
+                                    <button onclick="ListarSolicitudes(4)" type="button" class="btn btn-block  btn-danger btn-flat">Archivados</button>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="box">
+                            <div class="box-body">
+                                        <table id="Solicitudes"  class="table table-bordered table-hover" width="100%">
+
+                                            <thead>
+                                            <tr class="heading-table">
+                                                <th class="col-md-1"></th>
+                                                <th class="col-md-1">Nº DE SOLICITUD</th>
+                                                <th class="col-md-1">TIPO</th>
+                                                <th class="col-md-2">CASA</th>
+                                                <th class="col-md-1">ORGANIZACIÓN</th>
+                                                <th class="col-md-1">FECHA DE SOLICITUD</th>
+                                                <th class="col-md-1">FECHA MÁXIMA DE ATENCIÓN</th>
+                                                <th class="col-md-1">ESTADO</th>
+                                                <th class="col-md-1">EVALUACIÓN</th>
+                                            </tr>
+                                            </thead>
+
+                                        </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </div>
+
+    <script type="text/javascript">
+
+
+
+        $( document ).ready(function() {
+            ListarSolicitudes();
+        })
+
+        function format ( d ) {
+            return '<div class="col-md-8"><div class="col-md-12"><p style="float: left;"><strong>DIRECCIÓN: </strong> '+d.tipo_sol+'</p><br></div>'+
+                '<div class="col-md-12"><p style="float: left;"><strong>TIPO: </strong>'+d.tipo_sol+'</p></div>'+
+                '<div class="col-md-12"><p style="float: left;"><strong>DISTRITO: </strong>'+d.tipo_sol+'</p></div></div>';
+        }
+
+        var childRows = null;
+
+        function ListarSolicitudes(estado){
+
+            var titulo;
+
+            titulo = estado;
+
+            if (titulo == 1){
+                titulo="SOLICITUDES INCOMPLETAS";
+            }else if (titulo == 2){
+                titulo="SOLICITUDES PENDIENTES";
+            }else if (titulo == 3){
+                titulo="SOLICITUDES APROBADAS";
+            }else if (titulo == 4){
+                titulo="SOLICITUDES ARCHIVADAS";
+            }else{
+                titulo="SOLICITUDES";
+            }
+
+            document.getElementById("tipodesol").innerHTML = titulo ;
+
+            responsive: true
+
+            var dt =  $('#Solicitudes').DataTable( {
+                processing: true,
+                ordering: true,
+                destroy: true,
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ],
+                "buttons": [
+                    'copy', 'csv', 'excel', 'pdf'
+                ],
+
+                "language": {
+                    "lengthMenu": "Ver _MENU_ registros por página",
+                    "zeroRecords": "No se encontraron resultados",
+                    "info": "Viendo página _PAGE_ de _PAGES_",
+                    "infoEmpty": "No se encontraron responsables",
+                    "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "search":         "Buscar:",
+                    "paginate": {
+                        "first":      "Primero",
+                        "last":       "Último",
+                        "next":       "Siguiente",
+                        "previous":   "Anterior"
+                    },
+                },
+
+                "ajax":{
+                    "type":"get",
+                    "url":"{{ base_url() }}/admin/listasolicitudes",
+                    "data": {
+
+
+                        tipo_sol: 2,
+                        estado : estado,
+
+                    }
+                },
+
+                "columns":[
+                    {
+                        "class":          "details-control",
+                        "orderable":      false,
+                        "data":           null,
+                        "defaultContent": ""
+                    },
+                    {
+                        "data": "num_sol",
+                        render: function(data) {
+                            if(data==null) {
+                                return '---';
+                            }
+                            else{
+                                return data;
+                            }
+
+                        },
+                    },
+                    {
+                        "data": "tipo_sol",
+                        render: function(data) {
+                            if(data=="1") {
+                                return '[NUEVO]';
+                            }
+                            else{
+                                return '[ACTUALIZACIÓN]';
+                            }
+
+                        },
+                    },
+                    {"data":"casa"},
+                    {"data":"nombre_org"},
+                    {
+                        "data": "fec_revision",
+                        render: function(data) {
+                            if(data==null) {
+                                return '---';
+                            }
+                            else{
+                                return data;
+                            }
+                        },
+                    },
+                    {
+                        "data": "fec_venci",
+                        render: function(data) {
+                            if(data==null) {
+                                return '---';
+                            }
+                            else{
+                                return data;
+                            }
+                        },
+                    },
+                    {
+                        "data": "flag",
+                        render: function(data) {
+                            if(data=="1") {
+                                return "<span class='label label-info'>Incompleto</span>";
+                            }
+                            else if(data=="2") {
+                                return "<span class='label label-warning'>Pendiente</span>";
+                            }
+                             else if(data=="3") {
+                                return "<span class='label label-success'>Aprobado</span>";
+                            }
+                            else{
+                                return "<span class='label label-danger'>Archivado</span>";
+                            }
+
+                        },
+                    },
+                    {
+                        "data": "codsol",
+                        render: function(data) {
+                            return "<a class='btn btn-default'"+
+                                "style='cursor:pointer;overflow: visible;'"+
+                                "href='{{ base_url() }}/admin/solicitud/"+data+"'>"+
+                                "Evaluar <i class='fa fa-search-plus'></i></a>"
+                        },
+                    },
+
+                ],
+
+
+                columnDefs: [
+                    {
+                        className: 'text-center',
+                        targets: [1,2,3,5,6,7,8],
+                    },
+
+                    { width: "3%",
+                        targets: [0,3] },
+
+                    { width: "5%",
+                        targets: [1,2,7,8] },
+                    { width: "10%",
+                        targets: [5,6] },
+                    { width: "20%",
+                        targets: [4] },
+                ]
+            } );
+
+            var detailRows = [];
+
+            $('#Solicitudes tbody').off('click', 'tr td.details-control');
+            $('#Solicitudes tbody').on( 'click', 'tr td.details-control', function () {
+                var tr = $(this).closest('tr');
+                var row = dt.row( tr );
+
+                if ( row.child.isShown() ) {
+                    row.child.hide();
+                    tr.removeClass('shown');
+                }
+                else {
+                    // Open this row
+                    d = row.data();
+                    row.child( format(d) ).show();
+                    tr.addClass('shown');
+                }
+            } );
+
+            dt.on( 'draw', function () {
+                if (childRows) {
+
+                    childRows.every(function ( rowIdx, tableLoop, rowLoop ) {
+                        d = this.data();
+                        this.child($(format(d))).show();
+                        this.nodes().to$().addClass('shown');
+                    } );
+                    childRows = null;
+                }
+            } );
+
+        }
+
+    </script>
+
+{% endblock content %}

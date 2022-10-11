@@ -1,0 +1,371 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head><title>RUOS - MUNICIPALIDAD DE LIMA</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- LIBRARY FONT-->
+    <link type="text/css" rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lato:400,400italic,700,900,300">
+    <!-- LIBRARY CSS-->
+    <link type="text/css" rel="stylesheet" href="{{ base_url() }}/css/jquery.selectbox.css">
+
+    <link type="text/css" rel="stylesheet" href="{{ base_url() }}/css/jquery.fancybox.css">
+    <link type="text/css" rel="stylesheet" href="{{ base_url() }}/css/jquery.fancybox-buttons.css">
+    <link type="text/css" rel="stylesheet" href="{{ base_url() }}/css/mediaelementplayer.min.css">
+
+    <link type="text/css" rel="stylesheet" href="{{ base_url() }}/css/animate.css">
+    <link type="text/css" rel="stylesheet" href="{{ base_url() }}/css/Glyphter.css">
+    <link type="text/css" rel="stylesheet" href="{{ base_url() }}/css/font-awesome.css">
+    <link type="text/css" rel="stylesheet" href="{{ base_url() }}/libs/bootstrap-3.3.5/css/bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="{{ base_url() }}/css/style.css">
+    <link type="text/css" rel="stylesheet" href="{{ base_url() }}/css/owl.carousel.css">
+    <link type="text/css" rel="stylesheet" href="{{ base_url() }}/css/modals.css">
+    <link type="text/css" rel="stylesheet" href="{{ base_url() }}/css/jquery.dataTables.min.css">
+
+    <link type="text/css" rel="stylesheet"
+          href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css">
+
+    <!--
+     <link href="https://aplicativos.munlima.gob.pe/assets/css/explorer.css" rel="stylesheet" type="text/css">
+  -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://apis.google.com/js/client.js"></script>
+
+    <script type="text/javascript" src="https://unpkg.com/default-passive-events"></script>
+    <!--<script src="{{ base_url() }}/js/jquery-2.1.4.min.js"></script>-->
+    <script src="{{ base_url() }}/js/js.cookie.js"></script>
+    <script src="{{ base_url() }}/js/ckeditor/ckeditor.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=weather,geometry,visualization,places,drawing&amp;key=AIzaSyBOto-hKdu-7-z4FolFfAgA6ppzmpP303Y"
+            type="text/javascript"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166932182-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-166932182-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div id="page-wrapper">
+<div class="main-content">
+  <div class="content">
+    <div class="page-login rlp" style="background: #ededed;">
+      <div class="container">
+        <div class="login-wrapper rlp-wrapper" style="width:750px;">
+          <div class="login-table rlp-table">
+            <a href="..">
+              <img src="../images/logo-color-4.png" alt="" class="login"/>
+            </a>
+            <div class="login-title rlp-title">CREA TU CUENTA</div>
+            <hr>
+
+            <div id="load" class>
+            </div>
+            <form action="{{ path_for('auth.signup') }}" method="post" autccomplete="off">
+              <div class="login-form bg-w-form rlp-form">
+
+                <div class="col-md-6{{ errors.dni ? ' has-error' : '' }}">
+                  <label class="control-label form-label">D.N.I <span class="highlight">*</span>
+                  </label>
+                  <input name="dni" id="dni" type="text" placeholder="D.N.I" maxlength="8" onkeyup="buscarDni()"  value="{{ old.dni }}"  class="form-control form-input">
+                  {% if errors.dni %}
+                    <span class="help-block">{{ errors.dni | first }}</span>
+                  {% endif %}
+
+                </div>
+
+                <div class="col-md-6{{ errors.nombres ? ' has-error' : '' }}">
+                  <label class="control-label form-label">NOMBRES <span class="highlight">*</span>
+                  </label>
+                  <input name="nombres" id="nombres" type="text" placeholder="Nombres completos"
+                         class="form-control form-input" value="{{ old.nombres }}">
+                  {% if errors.nombres %}
+                    <span class="help-block">{{ errors.nombres | first }}</span>
+                  {% endif %}
+                </div>
+
+                <div class="col-md-6{{ errors.apellidopaterno ? ' has-error' : '' }}">
+                  <label for="regpassword" class="control-label form-label">APELLIDO PATERNO <span
+                      class="highlight">*</span>
+                  </label>
+                  <input name="apellidopaterno" id="apellidopaterno" type="text" placeholder="Apellido paterno"
+                         value="{{ old.apellidopaterno }}" class="form-control form-input"/>
+                  {% if errors.apellidopaterno %}
+                    <span class="help-block">{{ errors.apellidopaterno | first }}</span>
+                  {% endif %}
+                </div>
+
+                <div class="col-md-6{{ errors.apellidomaterno ? ' has-error' : '' }}">
+                  <label for="regpassword" class="control-label form-label">APELLIDO MATERNO <span
+                      class="highlight">*</span>
+                  </label>
+                  <input name="apellidomaterno" id="apellidomaterno" type="text" placeholder="Apellido materno"
+                         value="{{ old.apellidomaterno }}" class="form-control form-input"/>
+                  {% if errors.apellidomaterno %}
+                    <span class="help-block">{{ errors.apellidomaterno | first }}</span>
+                  {% endif %}
+                </div>
+
+                <div class="col-md-6{{ errors.email ? ' has-error' : '' }}">
+                  <label class="control-label form-label">CORREO <span class="highlight">*</span>
+                  </label>
+                  <input name="email" id="email" type="email" placeholder="Correo electrónico"
+                         class="form-control form-input" value="{{ old.email }}"/>
+                  {% if errors.email %}
+                    <span class="help-block">{{ errors.email | first }}</span>
+                  {% endif %}
+                </div>
+
+                <div class="col-md-6{{ errors.tel ? ' has-error' : '' }}">
+                  <label class="control-label form-label">TELÉFONO <span class="highlight">*</span>
+                  </label>
+                  <input name="tel" id="tel" type="text" placeholder="Teléfono"
+                         onkeypress="return soloNumeros(event)" value="{{ old.tel }}"
+                         class="form-control form-input"/>
+                  {% if errors.tel %}
+                    <span class="help-block">{{ errors.tel | first }}</span>
+                  {% endif %}
+                </div>
+
+
+                <div class="col-md-12{{ errors.casa ? ' has-error' : '' }}">
+                  <label for="regpassword" class="control-label form-label">CASA VECINAL <span
+                      class="highlight">*</span>
+                  </label>
+                  <select id="casa" name="casa" class="form-control">
+                    <option value="">Seleccione una Casa Vecinal cercana a su organización</option>
+                    <option value="1">CASA 1 - Jr. Cañete 100</option>
+                    <option value="2">CASA 2 - Av. Garcilazo de la Vega N°1348</option>
+                    <option value="3">CASA 3 - Av. Ramon Herrera N°273</option>
+                    <option value="4">CASA 4 - Jr. Junin N° 1051, Barrios Altos</option>
+                    <option value="5">CASA 5 - Cl. Santa Susana 315 Urb. Pando 3era Etapa.</option>
+                    <option value="6">CASA 6 - Av. Alfonso Ugarte 100, Cercado de Lima</option>
+                  </select>
+                  {% if errors.casa %}
+                    <span class="help-block">{{ errors.casa | first }}</span>
+                  {% endif %}
+                </div>
+
+
+                <div class="col-md-6{{ errors.distrito ? ' has-error' : '' }}">
+                  <label for="regpassword" class="control-label form-label">DISTRITO <span
+                      class="highlight">*</span>
+                  </label>
+                  <select id="distrito" name="distrito" class="form-control">
+                    <option selected value="01">CERCADO DE LIMA</option>
+                  </select>
+                  {% if errors.distrito %}
+                    <span class="help-block">{{ errors.distrito | first }}</span>
+                  {% endif %}
+                </div>
+
+                <div class="col-md-6{{ errors.direccion ? ' has-error' : '' }}">
+                  <label class="control-label form-label">DIRECCIÓN <span class="highlight">*</span>
+                  </label>
+                  <input name="direccion" id="direccion" type="text" placeholder="Dirección actual"
+                         value="{{ old.direccion }}" class="form-control form-input"/>
+                  {% if errors.direccion %}
+                    <span class="help-block">{{ errors.direccion | first }}</span>
+                  {% endif %}
+                </div>
+
+                <div class="col-md-6{{ errors.naci ? ' has-error' : '' }}">
+                  <label class="control-label form-label">FEC. NACIMIENTO <span class="highlight">*</span>
+                  </label>
+                  <input name="naci" id="naci" type="date" placeholder="Fec. Nacimiento" value="{{ old.naci }}"
+                         class="form-control form-input"/>
+                  {% if errors.naci %}
+                    <span class="help-block">{{ errors.naci | first }}</span>
+                  {% endif %}
+                </div>
+
+                <div class="col-md-6{{ errors.clave ? ' has-error' : '' }}">
+                  <label class="control-label form-label">CONTRASEÑA <span class="highlight">*</span>
+                  </label>
+                  <input name="clave" id="clave" type="text" placeholder="Contraseña" value="{{ old.clave }}"
+                         class="form-control form-input"/>
+                  {% if errors.clave %}
+                    <span class="help-block">{{ errors.clave | first }}</span>
+                  {% endif %}
+                </div>
+
+                <div class="col-md-12">
+                  <label class="control-label form-label">
+
+                  </label>
+                </div>
+
+
+                <div class="col-md-12">
+                  <center>
+                    <div class="login-submit">
+                      <button type="submit" class="btn btn-green center"><span>REGISTRARME</span></button>
+                    </div>
+                  </center>
+                </div>
+
+                {{ csrf.field | raw }}
+              </div>
+
+            </form>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!--doble prueba de subida-->
+
+<script>
+function myFunction() {
+  var x = document.getElementById("fname");
+  x.value = x.value.toUpperCase();
+}
+</script>
+
+<script>
+
+function buscarDni(){
+  var dni;
+
+  dni = $("#dni").val();
+
+
+  if (dni.length == 8){
+
+
+    BuscarPersonaDNI_WS_propietario('',dni,'','');
+  }else{
+limpiar_propietario();
+bloquear_datosPropietario('0');
+  }
+}
+
+
+function BuscarPersonaDNI_WS_propietario(key,dni,NROTAR,FECH){
+
+  $.ajax({
+    url:'https://pide.munlima.gob.pe/CWS/BuscarDatosPersonalesPIDE',
+    type:'post',
+    data:
+            {
+              usuario:'GPV01',
+              pass: '$GPV.2019',
+              nuDniConsulta:dni
+          },
+    beforeSend: function(e){
+      //$('#load').addClass('load');
+    },
+    success: function(data){
+      var c = JSON.parse(data);
+
+      if( c.valor.return.coResultado = '0000' ){
+        if (c.valor.return.datosPersona){
+          bloquear_datosPropietario('1');
+          var a = c.valor.return.datosPersona;
+
+          var ubi = a.ubigeo.split("/");
+          $('#nombres').val(a.prenombres);
+          $('#apellidopaterno').val(a.apPrimer);
+          $('#apellidomaterno').val(a.apSegundo);
+          $('#direccion').val(a.direccion);
+
+        }else{
+          limpiar_propietario();
+          bloquear_datosPropietario('0');
+        }
+      }else{
+       limpiar_propietario();
+       bloquear_datosPropietario('0');
+      }
+      $('#load').removeClass('load');
+    },
+    error: function(xhr, err){
+      $('#load').removeClass('load');
+    }
+  });
+
+}
+
+function limpiar_propietario(){
+
+  $('#nombres').val('');
+  $('#apellidopaterno').val('');
+  $('#apellidomaterno').val('');
+  $('#tel').val('');
+  $('#direccion').val('');
+
+}
+
+
+function bloquear_datosPropietario(con){
+  if(con=='1'){
+    $('#nombres').attr('disabled');
+    $('#apellidopaterno').attr('disabled');
+    $('#apellidomaterno').attr('disabled');
+
+  }else{
+    $('#nombres').removeAttr('disabled');
+    $('#apellidopaterno').removeAttr('disabled');
+    $('#apellidomaterno').removeAttr('disabled');
+
+  }
+}
+
+function soloNumeros(e) {
+  var key = window.Event ? e.which : e.keyCode
+  return ((key >= 48 && key <= 57) || (key == 8))
+}
+
+</script>
+
+
+</body>
+<script src="{{ base_url() }}/js/bootstrap.min.js"></script>
+<script src="{{ base_url() }}/js/owl.carousel.min.js"></script>
+<script src="{{ base_url() }}/js/jquery.appear.js"></script>
+<script src="{{ base_url() }}/js/jquery.countTo.js"></script>
+<script src="{{ base_url() }}/js/wow.min.js"></script>
+<script src="{{ base_url() }}/js/jquery.selectbox-0.2.min.js"></script>
+<script src="{{ base_url() }}/js/jquery.fancybox.js"></script>
+<script src="{{ base_url() }}/js/jquery.fancybox-buttons.js"></script>
+<!-- MAIN JS-->
+<script src="{{ base_url() }}/js/main.js"></script>
+<!-- LOADING SCRIPTS FOR PAGE-->
+<script src="{{ base_url() }}/js/isotope.pkgd.min.js"></script>
+<script src="{{ base_url() }}/js/fit-columns.js"></script>
+<script src="{{ base_url() }}/js/homepage.js"></script>
+
+
+
+<script src="https://aplicativos.munlima.gob.pe/js/aplicativo/google-map-infobox.min.js"></script>
+
+
+<script src="http://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+
+
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.flash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.print.min.js"></script>
+
+</html>

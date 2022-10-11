@@ -1,0 +1,31 @@
+{% extends 'templates/app.twig' %}
+{% block content %}
+    <div id="load">
+    </div>
+    <div id="wrapper-content">
+        <div id="page-wrapper">
+            <div class="main-content">
+                <div class="content">
+                    <div class="section background-opacity page-title set-height-top">
+                        <div class="container">
+                            <div class="page-title-wrapper">
+                                <h2 class="captions">GESTOR DE SOLICITUDES</h2>
+                                <ol class="breadcrumb">
+                                    <h4 class="top-title">Hola <strong>{{ AuthController.usuario.nombres }}</strong>,
+                                        inicia tu solicitud:</h4>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    {% if AuthController.usuario.tipo_user == 1 %}
+                        {% include 'auth/solicitud-lc.twig' %}
+                    {% else %}
+                        {% include 'auth/solicitud-dis.twig' %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include 'auth/modals/modals.twig' %}
+    <script src="{{ base_url() }}/js/solicitud.js?v=1.1"></script>
+{% endblock content %}

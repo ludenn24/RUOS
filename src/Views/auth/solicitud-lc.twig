@@ -1,0 +1,28 @@
+<div class="section section-padding choose-course">
+    <div class="container">
+        <a type="submit" href="{{ path_for('auth.organizacion') }}"
+           class="btn btn-404 btn-dark-dinamic btn-lg btn3d"><span>MI ORGANIZACIÓN SOCIAL</span>
+        </a>
+        {% if OrganizacionController.organizacion %}
+            {% if SolicitudController.checkSolNueva %}
+                <form action="{{ path_for('auth.solicitud') }}" method="post"
+                      autccomplete="off">
+                    <input id="tipo_sol" name="tipo_sol" type="hidden" value="1">
+                    <button type="submit" class="btn btn-404"><span>REGISTRAR A MI ORGANIZACIÓN SOCIAL POR PRIMERA VEZ</span>
+                    </button>
+                    {{ csrf.field | raw }}
+                </form>
+            {% endif %}
+            <form action="{{ path_for('auth.solicitud') }}" method="post" autccomplete="off">
+                <input id="tipo_sol" name="tipo_sol" type="hidden" value="2">
+                <button type="submit" class="btn btn-404"><span>ACTUALIZAR A MI ORGANIZACIÓN SOCIAL</span>
+                </button>
+                {{ csrf.field | raw }}
+            </form>
+        {% endif %}
+        <hr>
+        <a type="submit" href="{{ path_for('auth.solicitudexterna') }}"
+           class="btn btn-404 btn-light-dinamic btn-lg btn3d"><span>ACTUALIZACIÓN DE RECONOCIMIENTO</span>
+        </a>
+    </div>
+</div>

@@ -1,0 +1,162 @@
+<?php
+
+namespace App\Controllers\DetalleReconocimiento;
+
+
+use App\Models\Modelos\DetalleReconocimiento;
+use App\Models\Modelos\Solicitudes;
+
+use App\Controllers\Controller;
+
+
+Class DetalleReconocimientoController extends Controller
+{
+
+
+    public function enviarSolicitudDistrito($request, $response, $args)
+    {
+        try {
+            $recc = $request->getParam('recc');
+            $codigo = $request->getParam('codigo');
+            $estado = $request->getParam('estado');
+            $existe = Solicitudes::where('codigo', '=', $codigo)->where('flag', '=', 2)->first();
+            if($existe){
+                $msm['response'] = 'existe';
+                echo json_encode($msm);
+            }else{
+                $fecha_actual = date('Y-m-d');
+                $feriados = array(
+                    '2019-06-29',
+                    '2019-07-28',
+                    '2019-07-29',
+                    '2019-07-30',
+                    '2019-08-29',
+                    '2019-08-30',
+                    '2019-10-08',
+                    '2019-10-31',
+                    '2019-12-08',
+                    '2019-12-25',
+                    '2019-01-01',
+                    '2019-04-09',
+                    '2019-05-01'
+                );
+
+                $comienzo = strtotime($fecha_actual);
+                $fecha_venci_noti = $comienzo;
+                $i = 0;
+                while ($i < 30) {
+                    $fecha_venci_noti += 86400;
+                    $es_feriado = FALSE;
+                    foreach ($feriados as $key => $feriado) {
+                        //Verifico Si La Fecha Final Actual Es Feriado O No
+                        if (date("Y-m-d", $fecha_venci_noti) === date("Y-m-d", strtotime($feriado))) {
+                            $es_feriado = TRUE;
+                        }
+                    }
+                    if (!(date("w", $fecha_venci_noti) == 6 || date("w", $fecha_venci_noti) == 0 || $es_feriado)) {
+                        $i++;
+                    }
+                }
+                $fecha_venci = date ( 'Y-m-d' , $fecha_venci_noti );
+
+
+                DetalleReconocimiento::create([
+                    'cod_solicitud' => $codigo,
+                    'cod_recon' => $recc,
+                    'estado' => $estado,
+                ]);
+
+
+                Solicitudes::where('codigo', '=', $codigo)->update([
+                    'fec_aprobacion' => $fecha_actual,
+                    'flag' => $estado,
+                    'fec_revision' =>  $fecha_actual,
+                    'fec_venci' => $fecha_venci,
+                ]);
+
+                $msm['response'] = 'aprobado';
+                echo json_encode($msm);
+
+            }
+
+        } catch (ErrorException $e) {
+            $data = "Ocurrió un error.";
+            echo $data;
+        }
+    }
+
+
+    //CAMBIAR ESTADO DOCUMENTOS
+    public function enviardwSolicitudDistrito($request, $response, $args)
+    {
+        try {
+
+
+            $fecha_actual = date('Y-m-d');
+            $codigo = $request->getParam('codigo');
+            $estado = $request->getParam('estado');
+            $existe = Solicitudes::where('codigo', '=', $codigo)->where('flag', '=', 2)->first();
+            if($existe){
+                $msm['response'] = 'existe';
+                echo json_encode($msm);
+            }else{
+                $fecha_actual = date('Y-m-d');
+                $feriados = array(
+                    '2019-06-29',
+                    '2019-07-28',
+                    '2019-07-29',
+                    '2019-07-30',
+                    '2019-08-29',
+                    '2019-08-30',
+                    '2019-10-08',
+                    '2019-10-31',
+                    '2019-12-08',
+                    '2019-12-25',
+                    '2019-01-01',
+                    '2019-04-09',
+                    '2019-05-01'
+                );
+
+                $comienzo = strtotime($fecha_actual);
+                $fecha_venci_noti = $comienzo;
+                $i = 0;
+
+                while ($i < 30) {
+                    $fecha_venci_noti += 86400;
+                    $es_feriado = FALSE;
+                    foreach ($feriados as $key => $feriado) {
+                        //Verifico Si La Fecha Final Actual Es Feriado O No
+                        if (date("Y-m-d", $fecha_venci_noti) === date("Y-m-d", strtotime($feriado))) {
+                            $es_feriado = TRUE;
+                        }
+                    }
+                    if (!(date("w", $fecha_venci_noti) == 6 || date("w", $fecha_venci_noti) == 0 || $es_feriado)) {
+                        $i++;
+                    }
+                }
+                $fecha_venci = date ( 'Y-m-d' , $fecha_venci_noti );
+
+                Solicitudes::where('codigo', '=', $codigo)->update([
+                    'fec_aprobacion' => $fecha_actual,
+                    'flag' => $estado,
+                ]);
+
+               DetalleReconocimiento::create([
+                    'cod_solicitud' => 659,
+                    'cod_recon' => 8,
+                    'estado' => 2,
+
+                ]);
+
+                $msm['response'] = 'aprobado';
+                echo json_encode($msm);
+            }
+
+        } catch (ErrorException $e) {
+            $data = "Ocurrió un error.";
+            echo $data;
+        }
+    }
+
+
+}

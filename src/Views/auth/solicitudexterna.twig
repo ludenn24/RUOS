@@ -1,0 +1,173 @@
+{% extends 'templates/app.twig' %}
+{% block content %}
+    <div id="load" class>
+    </div>
+
+    <div id="wrapper-content">
+        <div id="page-wrapper">
+            <div class="main-content">
+                <div class="content">
+
+                    <div class="section section-padding contact-main">
+                        <div class="container">
+
+                            <div class="group-title-index">
+                                <h2 class="center-title"> ACTUALIZACIÓN DE RECONOCIMIENTO</h2>
+                                <h4 class="top-title"><b>{{ AuthController.usuario.nombres }}</b>, selecciona la
+                                    organización que deseas actualizar</h4>
+                            </div>
+
+                            <div class="contact-main-wrapper">
+                                <form name="form_solicitud" id="form_solicitud" class="bg-w-form contact-form" method="post">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label class="control-label form-label">ORGANIZACIÓN <span class="highlight">*</span>
+                                            </label>
+                                            <select class="form-control form-select obligate" data-content="DEBE SELECCIONAR UNA ORGANIZACIÓN" id="cod_org" name="cod_org"
+                                                    onchange="Buscardatos(this);">
+                                                <option value="">SELECCIONAR ORGANIZACIÓN</option>
+                                                {% for orgs in SolicitudController.SolicitudesOrganzaciones %}
+                                                    <option value="{{ orgs.codigo }}">
+                                                        [{{ orgs.num_org }}] {{ orgs.nombre_org }}
+                                                    </option>
+                                                {% endfor %}
+                                            </select>
+                                            <label class="control-label form-label">TIPO DE ORGANIZACIÓN
+                                            </label>
+
+                                            <input type="text" disabled id="tipo" name="tipo"
+                                                   class="form-control form-input mayus"
+                                                   value="">
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label class="control-label form-label">DIRECCIÓN DEL LOCAL DE LA
+                                                ORGANIZACIÓN</label>
+                                            <input type="text" disabled
+                                                   id="domicilio_org" name="domicilio_org"
+                                                   class="form-control form-input mayus"
+                                                   value="">
+                                        </div>
+                                    </div>
+                                    {{ csrf.field | raw }}
+
+                                    <div  class="msg"></div>
+
+                                    <div class="contact-submit">
+                                        <button type="button" id="confirmarsolicitud" class="btn btn-green center btn-contact btn-bold">
+                                          <span>
+                                           SOLICITAR ACTUALIZACIÓN
+                                          </span>
+                                        </button>
+                                    </div>
+
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        function Buscardatos(selectObject) {
+            var codigo = selectObject.value;
+            return $.ajax({
+                type: "get",
+                url: '{{ base_url() }}/organizacion/getorganizaciontipo',
+                data: {
+                    codigo: codigo,
+                },
+                success: function (data) {
+                    $('#tipo').val(data[0].descripcion);
+                    $('#domicilio_org').val(data[0].domicilio_org);
+                },
+                error: function () {
+                }
+            });
+        };
+
+    </script>
+
+
+    <script>
+
+        !function(a){
+            "use strict";
+            a(function(){
+                var b=a(window),
+                    c=a(document.body),
+                    content='',
+                    mycod='',
+                    operation='',
+                    form='',
+                    f='',
+                    mycodigo='',
+                    flag='',
+                    comentario='',
+                    codigo='';
+
+                a("#confirmarsolicitud").on("click",function(){
+                    var b=a(this),dataString;
+                    var holder='';
+                    var exito=true;
+                    $(".obligate").each(function(){
+                        if($(this).val()==''){
+                            $(this).focus();
+                            holder=$(this).attr("data-content");
+                            exito=false;
+                            $(".msg").html("").show();
+                            $(".msg").html("<div class='alert alert-danger'><i class='fa fa-exclamation-triangle'></i> "+holder+"</div>");
+                            setTimeout(function() {
+                                $(".msg").fadeOut(1500);
+                            },1500);
+                            return false;
+                        }
+                    });
+                    if(!exito)
+                        return false;
+                    dataString=$('#form_solicitud').serialize();
+                    $.ajax({
+                        type:"POST",
+                        url:"{{ base_url() }}/solicitud/registrarsolexterna",
+                        data:dataString,
+                        beforeSend: function(){
+                            b.button("loading");
+                        },
+                        success: function(data){
+                            if(data>0){
+                                b.button("reset");
+                                location.reload();
+                            }else{
+                                alert("Se ha producido un error");
+                            }
+
+                        },
+                        error: function(){
+                            console.log("Se ha producido un error");
+                        }
+                    })
+                });
+
+
+            })}
+
+
+
+
+        (jQuery),function(){"use strict";
+            $('#fono').keyup(function (){
+                this.value = (this.value + '').replace(/[^0-9]/g, '');
+            });
+
+        }();
+
+
+
+    </script>
+
+
+
+{% endblock content %}

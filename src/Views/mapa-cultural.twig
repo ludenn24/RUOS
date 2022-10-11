@@ -1,0 +1,210 @@
+{% extends 'templates/app.twig' %}
+{% block content %}
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #map {
+            width: 100%;
+            height: 600px;
+            border: solid 2px #cccccc;
+            border-radius: 5px;
+        }
+    </style>
+    <style>
+
+        #map-canvas {
+            margin: 0;
+            padding: 0;
+            height: 400px;
+            max-width: none;
+        }
+        #map-canvas img {
+            max-width: none !important;
+        }
+        .gm-style-iw {
+            width: 350px !important;
+            top: 15px !important;
+            left: 0px !important;
+            background-color: #fff;
+            box-shadow: 0 1px 6px rgba(178, 178, 178, 0.6);
+            border: 1px solid rgba(72, 181, 233, 0.6);
+            border-radius: 2px 2px 10px 10px;
+        }
+        #iw-container {
+            margin-bottom: 10px;
+        }
+        #iw-container .iw-title {
+            font-size: 16px;
+            font-weight: 400;
+            padding: 10px;
+            background-color: #004783;
+            color: white;
+            margin: 0;
+            border-radius: 2px 2px 0 0;
+        }
+        #iw-container .iw-content {
+            font-size: 13px;
+            line-height: 18px;
+            font-weight: 400;
+            margin-right: 1px;
+            max-height: 140px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        .iw-content img {
+            float: right;
+            margin: 0 5px 5px 10px;
+        }
+        .iw-subTitle {
+            font-size: 16px;
+            font-weight: 700;
+            padding: 5px 0;
+        }
+        .iw-bottom-gradient {
+            position: absolute;
+            width: 326px;
+            height: 25px;
+            bottom: 10px;
+            right: 18px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+            background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+            background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+            background: -ms-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+        }
+    </style>
+    <div id="wrapper-content">
+        <div id="page-wrapper">
+            <div class="main-content">
+                <div class="content">
+                    <div class="section background-opacity page-title set-height-top">
+                        <div class="container">
+                            <div class="page-title-wrapper">
+                                <h2 class="captions">ORGANIZACIONES</h2>
+                                <label class="control-label form-label">[GEOLOCALIZACIÓN DE LAS ORGANIZACIONES DEL CERCADO DE LIMA]
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="section contact-map">
+                                <div style="height: 650px;">
+                                    <div id="map"></div>
+                                </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        $( document ).ready(function() {
+
+            var d = new Date();
+            var month = d.getMonth()+1;
+            var day = d.getDate();
+
+            var fecha = d.getFullYear() + '-' +
+                ((''+month).length<2 ? '0' : '') + month + '-' +
+                ((''+day).length<2 ? '0' : '') + day;
+            $.ajax({
+                type:'get',
+                url: 'mapa/lista-cultural',
+                data:{},
+                beforeSend: function(e){
+                },
+                success: function(data){
+                    var bounds = new google.maps.LatLngBounds();
+                    var mapOptions = {
+                        mapTypeId: 'roadmap'
+                    };
+                    map = new google.maps.Map(document.getElementById('map'), {
+                        mapOptions
+                    });
+
+                    map.setTilt(50);
+                    var mostrarMarcadores = new google.maps.InfoWindow(),
+                        data, i;
+
+                    $.each(data,function(i,item){
+                        var position = new google.maps.LatLng(item.latitud, item.longitud);
+                        bounds.extend(position);
+
+                        if(item.fin < fecha){
+                            var img_icono = "{{ base_url() }}/images/advertencia.png";
+                        }else{
+                            var img_icono = "{{ base_url() }}/images/comunidad2.png";
+
+                        }
+
+
+                        marker = new google.maps.Marker({
+                            position: position,
+                            map: map,
+                            title: item.latitud,
+                            icon: img_icono
+
+                        });
+                        var c = '<div id="iw-container" class="mayus">' +
+                            '<div class="iw-title">'+item.nombre_org+'</div>' +
+                            '<div class="iw-content">' +
+                            '<table class="table table-bordered" cellpadding="5">'+
+                            '<tbody><tr>'+
+                            '<th><b>CÓDIGO:</b> </th>'+
+                            '<td>'+item.num_org+'<br></td>'+
+                            '</tr>'+
+                            '<tr>'+
+                            '<th valign="top" align="left"><b>TIPO:</b> </th>'+
+                            '<td valign="top">'+item.descripcion+'<br></td>'+
+                            '</tr>'+
+                            '<tr>'+
+                            '<th valign="top" align="left"><b>DIRECCIÓN:</b> </th>'+
+                            '<td valign="top">'+item.domicilio_org+'<br></td>'+
+                            '</tr>'+
+                            '<tr>'+
+                            '<th valign="top" align="left"><b>VIGENCIA:</b> </th>'+
+                            '<td valign="top">'+item.inicio+'<br></td>'+
+                            '</tr>'+
+                            '<tr>'+
+                            '<th valign="top" align="left"><b>FIN:</b> </th>'+
+                            '<td valign="top">'+item.fin+'<br></td>'+
+                            '</tr>'+
+                            '</tbody>'+
+                            '</table>'+
+                            '</div>';
+
+
+                        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                            return function() {
+                                mostrarMarcadores.setContent(c);
+                                mostrarMarcadores.open(map, marker);
+                            }
+                        })(marker, i));
+                        // Centramos el Mapa de Google para que todos los marcadores se puedan ver
+                        map.fitBounds(bounds);
+                    });
+
+                    var src = "{{ base_url() }}/mapas/cercado_lima.kmz";
+
+                    var kmlLayer = new google.maps.KmlLayer(src, {
+                        suppressInfoWindows: true,
+                        preserveViewport: true,
+                        map: map
+                    });
+                    // Aplicamos el evento 'bounds_changed' que detecta cambios en la ventana del Mapa de Google, también le configramos un zoom de 14
+                    var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
+                        this.setZoom(14);
+                        google.maps.event.removeListener(boundsListener);
+                    });
+                },
+                error: function(){
+                }
+            });
+        });
+
+    </script>
+
+
+{% endblock content %}

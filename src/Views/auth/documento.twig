@@ -1,0 +1,22 @@
+
+
+
+
+
+{% extends 'templates/app.twig' %}
+
+{% block content %}
+
+  {% if SolicitudController.solicitud.tipo_sol == 1%}
+
+  {% include 'auth/nuevo.twig' %}
+
+  {% else %}
+
+  {% include 'auth/actualizacion.twig' %}
+
+  {% endif %}
+
+  {% include 'templates/partials/modals.twig' %}
+
+{% endblock content %}

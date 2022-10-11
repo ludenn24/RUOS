@@ -1,0 +1,10 @@
+{% extends 'templates/app.twig' %}
+{% block content %}
+    
+{% if AuthController.usuario.tipo_user == 1 %}
+    {% include 'auth/missolicitudes-lc.twig' %}
+{% else %}
+    {% include 'auth/missolicitudes-dis.twig' %}
+{% endif %}
+                    
+{% endblock content %}

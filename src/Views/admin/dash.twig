@@ -1,0 +1,492 @@
+{% extends 'admin/templates/app.twig' %}
+
+{% block content %}
+<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    #map {
+        width: 100%;
+        height: 447px;
+        border-radius: 5px;
+    }
+</style>
+<style>
+
+    #map-canvas {
+        margin: 0;
+        padding: 0;
+        height: 400px;
+        max-width: none;
+    }
+
+    #map-canvas img {
+        max-width: none !important;
+    }
+
+    .gm-style-iw {
+        width: 350px !important;
+        top: 15px !important;
+        left: 0px !important;
+        background-color: #fff;
+        box-shadow: 0 1px 6px rgba(178, 178, 178, 0.6);
+        border: 1px solid rgba(72, 181, 233, 0.6);
+        border-radius: 2px 2px 10px 10px;
+    }
+
+    #iw-container {
+        margin-bottom: 10px;
+    }
+
+    #iw-container .iw-title {
+        font-size: 16px;
+        font-weight: 400;
+        padding: 10px;
+        background-color: #9E9E9E;
+        color: white;
+        margin: 0;
+        border-radius: 2px 2px 0 0;
+    }
+
+    #iw-container .iw-content {
+        font-size: 13px;
+        line-height: 18px;
+        font-weight: 400;
+        margin-right: 1px;
+        max-height: 140px;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .iw-content img {
+        float: right;
+        margin: 0 5px 5px 10px;
+    }
+
+    .iw-subTitle {
+        font-size: 16px;
+        font-weight: 700;
+        padding: 5px 0;
+    }
+
+    .iw-bottom-gradient {
+        position: absolute;
+        width: 326px;
+        height: 25px;
+        bottom: 10px;
+        right: 18px;
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+        background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+        background: -moz-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+        background: -ms-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+    }
+</style>
+<body class="hold-transition skin-blue sidebar-mini ">
+<div class="pace  pace-inactive">
+    <div class="pace-progress" data-progress-text="100%" data-progress="99"
+         style="transform: translate3d(100%, 0px, 0px);">
+        <div class="pace-progress-inner"></div>
+    </div>
+    <div class="pace-activity"></div>
+</div>
+<div class="wrapper">
+    <header class="main-header">
+        <!-- Logo -->
+        <a href="" class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini"><b>R</b>S</span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"><b style="font-style:oblique;">RUOS</b></span>
+        </a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top" role="navigation">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <!-- User Account: style can be found in dropdown.less -->
+                    <li class="dropdown user user-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="{{ base_url() }}/dist/img/logini.jpg" class="user-image" alt="User Image">
+                            <span class="hidden-xs"><?php echo $_SESSION['ses_correouser'];?></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- User image -->
+                            <li class="user-header">
+                                <img src="{{ base_url() }}/dist/img/logini.jpg" class="img-circle" alt="User Image">
+                                <p>
+                                    {{ AdminController.admin.nombres }}
+                                    <small>{{ AdminController.admin.dni }}</small>
+                                    <small>Administrador</small>
+                                </p>
+                            </li>
+                            <!-- Menu Footer-->
+                            <li class="user-footer" style="border: 1px solid #3C8DBC;">
+                                <div class="pull-right">
+                                    <a href="{{path_for('auth.admin.signout')}}" class="btn btn-default btn-flat" id="changeses"
+                                       style="border: 1px solid #3C8DBC;">Cerrar sesión</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- Control Sidebar Toggle Button -->
+                    <li>
+                        <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <aside class="main-sidebar">
+        {% include 'admin/templates/menu.twig' %}
+    </aside>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+
+        <section class="content-header">
+            <h1>
+                REGISTRO ÚNICO DE ORGANIZACIONES SOCIALES
+            </h1>
+        </section>
+
+        <section class="content">
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-success">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Organizaciones Sociales</h3>
+                        </div>
+                        <div class="box-body no-padding">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12">
+                                    <div class="pad">
+                                        <div>
+                                            <div id="map" style="height: 447px;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="page-header">ORGANIZACIONES REGISTRADAS</h2>
+
+            <div class="row">
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-aqua"><i class="fa fa-users"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">VIGENTES</span>
+                            <span class="info-box-number vigentes" style="font-size: 40px;color: gray;"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-yellow"><i class="fa fa-warning"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">NO VIGENTES</span>
+                            <span class="info-box-number novigentes" style="font-size: 40px;color: gray;"></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <h2 class="page-header">SOLICITUDES DEL CERCADO DEL LIMA ({{ st }})</h2>
+            <div class="row">
+                <div class="col-lg-3 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-green">
+                        <div class="inner">
+                            <h3>{{ s3 }}<sup style="font-size: 20px"></sup></h3>
+
+                            <p>Solicitudes aprobadas</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-check-square-o"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">
+                            Más detalles <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-yellow">
+                        <div class="inner">
+                            <h3>{{ s2 }}</h3>
+
+                            <p>Solicitudes pendientes</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-exclamation-circle"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">
+                            Más detalles <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-aqua">
+                        <div class="inner">
+                            <h3>{{ s1 }}</h3>
+
+                            <p>Solicitudes incompletas</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-hourglass-3"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">
+                            Más detalles <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- ./col -->
+
+                <!-- ./col -->
+
+                <!-- ./col -->
+                <div class="col-lg-3 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-red">
+                        <div class="inner">
+                            <h3>{{ s4 }}</h3>
+
+                            <p>Solicitudes Archivadas</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-folder-open-o"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">
+                            Más detalles <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- ./col -->
+            </div>
+            <!-- /.row -->
+
+            <h2 class="page-header">SOLICITUDES DISTRITALES ({{ sdt }})</h2>
+            <div class="row">
+                <div class="col-lg-3 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-green">
+                        <div class="inner">
+                            <h3>{{ sd3 }}<sup style="font-size: 20px"></sup></h3>
+
+                            <p>Solicitudes aprobadas</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-thumbs-o-up"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">
+                            Más detalles <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-yellow">
+                        <div class="inner">
+                            <h3>{{ sd2 }}</h3>
+
+                            <p>Solicitudes pendientes</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-person-add"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">
+                            Más detalles <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-aqua">
+                        <div class="inner">
+                            <h3>{{ sd1 }}</h3>
+
+                            <p>Solicitudes incompletas</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-shopping-cart"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">
+                            Más detalles <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- ./col -->
+
+                <!-- ./col -->
+
+                <!-- ./col -->
+                <div class="col-lg-3 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-red">
+                        <div class="inner">
+                            <h3>{{ sd4 }}</h3>
+
+                            <p>Solicitudes Archivadas</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-pie-graph"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">
+                            Más detalles <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- ./col -->
+            </div>
+            <!-- /.row -->
+        </section>
+    </div>
+
+  <script src="https://maps.googleapis.com/maps/api/js?libraries=weather,geometry,visualization,places,drawing&amp;key=AIzaSyA2S8lytX4gNMVNBRpckr7BH97pYmmljY4"                type="text/javascript"></script>
+    <script src="https://aplicativos.munlima.gob.pe/js/aplicativo/google-map-infobox.min.js"></script>
+
+
+    <script>
+
+        $(document).ready(function () {
+            var d = new Date();
+            var month = d.getMonth()+1;
+            var day = d.getDate();
+
+            var fecha = d.getFullYear() + '-' +
+                ((''+month).length<2 ? '0' : '') + month + '-' +
+                ((''+day).length<2 ? '0' : '') + day;
+
+            $.ajax({
+                type: 'get',
+                url: '{{ base_url() }}/mapa/lista',
+                data: {},
+                beforeSend: function (e) {
+                },
+                success: function (data) {
+                    var bounds = new google.maps.LatLngBounds();
+                    var img_icono = "{{ base_url() }}/images/comunidad.png";
+                    var mapOptions = {
+                        mapTypeId: 'roadmap'
+                    };
+                    map = new google.maps.Map(document.getElementById('map'), {
+                        mapOptions
+                    });
+
+                    map.setTilt(50);
+                    var mostrarMarcadores = new google.maps.InfoWindow(),
+                        data, i;
+
+                    var vigentes = 0;
+                    var novigentes = 0;
+                    $.each(data, function (i, item) {
+                        var position = new google.maps.LatLng(item.latitud, item.longitud);
+                        bounds.extend(position);
+
+                        if(item.fin < fecha){
+                            var img_icono = "{{ base_url() }}/images/advertencia.png";
+                            novigentes = novigentes + 1;
+                        }else{
+                            var img_icono = "{{ base_url() }}/images/comunidad2.png";
+                            vigentes = vigentes + 1;
+                        }
+
+                        marker = new google.maps.Marker({
+                            position: position,
+                            map: map,
+                            title: item.latitud,
+                            icon: img_icono
+
+                        });
+                        var c = '<div id="iw-container" class="mayus">' +
+                            '<div class="iw-title">' + item.nombre_org + '</div>' +
+                            '<div class="iw-content">' +
+                            '<table class="table table-bordered" cellpadding="5">' +
+                            '<tbody><tr>' +
+                            '<th><b>CÓDIGO:</b> </th>' +
+                            '<td>' + item.num_org + '<br></td>' +
+                            '</tr>' +
+                            '<tr>' +
+                            '<th valign="top" align="left"><b>TIPO:</b> </th>' +
+                            '<td valign="top">' + item.descripcion + '<br></td>' +
+                            '</tr>' +
+                            '<tr>' +
+                            '<th valign="top" align="left"><b>MIEMBROS:</b> </th>' +
+                            '<td valign="top">' + item.num_miem + '<br></td>' +
+                            '</tr>' +
+                            '<tr>' +
+                            '<th valign="top" align="left"><b>DIRECCIÓN:</b> </th>' +
+                            '<td valign="top">' + item.domicilio_org + '<br></td>' +
+                            '</tr>' +
+                            '<tr>' +
+                            '<th valign="top" align="left"><b>VIGENCIA:</b> </th>' +
+                            '<td valign="top">' + item.inicio + '<br></td>' +
+                            '</tr>' +
+                            '<tr>' +
+                            '<th valign="top" align="left"><b>FIN:</b> </th>' +
+                            '<td valign="top">' + item.fin + '<br></td>' +
+                            '</tr>' +
+                            '</tbody>' +
+                            '</table>' +
+                            '</div>';
+
+
+                        google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                            return function () {
+                                mostrarMarcadores.setContent(c);
+                                mostrarMarcadores.open(map, marker);
+                            }
+                        })(marker, i));
+                        // Centramos el Mapa de Google para que todos los marcadores se puedan ver
+                        map.fitBounds(bounds);
+                    });
+
+                    var src = "{{ base_url() }}/mapas/cercado_lima.kmz";
+
+                    var kmlLayer = new google.maps.KmlLayer(src, {
+                        suppressInfoWindows: true,
+                        preserveViewport: true,
+                        map: map
+                    });
+                    // Aplicamos el evento 'bounds_changed' que detecta cambios en la ventana del Mapa de Google, también le configramos un zoom de 14
+                    var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function (event) {
+                        this.setZoom(14);
+                        google.maps.event.removeListener(boundsListener);
+                    });
+
+                    $(".vigentes").append(vigentes);
+                    $(".novigentes").append(novigentes);
+
+                },
+                error: function () {
+                }
+            });
+        });
+
+    </script>
+
+    {% endblock content %}

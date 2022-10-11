@@ -1,0 +1,484 @@
+{% block content %}
+<div class="section intro-edu">
+   <div class="container">
+      <div class="group-title-index">
+         <h2 class="center-title">NOTIFICACIONES DE DOCUMENTOS</h2>
+         <h4 class="top-title"><b>{{ AuthController.usuario.nombres }}</b>, en esta sección conocerás la observaciones que
+            presentan tus <b>documentos</b>.
+         </h4>
+         <h5 class="top-title"><b>La evaluación de documentos tiene un límite de tiempo de 30 días</b> hábiles.
+         </h5>
+      </div>
+   </div>
+</div>
+<div class="section teacher-course section-padding" style="padding: 0px 0px 100px">
+   <div class="container teacher-course-wrapper">
+      <div class="course-table">
+         <div class="outer-container">
+            <div class="inner-container">
+               <div class="table-header">
+                  <table class="edu-table-responsive">
+                     <thead>
+                        <tr class="heading-table">
+                           <th class="col-2"><span>Documento</span></th>
+                           <th class="col-1"><span>Fecha de registro</span></th>
+                           <th class="col-1"><span>Estado</span></th>
+                           <th class="col-1"><span>Historial</span></th>
+                           <th class="col-1"><span>Mensajes</span></th>
+                           <th class="col-1"><span>Actualizar</span></th>
+                        </tr>
+                     </thead>
+                  </table>
+               </div>
+               <div class="table-body">
+                  <table class="edu-table-responsive table-hover">
+                     <tbody>
+                        {% for docume in DocumentoController.getdocumentosnuevo %}
+                        <tr class="table-row">
+                           <td class="col-2">
+                              <span>
+                              {% if (docume.tipdoc=='SOL_GPV') %}
+                              SOLICITUD A LA GERENCIA DE PARTICIPACIÓN VECINAL
+                              {% elseif (docume.tipdoc=='ACT_ASAM') %}
+                              ACTA DE ASAMBLEA GENERAL
+                              {% elseif (docume.tipdoc=='PAD_ACT') %}
+                              PADRÓN O NÓMINA ACTUALIZADA DE LOS MIEMBROS DE LA ORGANIZACIÓN
+                              {% elseif (docume.tipdoc=='EST_ORG') %}
+                              ESTATUTO DE LA ORGANIZACIÓN EN CASO HAYA MODIFICACIÓN PARCIAL O TOTAL
+                              {% elseif (docume.tipdoc=='CONV_INVI') %}
+                              CONVOCATORIA O ESQUELA DE INVITACIÓN A LA ASAMBLEA GENERAL
+                              {% elseif (docume.tipdoc=='PLA_ACI') %}
+                              PLANO O CROQUIS DEL RADIO DE ACCIÓN DE LA ORGANIZACIÓN *
+                              {% elseif (docume.tipdoc=='PLA_UBI') %}
+                              PLANO O CROQUIS REFERENCIAL DE LA UBICACIÓN DEL LOCAL O DOMICILIO INSTITUCIONAL DE LA ORGANIZACIÓN
+                              {% elseif (docume.tipdoc=='NOM_MOS') %}
+                              NÓMINA DE LOS MIEMBROS DE LA ORGANIZACIÓN SOCIAL
+                              {% elseif (docume.tipdoc=='ACT_ELE') %}
+                              ACTA DE ELECCIÓN DEL ÓRGANO DIRECTIVO
+                              {% elseif (docume.tipdoc=='OTR_DOC') %}
+                              OTRO ACERVO DOCUMENTAL
+                              {% elseif (docume.tipdoc=='NOM_MIEM') %}
+                              NÓMINA DE LOS MIEMBROS DEL ÓRGANO DIRECTIVO
+                              {% elseif (docume.tipdoc=='EST_ACT') %}
+                              ESTATUTO Y ACTA DE APROBACIÓN
+                              {% elseif (docume.tipdoc=='ACT_FUN') %}
+                              ACTA DE FUNDACIÓN O DE CONSTITUCIÓN
+                              {% elseif (docume.tipdoc=='SOL_JU') %}
+                              SOLICITUD DIRIGIDA A LA GERENCIA DE PARTICIPACIÓN VECINAL
+                              {% elseif (docume.tipdoc=='MIE_ORG') %}
+                              LISTA DE MIEMBROS DE LA ORGANIZACIÓN
+                              {% elseif (docume.tipdoc=='ACT_REU') %}
+                              ACTA DE LA REUNIÓN DE CONSTITUCIÓN
+                              {% endif %}
+                              </span>
+                           </td>
+                           <td class="col-1"><span>{{ docume.freg }}</span></td>
+                           <td class="col-1">
+                              {% if (docume.flag==1) %}
+                              <span class='label'>En evaluación</span>
+                              {% elseif (docume.flag==2) %}
+                              <span class='label label-danger'>Observado</span>
+                              {% elseif (docume.flag==3) %}
+                              <span class='label label-success'>Aprobado</span>
+                              {% endif %}
+                           </td>
+                           <td class="col-1">
+                              <a class="btn btn-default "
+                                 style="cursor:pointer;overflow: visible;"
+                                 data-target="#VerHistorial"
+                                 id="datamodal"
+                                 data-toggle="modal"
+                                 data-content="{{ docume.idsol }}"
+                                 data-tipo="{{ docume.tipdoc }}"
+                                 data-title="{{ docume.tipdoc }}"
+                                 ><i class="fa fa-history"></i>
+                              </a>
+                           </td>
+                           <td class="col-1">
+                              <a class="btn btn-default "
+                                 style="cursor:pointer;overflow: visible;"
+                                 data-target="#AgregarAdvertencia"
+                                 id="datamodal"
+                                 data-toggle="modal"
+                                 data-content="{{ docume.codigo }}"
+                                 data-user="{{ AuthController.usuario.codigo }}"
+                                 data-tipo="{{ docume.tipdoc }}"
+                                 data-title="{{ docume.tipdoc }}"
+                                 ><i class="fa fa-comments"></i>
+                              </a>
+                           </td>
+                           <td class="col-1">
+                              {% if (docume.flag==1) %}
+                              <span class='label'>---</span>
+                              {% elseif (docume.flag==2) %}
+                              <a class="btn btn-default "
+                                 style="cursor:pointer;overflow: visible;"
+                                 data-target="#ReSubir"
+                                 id="datamodal"
+                                 data-toggle="modal"
+                                 data-cidsol="{{ docume.idsol }}"
+                                 data-tipodoc="{{ docume.tipdoc }}"
+                                 data-title="{{ docume.tipdoc }}"
+                                 ><i class="fa fa-cloud-upload"></i>
+                              </a>
+                              {% endif %}
+                           </td>
+                           {% else %}
+                           No se encontraron documentos.
+                           {% endfor %}
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+               <div class="modal fade" id="myModalInformation" tabindex="-1" role="dialog"
+                  aria-labelledby="myModalInformation">
+                  <div class="modal-dialog" role="document">
+                     <div class="modal-content">
+                        <div class="modal-header mod">
+                           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                              aria-hidden="true" style="color:#fff;">&times;</span></button>
+                           <h4 class="modal-title modtitle" id="myModalInformation">[ Información ] </h4>
+                        </div>
+                        <div class="modal-body">
+                           cargando contenido...espere un momento por favor
+                        </div>
+                        <div class="msg"></div>
+                        <div class="modal-footer">
+                           <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="modal fade" id="VerHistorial" tabindex="-1" role="dialog" aria-labelledby="VerHistorial">
+                  <div class="modal-dialog modal-info fade in" role="document">
+                     <div class="modal-content">
+                        <div class="modal-header mod">
+                           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style="color:#fff;">&times;</span></button>
+                           <h4 class="modal-title modtitle" id="VerHistorial"><strong>cargando...</strong></h4>
+                        </div>
+                        <div class="modal-body">
+                           <div class="container mt-5 mb-5">
+                              <div class="row">
+                                 <div class="col-md-6 offset-md-3">
+                                    <ul class="timeline">
+                                    </ul>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div  class="msg"></div>
+                        <div class="modal-footer">
+                           <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="modal fade" id="ReSubir" tabindex="-1" role="dialog" aria-labelledby="ReSubir">
+                  <div class="modal-dialog" role="document">
+                     <div class="modal-content">
+                        <div class="modal-header mod">
+                           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style="color:#fff;">&times;</span></button>
+                           <h4 class="modal-title modtitle" id="ReSubir"><strong>cargando...</strong></h4>
+                        </div>
+                        <div class="modal-body">
+                           <div class="documentos">
+                              <p  style="float: left;width: 100%;">SUBIR DOCUMENTO CORREGIDO*</p>
+                              <div class="col-sm-12">
+                                 <div class="form-group">
+                                    <form name="form_update" id="form_update" method="post" enctype="multipart/form-data">
+                                       <div class="col-sm-10 not">
+                                          <input type="hidden" name="idsol" id="idsol" value="">
+                                          <input type="hidden" name="tipo_doc" id="tipo_doc" value="">
+                                          <input class="form-control obligatedoc" type="file" name="file" id="file" data-content="Usted debe elegir un documento" />
+                                          {{ csrf.field | raw }}
+                                       </div>
+                                       <input id="subirDocumento" type="reset" name='btnSubmite' class="btn btn-primary" value="Subir" />
+                                    </form>
+                                 </div>
+                              </div>
+                              <div class="col-sm-12 barra1 mybarra">
+                              </div>
+                              <div  class="col-sm-12 msgu"></div>
+                           </div>
+                        </div>
+                        <div class="modal-footer">
+                           <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="modal fade" id="AgregarAdvertencia" tabindex="-1" role="dialog" aria-labelledby="AgregarAdvertencia">
+                  <div class="modal-dialog" role="document">
+                     <div class="modal-content">
+                        <div class="modal-header mod">
+                           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style="color:#fff;">&times;</span></button>
+                           <h4 class="modal-title modtitle" id="AgregarAdvertencia"><strong>cargando...</strong></h4>
+                        </div>
+                        <div class="modal-body">
+                           <div class="box-body row">
+                              <div class="col-sm-12">
+                                 <div class="form-group">
+                                    <label>Documento en cuestión</label>
+                                    <div class="input-group">
+                                       <span class="input-group-addon" style="width: auto;"><i class="fa fa-bars"></i></span>
+                                       <input type="text" id="nombredocumento" disabled value="" class="form-control obligate nombredocumento"/>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="col-sm-12">
+                                 <div class="box box-primary direct-chat direct-chat-primary">
+                                    <div class="box-body">
+                                       <div class="direct-chat-messages" id="ventanachat">
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="col-sm-12">
+                                 <div class="form-group">
+                                    <label>Mensaje: </label>
+                                    <form name="my_form" id="my_form" method="post">
+                                       <input type="hidden" name="codigodocumento" id="codigodocumento" value="">
+                                       <input type="hidden" name="tipo_user" id="tipo_user" value="1">
+                                       <input type="hidden" name="iduser" id="iduser" value="">
+                                       <input type="hidden" name="tipdoc" id="tipdoc" value="">
+                                       {{ csrf.field | raw }}
+                                       <textarea class="form-control obligate" id="texto" rows="5" name="texto"
+                                          data-content="Usted debe ingresar un mensaje"
+                                          id="texto" placeholder="Escriba el mensaje"></textarea>
+                                    </form>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div  class="msg"></div>
+                        <div class="modal-footer">
+                           <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                           <button type="button" id="savemensaje" data-loading-text="Guardando..."  class="btn btn-success" autocomplete="off">Guardar</button>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<script>
+   !function (a) {
+       "use strict";
+       a(function () {
+           var b = a(window),
+                   c = a(document.body),
+                   content = '',
+                   mycod = '',
+                   operation = '',
+                   form = '',
+                   f = '',
+                   mycodigo = '';
+   
+           a("#VerHistorial").on("show.bs.modal", function (b) {
+   
+               var c = a(b.relatedTarget),
+                       content = c.data("content"),
+                       tipo = c.data("tipo"),
+                       titulo = c.data("title"),
+                       e = a(this);
+   
+               e.find(".modal-title").text("HISTORIAL");
+   
+               return $.ajax({
+                   type: "get",
+                   url: '{{ base_url() }}/documentos',
+                   data: {
+                       idvalor: content,
+                       tipo: tipo,
+                   },
+                   beforeSend: function () {
+                       e.find(".modal-title").text("[" + titulo + "]");
+                       e.find(".timeline li").html("cargando contenido");
+                   },
+                   success: function (data) {
+                       $('.timeline li').remove();
+                       $.each(data, function (i, item) {
+                           if (item.flag == 1) {
+                               item.flag = '<span class=\'label label-info\'><i class=\'fa fa-search\'></i>  EN EVALUACIÓN</span>';
+                           } else if (item.flag == 2) {
+                               item.flag = '<span class=\'label label-danger\'><i class=\'fa fa-exclamation-triangle\'></i>  OBSERVADO</span>';
+                           } else if (item.flag == 3) {
+                               item.flag = '<span class=\'label label-success\'><i class=\'fa fa-check\'></i>  APROBADO</span></span></li';
+                           }
+   
+                           $(".timeline").append("" +
+                                   "<li>" +
+                                   "<a target='_blank' href='" + item.urldoc + "'><i class='fa fa-folder'></i> " + item.urldoc + "</a>" +
+                                   "<p><i class='fa fa-calendar'></i> " + item.freg + "</p>" +
+                                   item.flag);
+   
+                       });
+                   },
+                   error: function () {
+                   }
+               });
+           });
+   
+   
+           a("#AgregarAdvertencia").on("show.bs.modal", function (b) {
+               var c = a(b.relatedTarget),
+                       content = c.data("content"),
+                       tipo = c.data("tipo"),
+                       titulo = c.data("title"),
+                       user = c.data("user"),
+                       e = a(this);
+   
+               document.getElementById("nombredocumento").value = titulo;
+               document.getElementById("codigodocumento").value = content;
+               document.getElementById("tipdoc").value = tipo;
+               document.getElementById("iduser").value = user;
+   
+               e.find(".modal-title").text("HISTORIAL");
+   
+               return $.ajax({
+                   type: "get",
+                   url: '{{ base_url() }}/mensajes',
+                   data: {
+                       idvalor: content,
+                   },
+   
+                   beforeSend: function () {
+                       e.find(".modal-title").text("[" + titulo + "]");
+                       e.find(".timeline li").html("cargando contenido");
+                   },
+   
+                   success: function (data) {
+   
+                       $('#ventanachat div').remove();
+   
+                       $.each(data, function (i, item) {
+   
+                           var nomuser;
+                           var fechapull;
+                           var lado;
+                           var foto;
+   
+                           if (item.tipo_user == 2) {
+                               item.tipo_user = 'pull-right',
+                                       nomuser = 'Administrador',
+                                       fechapull = 'pull-left',
+                                       lado = 'right';
+                               foto = 'https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-128.png';
+                           } else {
+                               item.tipo_user = 'pull-left',
+                                       nomuser = 'Usuario',
+                                       fechapull = 'pull-right';
+                               foto = 'https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-alt-128.png';
+                           }
+   
+                           $("#ventanachat").append("" +
+                                   "<div class='direct-chat-msg " + lado + "'>" +
+                                   "<div class='direct-chat-info clearfix'>" +
+                                   "<span class='direct-chat-name " + item.tipo_user + "'>" + nomuser + "" +
+                                   "</span>" +
+                                   "<span class='direct-chat-timestamp " + fechapull + "'>" + item.fecha_registro + "" +
+                                   "</span>" +
+                                   "</div>" +
+                                   "<img class='direct-chat-img' src='" + foto + "' alt='message user image'>" +
+                                   "<div class='direct-chat-text'>" + item.mensaje + "" +
+                                   "</div>" +
+                                   "</div>"
+                                   );
+                       });
+                   },
+   
+                   error: function () {
+                   }
+               });
+           }),
+                   a("#ReSubir").on("show.bs.modal", function (b) {
+               var c = a(b.relatedTarget),
+                       idsol = c.data("cidsol"),
+                       tipodoc = c.data("tipodoc"),
+                       e = a(this);
+   
+               document.getElementById("idsol").value = idsol;
+               document.getElementById("tipo_doc").value = tipodoc;
+   
+   
+               e.find(".modal-title").text("SUBIR NUEVO DOCUMENTO");
+           }),
+                   a("#savemensaje").on("click", function () {
+   
+               // CKEDITOR.instances['texto'].getData()
+   
+               var b = a(this), dataString;
+               var holder = '';
+               var exito = true;
+               $(".obligate").each(function () {
+                   if ($(this).val() == '') {
+                       $(this).focus();
+                       holder = $(this).attr("data-content");
+                       exito = false;
+                       $(".msg").html("").show();
+                       $(".msg").html("<div class='alert alert-danger'><i class='fa fa-exclamation-triangle'></i> " + holder + "</div>");
+                       setTimeout(function () {
+                           $(".msg").fadeOut(1500);
+                       }, 1500);
+                       return false;
+                   }
+               });
+               if (!exito)
+                   return false;
+               dataString = $('#my_form').serialize();
+               $.ajax({
+                   type: "POST",
+                   url: "{{ base_url() }}/mensajesadd",
+                   data: dataString,
+                   beforeSend: function () {
+                       b.button("loading");
+                   },
+                   success: function (data) {
+                       var position = data.indexOf('?');
+                       var number = data.substr(0, position).replace(/\s+/g, '');
+                       // alert(data + "=>" + position + " =>" + number + " =>"+number.length);
+                       if (number > 0) {
+                           b.button("reset");
+                           $('#AgregarAdvertencia').modal('hide')
+                           $('#myModalInformation').find(".modal-body").html("<center>" + data.substr(position + 1, data.length) + "</center>");
+                           $('#myModalInformation').modal('show');
+                           ;
+                           setTimeout(function () {
+                               window.location.href = window.location;
+                           }, 2000);
+   
+                       } else {
+                           $(".msg").html("").show();
+                           $(".msg").html(data);
+                           setTimeout(function () {
+                               $(".msg").fadeOut(1500);
+                           }, 1000);
+                           b.button("reset");
+                       }
+   
+                   },
+                   error: function () {
+                       console.log("It failed");
+                   }
+               })
+           });
+       })
+   }
+   
+   (jQuery), function () {
+       "use strict";
+       $('#fono').keyup(function () {
+           this.value = (this.value + '').replace(/[^0-9]/g, '');
+       });
+   
+   }();
+   
+   $('#btnSave').click(function () {
+       addWine();
+   });
+   
+</script>
+<script src="{{ base_url() }}/js/custom.js"></script>
+{% endblock content %}

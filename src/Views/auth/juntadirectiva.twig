@@ -1,0 +1,239 @@
+{% block content %}
+<div class="section section-padding contact-main gray-color " id="juntadirectiva">
+  <div class="container">
+    <div class="group-title-index">
+      <h2 class="center-title">JUNTA DIRECTIVA</h2>
+      <h4 class="top-title"><b>Agregue a los dirigentes responsables</b></h4>
+    </div>
+
+    <div class="contact-main-wrapper">
+
+      <div class="row">
+
+        <!----------------------------AGREGAR------------------------>
+
+        <form action="{{ path_for('juntadirectiva.registrar') }}" class="bg-w-form contact-form" method="post"
+              autccomplete="off">
+
+          <input hidden type="text" name="cod_org" id="cod_org" value="{{ OrganizacionController.organizacion.codigo }}">
+          <input hidden type="text" name="foto" id="foto" value="">
+
+          <div class="col-sm-10">
+            <div class="col-md-12{{ errors.cod_puesto ? ' has-error' : '' }}">
+
+              <select class="form-control form-select" id="cod_puesto" name="cod_puesto"
+                      onChange="puestochange(this)">
+                <option value="">Seleccionar un cargo</option>
+                {% for puestos in JuntaDirectivaController.listapuestos %}
+                  <option value="{{ puestos.codigo }}">{{ puestos.puesto }}</option>
+                {% endfor %}
+
+              </select>
+              {% if errors.cod_puesto %}
+                <span class="help-block">{{ errors.cod_puesto | first }}</span>
+              {% endif %}
+
+            </div>
+
+            <div class="col-md-12{{ errors.descripcion_cargo ? ' has-error' : '' }}" id="div-otros"
+                 style="display:none;">
+              <input type="text" value="" placeholder="Describa el cargo" id="descripcion_cargo"
+                     name="descripcion_cargo" class="form-control form-input">
+              {% if errors.descripcion_cargo %}
+                <span class="help-block">{{ errors.descripcion_cargo | first }}</span>
+              {% endif %}
+            </div>
+
+            <div class="col-md-4{{ errors.dni ? ' has-error' : '' }}">
+              <input type="text" value="" placeholder="DNI" maxlength="8" id="dni" name="dni" onkeyup="buscarDni()"
+                     class="form-control form-input">
+              {% if errors.dni %}
+                <span class="help-block">{{ errors.dni | first }}</span>
+              {% endif %}
+            </div>
+
+            <div class="col-md-4{{ errors.nombre ? ' has-error' : '' }}">
+              <input type="text" value="" placeholder="Nombres" id="nombre" name="nombre"
+                     class="form-control form-input">
+              {% if errors.nombre %}
+                <span class="help-block">{{ errors.nombre | first }}</span>
+              {% endif %}
+            </div>
+
+            <div class="col-md-4{{ errors.apellido_pat ? ' has-error' : '' }}">
+              <input type="text" value="" placeholder="Apellido paterno" id="apellido_pat" name="apellido_pat"
+                     class="form-control form-input">
+              {% if errors.apellido_pat %}
+                <span class="help-block">{{ errors.apellido_pat | first }}</span>
+              {% endif %}
+            </div>
+
+            <div class="col-md-4{{ errors.apellido_mat ? ' has-error' : '' }}">
+              <input type="text" value="" placeholder="Apellido materno" id="apellido_mat" name="apellido_mat"
+                     class="form-control form-input">
+              {% if errors.apellido_mat %}
+                <span class="help-block">{{ errors.apellido_mat | first }}</span>
+              {% endif %}
+            </div>
+
+            <div class="col-md-4{{ errors.fecha_nacimiento ? ' has-error' : '' }}">
+              <input type="text" value="" placeholder="Fecha de nacimiento" onfocus="(this.type='date')"
+                     id="fecha_nacimiento" name="fecha_nacimiento" class="form-control form-input">
+              {% if errors.fecha_nacimiento %}
+                <span class="help-block">{{ errors.fecha_nacimiento | first }}</span>
+              {% endif %}
+            </div>
+
+            <div class="col-md-4{{ errors.sexo ? ' has-error' : '' }}">
+
+              <select class="form-control form-select" id="sexo" name="sexo">
+                <option value="">Seleccione su sexo</option>
+                <option value="f">Femenino</option>
+                <option value="m">Masculino</option>
+              </select>
+
+              {% if errors.sexo %}
+                <span class="help-block">{{ errors.sexo | first }}</span>
+              {% endif %}
+            </div>
+
+            <div class="col-md-4{{ errors.departamento ? ' has-error' : '' }}">
+              <input type="text" value="" placeholder="Departamento" id="departamento" name="departamento"
+                     class="form-control form-input">
+              {% if errors.departamento %}
+                <span class="help-block">{{ errors.departamento | first }}</span>
+              {% endif %}
+            </div>
+
+            <div class="col-md-4{{ errors.provincia ? ' has-error' : '' }}">
+              <input type="text" value="" placeholder="Provincia"
+                     id="provincia" name="provincia" class="form-control form-input">
+              {% if errors.provincia %}
+                <span class="help-block">{{ errors.provincia | first }}</span>
+              {% endif %}
+            </div>
+
+            <div class="col-md-4{{ errors.distrito ? ' has-error' : '' }}">
+              <input type="text" value="" placeholder="Distrito"
+                     id="distrito" name="distrito" class="form-control form-input">
+              {% if errors.distrito %}
+                <span class="help-block">{{ errors.distrito | first }}</span>
+              {% endif %}
+            </div>
+
+            {% if flash.getMessage('error_dni_registrado') %}
+              <div class="col-md-12">
+                <div class="alert alert-danger" role="alert">
+                  {{ flash.getMessage('error_dni_registrado') | first }}
+                </div>
+              </div>
+            {% endif %}
+
+            {% if flash.getMessage('registro_responsable') %}
+              <div class="col-md-12">
+                <div class="alert alert-success" role="alert">
+                  {{ flash.getMessage('registro_responsable') | first }}
+                </div>
+              </div>
+            {% endif %}
+
+          </div>
+
+          <div class="col-sm-2">
+            <img id="imgElem" style="width: 100%;border: solid 2px #ddd;border-radius: 10px;" src="https://s3.eu-west-2.amazonaws.com/memory-markdown/static/anonymous.png">
+          </div>
+
+
+
+          <div class="contact-submit">
+            <button type="submit" class="btn btn-green center btn-contact"><span>REGISTRAR RESPONSABLE</span></button>
+          </div>
+
+          {{ csrf.field | raw }}
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!----------------------------LISTADO------------------------>
+
+<div class="section teacher-course gray-color">
+  <div class="container teacher-course-wrapper mayus">
+    <div class="course-table">
+      <table id="example" class="table table-striped table-bordered">
+        <thead>
+        <tr>
+          <th>DNI</th>
+          <th>Cargo</th>
+          <th>Nombres</th>
+          <th>Apellidos</th>
+          <th>Fecha de nacimiento</th>
+          <th>Sexo</th>
+          <th>Departamento</th>
+          <th>Provincia</th>
+          <th>Distrito</th>
+          <th>Foto</th>
+          <th>Eliminar</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for juntas in JuntaDirectivaController.juntadirectiva %}
+          <tr>
+            <td>{{ juntas.dni }}</td>
+            <td><strong>{{ juntas.puesto }}</strong><br> {{ juntas.descripcion_cargo|upper }}</td>
+            <td>{{ juntas.nombre }}</td>
+            <td>{{ juntas.apellido_pat }} {{ juntas.apellido_mat }}</td>
+            <td>{{ juntas.fecha_nacimiento }}</td>
+
+            {% if juntas.sexo == 'f' %}
+              <td>Femenino</td>
+            {% else%}
+              <td>Masculino</td>
+            {% endif%}
+
+            <td>{{ juntas.departamento }}</td>
+            <td>{{ juntas.provincia }}</td>
+            <td>{{ juntas.distrito }}</td>
+            <td><img style="width: 60px;border: solid 2px #9E9E9E;border-radius: 10px;" src="data:image/jpg;base64,{{ juntas.foto }}"></td>
+            <td>
+              <form action="{{ path_for('juntadirectiva.eliminar') }}" class="bg-w-form contact-form"
+                    method="post" autccomplete="off">
+                <input hidden type="text" name="codigo" value="{{ juntas.codigo }}">
+                <button type="submit" class="btn buttons-delete"><i class="fa fa-times"></i></button>
+                {{ csrf.field | raw }}
+              </form>
+            </td>
+
+          </tr>
+        {% endfor %}
+
+        </tbody>
+
+        <tfoot>
+        <tr>
+          <th>DNI</th>
+          <th>Cargo</th>
+          <th>Nombres</th>
+          <th>Apellidos</th>
+          <th>Fecha de nacimiento</th>
+          <th>Sexo</th>
+          <th>Departamento</th>
+          <th>Provincia</th>
+          <th>Distrito</th>
+          <th>Foto</th>
+          <th>Eliminar</th>
+        </tr>
+        </tfoot>
+
+      </table>
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock content %}

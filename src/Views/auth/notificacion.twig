@@ -1,0 +1,64 @@
+{% extends 'templates/app.twig' %}
+{% block content %}
+<div id="wrapper-content">
+<div id="page-wrapper">
+   <div class="main-content">
+      <div class="content">
+         <div class="section section-padding edu-ab">
+            <div class="container">
+               <div class="edu-ab">
+                  <div class="group-title-index edu-ab-title">
+                     {% if SolicitudController.solicitud.tipo_sol == 1%}
+                     <h2 class="center-title">
+                        PROCESO PARA <b>REGISTRO NUEVO</b> DE ORGANIZACIÓN
+                     </h2>
+                     {% else %}
+                     <h2 class="center-title">
+                        PROCESO PARA <b>ACTUALIZACIÓN</b>  DE ORGANIZACION
+                     </h2>
+                     {% endif %}
+                     <h4 class="top-title">El siguiente paso es subir tus documentos para solicitud</h4>
+                  </div>
+                  <div class="edu-ab-content">
+                     <ul class="list-unstyled list-inline">
+                        <li>
+                           <div class="circle-icon fa-2x" style="background: #00a39c;"><i class="fa fa-check"
+                              style="color: white;"></i></div>
+                           <span>Crear cuenta</span>
+                        </li>
+                        <li>
+                           <div class="circle-icon fa-2x" style="background: #00a39c;"><i class="fa fa-check"
+                              style="color: white;"></i></div>
+                           <span>Iniciar sesión</span>
+                        </li>
+                        <li>
+                           <div class="circle-icon fa-2x" style="background: #00a39c;"><i class="fa fa-check "
+                              style="color: white;"></i></div>
+                           <span>Subir documentos</span>
+                        <li>
+                           <div class="circle-icon fa-2x" style="background: #00a39c;"><i class="fa fa-check"
+                              style="color: white;"></i></div>
+                           <span>Enviar solicitud</span>
+                        </li>
+                        <li>
+                           <div class="circle-icon fa-2x"><i class="fa fa-search"></i></div>
+                           <span>Evaluación de documentos</span>
+                        </li>
+                        <li>
+                           <div class="circle-icon fa-2x"><i class="fa fa-thumbs-up"></i></div>
+                           <span>Estado de aprobación</span>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+         {% if SolicitudController.solicitud.tipo_sol == 1%}
+         {% include 'auth/notificacion-nuevo.twig' %}
+         {% else %}
+         {% include 'auth/notificacion-actualizacion.twig' %}
+         {% endif %}
+      </div>
+   </div>
+</div>
+{% endblock content %}

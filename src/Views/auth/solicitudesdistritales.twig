@@ -1,0 +1,311 @@
+{% extends 'templates/app.twig' %}
+{% block content %}
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            width: 100%;
+            height: 80%;
+            border: solid 2px #cccccc;
+            border-radius: 5px;
+        }
+
+        #map2 {
+            width: 100%;
+            height: 80%;
+            border: solid 2px #cccccc;
+            border-radius: 5px;
+        }
+
+        #coords {
+            width: 500px;
+        }
+
+        td.details-control {
+            background: url('{{ base_url() }}/images/details_open.png') no-repeat center center;
+            cursor: pointer;
+        }
+
+        tr.shown td.details-control {
+            background: url('{{ base_url() }}/images/details_close.png') no-repeat center center;
+        }
+    </style>
+    <div id="wrapper-content">
+        <div id="page-wrapper">
+            <div class="main-content">
+                <div class="content">
+                    <div class="section background-opacity page-title set-height-top">
+                        <div class="container">
+                            <div class="page-title-wrapper">
+                                <h2 class="captions">SOLICITUDES MENSUALES</h2>
+                                <h4 class="top-title"><strong>[{{ AuthController.usuario.nombres }}]</strong></h4>
+
+                                <ol class="breadcrumb">
+                                    <li><a href="../auth/solicitud">Solicitudes</a></li>
+                                    <li class="active"><a href="#">Solicitudes Mensuales</a></li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <div class="search-input">
+                            <div class="container">
+                                <div class="search-input-wrapper">
+                                    <form>
+                                        <div class="col-sm-5">
+                                            <h5 style="font-weight: bold; color: #000000; text-transform: uppercase;">
+                                                Búsqueda por año</h5>
+                                            <select class="form-control obj_anio" id="obj_anio" name="obj_anio">
+                                                <option value="">Todos</option>
+                                                <option value="2020">2020</option>
+                                                <option value="2019">2019</option>
+                                                <option value="2018">2018</option>
+                                                <option value="2017">2017</option>
+                                                <option value="2017">2016</option>
+                                                <option value="2017">2015</option>
+                                                <option value="2017">2014</option>
+                                                <option value="2017">2013</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-sm-5">
+                                            <h5 style="font-weight: bold; color: #000000; text-transform: uppercase;">
+                                                Búsqueda por mes</h5>
+                                            <select class="form-control obj_mes" id="obj_mes" name="obj_mes">
+                                                <option value="">Todos</option>
+                                                <option value="01">Enero</option>
+                                                <option value="02">Febrero</option>
+                                                <option value="03">Marzo</option>
+                                                <option value="04">Abril</option>
+                                                <option value="05">Mayo</option>
+                                                <option value="06">Junio</option>
+                                                <option value="07">Julio</option>
+                                                <option value="08">Agosto</option>
+                                                <option value="09">Septiembre</option>
+                                                <option value="10">Octubre</option>
+                                                <option value="11">Noviembre</option>
+                                                <option value="12">Diciembre</option>
+
+                                            </select>
+                                        </div>
+
+
+                                        <div class="col-sm-2">
+                                            <h5 style="color: #ebebeb;"> __</h5>
+                                            <div type="submit" class="form-submit btn btn-transition-2 searchRes"
+                                                 style="width:100%; padding: inherit;">
+                                                <span>Buscar <i class="fa fa-search"></i></span>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="clearfix"></div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section teacher-course">
+                        <div class="container">
+                            <div class="teacher-course-wrapper">
+
+                                <table id="Resoluciones"
+                                       class="display  compact  table-striped table-bordered dt-responsive"
+                                       width="100%">
+
+                                    <thead>
+                                    <tr class="heading-table">
+                                        <th></th>
+                                        <th class="col-md-2">NOMBRE DE ORGANIZACIÓN</th>
+                                        <th class="col-md-2">TIPO DE SOLICITUD</th>
+                                        <th class="col-md-1">DISTRITO</th>
+                                        <th class="col-md-1">FECHA DE SOLICITUD</th>
+                                        <th class="col-md-1">INICIO DE VIGENCIA</th>
+                                        <th class="col-md-1">FIN DE VIGENCIA</th>
+                                        <th class="col-md-1">TIPO DE ORGANIZACIÓN</th>
+                                        <th class="col-md-1">CÓDIGO DE LA RESOLUCION</th>
+                                        <th class="col-md-1">DESCARGAR RESOLUCIÓN</th>
+                                    </tr>
+                                    </thead>
+
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+
+
+        $('.searchRes').click(function () {
+
+            cod_mes = $('.obj_mes').val();
+            cod_anio = $('.obj_anio').val();
+
+            ListarResoluciones(cod_anio, cod_mes);
+        })
+
+
+        $(document).ready(function () {
+            ListarResoluciones();
+        })
+
+        function format(d) {
+            return '<div class="col-md-8"><div class="col-md-12"><p style="float: left;"><strong>DIRECCIÓN: </strong> ' + d.domicilio_org + '</p><br></div>' +
+                '<div class="col-md-12"><p style="float: left;"><strong>TIPO: </strong>' + d.descripcion + '</p></div>' +
+                '<div class="col-md-12"><p style="float: left;"><strong>DISTRITO: </strong>' + d.distrito + '</p></div></div>';
+        }
+
+        var childRows = null;
+
+        function ListarResoluciones(cod_anio, cod_mes) {
+
+
+            var dt = $('#Resoluciones').DataTable({
+
+                destroy: true,
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ],
+
+                "buttons": [
+                    'copy', 'csv', 'excel', 'pdf'
+                ],
+
+                "language": {
+                    "lengthMenu": "Ver _MENU_ registros por página",
+                    "zeroRecords": "No se encontraron resultados",
+                    "info": "Viendo página _PAGE_ de _PAGES_",
+                    "infoEmpty": "No se encontraron responsables",
+                    "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "search": "Buscar:",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Último",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    },
+                },
+
+                "ajax": {
+                    "type": "get",
+                    "url": "{{ base_url() }}/solicitud/distritales/lista",
+                    "data": {
+
+                        anio: cod_anio,
+                        mes: cod_mes
+                    }
+                },
+
+                "columns": [
+                    {
+                        "class": "details-control",
+                        "orderable": false,
+                        "data": null,
+                        "defaultContent": ""
+                    },
+
+                    {"data": "nombre_org"},
+                    {
+                        "data": "tipo_sol",
+                        render: function (data) {
+                            if (data === "1") {
+                                return 'NUEVO';
+                            } else {
+                                return 'ACTUALIZACIÓN';
+                            }
+
+                        },
+                    },
+                    {"data": "distrito"},
+                    {"data": "fec_revision"},
+                    {"data": "inicio"},
+                    {"data": "fin"},
+                    {"data": "descripcion"},
+                    {
+                        "data": "res_dis",
+                        render: function (data) {
+                            return "" + data + ""
+                        },
+                    },
+                    {
+                        "data": "urldoc",
+                        render: function (data) {
+                            return "<a class='btn btn-default'" +
+                                "style='cursor:pointer;overflow: visible;'" +
+                                "target='_blank'" +
+                                "href='{{ base_url() }}/" + data + "'>" +
+                                "<i class='fa fa-download'></i></a>"
+                        },
+                    },
+
+
+                ],
+
+
+                columnDefs: [
+                    {
+                        className: 'text-center',
+                        targets: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+                    }
+                ],
+
+
+            });
+
+
+            // Array to track the ids of the details displayed rows
+            var detailRows = [];
+
+            $('#Resoluciones tbody').off('click', 'tr td.details-control');
+            $('#Resoluciones tbody').on('click', 'tr td.details-control', function () {
+                var tr = $(this).closest('tr');
+                var row = dt.row(tr);
+
+                if (row.child.isShown()) {
+                    // This row is already open - close it
+                    row.child.hide();
+                    tr.removeClass('shown');
+                } else {
+                    // Open this row
+                    d = row.data();
+                    row.child(format(d)).show();
+                    tr.addClass('shown');
+                }
+            });
+
+
+            // On each draw, loop over the `detailRows` array and show any child rows
+            dt.on('draw', function () {
+
+                // If reloading table then show previously shown rows
+                if (childRows) {
+
+                    childRows.every(function (rowIdx, tableLoop, rowLoop) {
+                        d = this.data();
+                        this.child($(format(d))).show();
+                        this.nodes().to$().addClass('shown');
+                    });
+
+                    // Reset childRows so loop is not executed each draw
+                    childRows = null;
+                }
+            });
+
+        }
+
+    </script>
+
+
+{% endblock content %}

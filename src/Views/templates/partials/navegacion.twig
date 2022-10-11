@@ -1,0 +1,60 @@
+<header>
+    <div class="header-topbar">
+        <div class="container">
+            <div class="topbar-left pull-left">
+                <div class="email"><a href="#"><i class="topbar-icon fa fa-envelope-o"></i><span>ruos@munlima.gob.pe</span></a></div>
+                <div class="hotline"><a href="#"><i class="topbar-icon fa fa-phone"></i><span>632-1300 Anexo  1626</span></a></div>
+            </div>
+            <div class="topbar-right pull-right">
+                <div class="socials">
+                    <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+                    <a href="#" class="google"><i class="fa fa-instagram"></i></a>
+                </div>
+                <div class="group-sign-in">
+                    {% if AuthController.check %}
+                        <a href="{{ path_for('auth.signout') }}" class="register"><i class="fa fa-power-off"></i> CERRAR SESIÓN</a>
+                    {% else %}
+                        <a href="{{ path_for('auth.signin') }}" class="login">INICIAR SESIÓN</a>
+                        <a href="{{ path_for('auth.signup') }}" class="register">REGÍSTRATE</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+  <div class="header-main homepage-01">
+    <div class="container">
+      <div class="header-main-wrapper">
+        <div class="navbar-heade">
+          <div class="logo pull-left"><a href="{{ path_for('home') }}" class="header-logo"><img
+                src="{{ base_url() }}/images/logo.png" alt=""/></a></div>
+          <button type="button" data-toggle="collapse" data-target=".navigation" class="navbar-toggle edugate-navbar">
+            <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+        </div>
+        <nav class="navigation collapse navbar-collapse pull-right">
+          <ul class="nav-links nav navbar-nav">
+
+            <li><a href="{{ path_for('home') }}" class="main-menu">INICIO </a></li>
+			<li class="dropdown"><a  class="main-menu">SOLICITUDES<span class="fa fa-angle-down icons-dropdown"></span></a>                            
+
+            <ul class="dropdown-menu edugate-dropdown-menu-1">
+			<li><a href="{{ path_for('auth.solicitud') }}" class="link-page">Solicitud en proceso</a></li>                                
+			<li><a href="{{ path_for('auth.solicitudes') }}" class="link-page">Historial de solicitudes</a></li>                            
+			</ul>            
+			</li>
+
+            <li><a href="{{ path_for('home') }}#requisitos" class="main-menu">REQUISITOS</a></li>
+            <li class="dropdown"><a class="main-menu">RESOLUCIONES <span class="fa fa-angle-down icons-dropdown"></span></a>
+                <ul class="dropdown-menu edugate-dropdown-menu-1">
+                    <li><a href="{{ path_for('auth.resoluciones') }}" class="link-page">Cercado de Lima</a></li>
+                    <li><a href="{{ path_for('auth.resdistritales') }}" class="link-page">Distritales</a></li>                                          
+                </ul>   
+            </li>
+            <li><a href="{{ path_for('mapa') }}" class="main-menu">GEOLOCALIZACIÓN</a></li>
+              <li><a href="{{ path_for('asesoria') }}" class="main-menu">ASESORÍAS</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>

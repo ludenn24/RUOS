@@ -1,0 +1,889 @@
+{% block content %}
+
+    
+    <style>
+        
+        #overlay {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 99999;
+    background-color: gray;
+    filter: alpha(opacity=75);
+    -moz-opacity: 0.75;
+    opacity: 0.75;
+    display: none;
+}
+#overlay h2 {
+    position: fixed;
+    margin-left: 40%;
+    top: 40%;
+}
+
+        </style>
+        
+        <div id="overlay"><h2>Loading .. Please wait</h2></div>
+        
+        
+    <div class="modal fade" id="AgregarOrganizacion" tabindex="-1" role="dialog" aria-labelledby="AgregarOrganizacion">
+        <div class="modal-dialog modal-info fade in modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header mod">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"
+                                                                                                      style="color:#fff;">&times;</span>
+                    </button>
+                    <h4 class="modal-title modtitle"><strong>NUEVA ORGANIZACIÓN SOCIAL</strong></h4>
+                </div>
+                <div class="modal-body">
+
+
+                    <div class="group-title-index">
+                        <h2 class="center-title"> INFORMACIÓN REQUERIDA </h2>
+                        <h4 class="top-title"><b>{{ AuthController.usuario.nombres }}</b>, agrega los <b>datos</b> de la
+                            organización </h4>
+                    </div>
+
+                    <div class="contact-main-wrapper">
+                        <form class="bg-w-form contact-form" method="post" autccomplete="off"
+                              id="FormAgregarOrganizacion">
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    <label class="control-label form-label">NOMBRE DE LA ORGANIZACIÓN <span
+                                                class="highlight">*</span></label>
+                                    <input type="text" placeholder="Ingrese el nombre de la organización" id="nom_orgv2"
+                                           name="nom_orgv2"
+                                           data-content="Usted debe ingresar el nombre de la organización"
+                                           class="form-control form-input obligatev2" value="">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="control-label form-label">DIRECCIÓN DEL LOCAL DE LA ORGANIZACIÓN <span
+                                                class="highlight">*</span></label>
+                                    <input type="text" placeholder="Ingrese la dirección del local de la organización"
+                                           id="domicilio_orgv2" name="domicilio_orgv2"
+                                           class="form-control form-input obligatev2"
+                                           data-content="Usted debe ingresar la dirección del local de la organización."
+                                           value="">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="control-label form-label">DISTRITO <span class="highlight">*</span>
+                                    </label>
+                                    <select class="form-control form-select obligatev2" disabled id="distrito_orgv2"
+                                            name="distrito_orgv2"
+                                            data-content="Usted debe seleccionar el distrito de su organización  .">
+                                        <option value="">Seleccionar un distrito</option>
+                                        {% for listado in OrganizacionController.getdistritos %}
+                                            <option {% if listado.idDist == AuthController.usuario.distrito %} selected  {% endif %}
+                                                    value="{{ listado.idDist }}">{{ listado.distrito }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+
+                                <div class="col-md-6">
+                                    <label class="control-label form-label">TIPO DE ORGANIZACIÓN <span
+                                                class="highlight">*</span>
+                                    </label>
+                                    <select class="form-control form-select obligatev2" id="obj_denominav2"
+                                            name="obj_denominav2"
+                                            data-content="Usted debe seleccionar el tipo de la organización.">
+                                        <option value="">Seleccionar un tipo</option>
+                                        {% for tipoden in OrganizacionController.tipoorganizacion %}
+                                            <option value="{{ tipoden.codigo }}">{{ tipoden.descripcion }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="control-label form-label ">FECHA DE CONSTITUCIÓN DE LA ORGANIZACIÓN
+                                        <span class="highlight">*</span></label>
+                                    <input type="date" placeholder="" id="fecha_consv2" name="fecha_consv2"
+                                           class="form-control form-input obligatev2"
+                                           data-content="Usted debe seleccionar la fecha de constitución." value="">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="control-label form-label">NÚMERO DE MIEMBROS <span
+                                                class="highlight">*</span></label>
+                                    <input type="number" placeholder="" id="num_miemv2" name="num_miemv2"
+                                           class="form-control form-input obligatev2"
+                                           value="" data-content="Usted debe ingresar el número de miembros.">
+                                </div>
+
+                                <input id="finesv2" name="finesv2" type="hidden">
+
+                                <div class="col-md-12">
+                                    <label class="control-label form-label">Unicación de la organización <span
+                                                class="highlight">*</span>
+                                    </label>
+
+
+                                    <div id="map" style="height: 300px;"></div>
+
+                                </div>
+
+
+                                <input id="latitud" value="" class="obligatev2" name="latitud" type="hidden"
+                                       data-content="Usted debe ubicar la organización en el mapa."/>
+                                <input id="longitud" value="" class="obligatev2" name="longitud" type="hidden"
+                                       data-content="Usted debe ubicar la organización en el mapa."/>
+
+                            </div>
+
+                            <div class="msg2 col-md-12"></div>
+
+                            <div class="contact-submit">
+                                <button type="button" id="RegistrarOrganizacion" class="btn btn-contact btn-green">
+                      <span>
+                        REGISTRAR ORGANIZACIÓN
+                      </span>
+                                </button>
+                            </div>
+                            {{ csrf.field | raw }}
+                        </form>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="EditarOrganizacion" name="modalEditar" tabindex="-1" role="dialog"
+         aria-labelledby="EditarOrganizacion">
+        <div class="modal-dialog modal-info fade in modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header mod">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"
+                                                                                                      style="color:#fff;">&times;</span>
+                    </button>
+                    <h4 class="modal-title modtitle" id="VerHistorial"><strong>cargando...</strong></h4>
+                </div>
+                <div class="modal-body">
+
+
+                    <div class="group-title-index">
+                        <h2 class="center-title"> DATOS DE LA ORGANIZACIÓN </h2>
+                        <h4 class="top-title"><b>{{ AuthController.usuario.nombres }}</b>, edita los <b>datos</b> de la
+                            organización </h4>
+                    </div>
+
+                    <div class="contact-main-wrapper">
+                        <form class="bg-w-form contact-form" method="post" autccomplete="off"
+                              id="FormActualizarOrganizacion">
+                            <div class="row">
+
+                                <input value="" id="codigoorganizacion" name="codigoorganizacion" type="hidden">
+
+                                <div class="col-md-6">
+                                    <label class="control-label form-label">NOMBRE DE LA ORGANIZACIÓN<span
+                                                class="highlight">*</span></label>
+                                    <input type="text" placeholder="Ingrese el nombre de la organización" id="nom_org"
+                                           name="nom_org"
+                                           data-content="Usted debe ingresar el nombre de la organización"
+                                           class="form-control form-input obligate" value="">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="control-label form-label">DIRECCIÓN DEL LOCAL DE LA ORGANIZACIÓN <span
+                                                class="highlight">*</span></label>
+                                    <input type="text" placeholder="Ingrese la dirección del local de la organización"
+                                           id="domicilio_org" name="domicilio_org"
+                                           class="form-control form-input obligate"
+                                           data-content="Usted debe ingresar la dirección del local de la organización."
+                                           value="">
+                                </div>
+
+
+                                <div class="col-md-6">
+                                    <label class="control-label form-label">DISTRITO<span class="highlight">*</span>
+                                    </label>
+                                    <select class="form-control form-select obligate" disabled id="distrito_org"
+                                            name="distrito_org"
+                                            data-content="Usted debe seleccionar el distrito de su organización  .">
+                                        <option value="">Seleccionar una clase</option>
+                                        {% for listado in OrganizacionController.getdistritos %}
+                                            <option {% if listado.idDist == AuthController.usuario.distrito %} selected  {% endif %}
+                                                    value="{{ listado.idDist }}">{{ listado.distrito }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="control-label form-label">TIPO DE ORGANIZACIÓN <span
+                                                class="highlight">*</span>
+                                    </label>
+                                    <select class="form-control form-select obligate" id="obj_denomina"
+                                            name="obj_denomina"
+                                            data-content="Usted debe seleccionar el tipo de la organización.">
+                                        <option value="">Seleccionar un tipo</option>
+                                        {% for tipoden in OrganizacionController.tipoorganizacion %}
+                                            <option value="{{ tipoden.codigo }}">{{ tipoden.descripcion }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6">
+
+                                    <label class="control-label form-label ">FECHA DE CONSTITUCIÓN DE LA
+                                        ORGANIZACIÓN</label>
+                                    <input type="date" placeholder="" id="fecha_cons" name="fecha_cons"
+                                           class="form-control form-input obligate"
+                                           data-content="Usted debe seleccionar la fecha de constitución." value="">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="control-label form-label">NÚMERO DE MIEMBROS</label>
+                                    <input type="number" placeholder="" id="num_miem" name="num_miem"
+                                           class="form-control form-input obligate"
+                                           value="" data-content="Usted debe ingresar el número de miembros.">
+                                </div>
+
+                                <input id="fines" name="fines" type="hidden">
+
+                                <div class="col-md-12" style="height: 400px;">
+                                    <label class="control-label form-label">GEOLOCALIZACIÓN <span
+                                                class="highlight">*</span>
+                                    </label>
+                                    <div id="map2"></div>
+                                </div>
+
+                                <input id="longitud_editar" class="obligate" name="longitud_editar" type="hidden"
+                                       data-content="Usted debe ubicar la organización en el mapa."/>
+                                <input id="latitud_editar" class="obligate" name="latitud_editar" type="hidden"
+                                       data-content="Usted debe ubicar la organización en el mapa."/>
+
+                            </div>
+
+                            <div class="msg"></div>
+
+                            <div class="contact-submit">
+                                <button type="button" id="ActualizarOrganizaccion" class="btn btn-success">
+                      <span>
+                        ACTUALIZAR INFORMACIÓN
+                      </span>
+                                </button>
+                            </div>
+
+
+                            {{ csrf.field | raw }}
+
+                        </form>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="JuntaDirectiva" name="modalEditar" tabindex="-1" role="dialog"
+         aria-labelledby="JuntaDirectiva">
+        <div class="modal-dialog modal-info fade in modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header mod">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"
+                                                                                                      style="color:#fff;">&times;</span>
+                    </button>
+                    <h4 class="modal-title modtitle" id="VerHistorial"><strong>cargando...</strong></h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="group-title-index">
+                        <h2 class="organizacion-name center-title">JUNTA DIRECTIVA</h2>
+                        <h4 class="top-title"><b>Agregue a los miembros responsables</b></h4>
+                    </div>
+
+                    <div class="contact-main-wrapper">
+                        <!----------------------------AGREGAR------------------------>
+                        <form class="bg-w-form contact-form" method="post" autccomplete="off"
+                              id="FormAgregarMiembro">
+                            <div class="row">
+                                <input type="hidden" type="text" name="cod_sol" id="cod_sol" value="">
+                                <input type="hidden" type="text" name="foto" id="foto" value="">
+
+                                <div class="col-sm-10">
+                                    <div class="col-md-6">
+
+                                        <select class="form-control form-select" id="cod_puesto" name="cod_puesto"
+                                                onChange="puestochange(this)"
+                                                data-content="Usted debe seleccionar un cargo.">
+                                            <option value="">Seleccionar un cargo</option>
+                                            {% for puestos in JuntaDirectivaController.listapuestos %}
+                                                <option value="{{ puestos.codigo }}">{{ puestos.puesto }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-6" id="div-otros"
+                                         style="display:none;">
+                                        <input type="text" value="" placeholder="Describa el cargo"
+                                               id="descripcion_cargo"
+                                               name="descripcion_cargo" class="form-control form-input">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <select class="form-control form-select" id="cod_tipo_dni" name="cod_tipo_dni"
+                                                data-content="Usted debe seleccionar el tipo de documento">
+                                                <option value="">Tipo de documento</option>
+                                                <option value="DNI">DNI</option>
+                                                <option value="CE">CARNET DE EXTRANJERÍA</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <input type="text" value="" placeholder="DNI" maxlength="10" id="dni"
+                                               name="dni" onkeyup="buscarDni()"
+                                               class="form-control form-input obligate3"
+                                               data-content="Usted debe ingresar el dni.">
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <input type="text" value="" placeholder="Nombres" id="nombre" name="nombre"
+                                               class="form-control form-input obligate3"
+                                               data-content="Usted debe ingresar el nombre.">
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <input type="text" value="" placeholder="Apellido paterno" id="apellido_pat"
+                                               name="apellido_pat"
+                                               class="form-control form-input obligate3"
+                                               data-content="Usted debe ingresar el apellido paterno.">
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <input type="text" value="" placeholder="Apellido materno" id="apellido_mat"
+                                               name="apellido_mat"
+                                               class="form-control form-input obligate3"
+                                               data-content="Usted debe ingresar el apellidos materno.">
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <input type="text" value="" placeholder="Fecha de nacimiento"
+                                               onfocus="(this.type='date')"
+                                               id="fecha_nacimiento" name="fecha_nacimiento"
+                                               class="form-control form-input"
+                                               data-content="Usted debe ingresar la fecha de nacimiento.">
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <select class="form-control form-select" id="sexo" name="sexo"
+                                                data-content="Usted debe seleccionar el sexo.">
+                                            <option value="">Seleccione su sexo</option>
+                                            <option value="f">Femenino</option>
+                                            <option value="m">Masculino</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <input type="text" value="" placeholder="Departamento" id="departamento"
+                                               name="departamento"
+                                               class="form-control form-input">
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <input type="text" value="" placeholder="Provincia"
+                                               id="provincia" name="provincia" class="form-control form-input">
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <input type="text" value="" placeholder="Distrito"
+                                               id="distrito" name="distrito" class="form-control form-input">
+                                    </div>
+
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <img id="imgElem"
+                                         style="width: 100%;border: solid 2px #ddd;border-radius: 10px;"
+                                         src="{{ base_url() }}/images/anonimo.png">
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="msg3 col-sm-12">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="contact-submit">
+                                <button type="button" id="RegistrarMiembro"
+                                        class="btn btn-green center btn-contact">
+                                      <span>
+                                        REGISTRAR MIEMBRO
+                                      </span>
+                                </button>
+                            </div>
+                            {{ csrf.field | raw }}
+                        </form>
+
+                    </div>
+
+                    <!----------------------------LISTADO------------------------>
+                    <div class="section teacher-course">
+                        <div class="teacher-course-wrapper">
+
+                            <table id="MiembrosJuntaDirectiva"
+                                   class="table table-striped cell-border table-bordered responsive" width="100%">
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>DNI</th>
+                                    <th>CARGO</th>
+                                    <th>NOMBRE</th>
+                                    <th>APELLIDO PATERNO</th>
+                                    <th>APELLIDO MATERNO</th>
+                                    <th>ELIMINAR</th>
+                                </tr>
+                                </thead>
+                                <tfoot>
+                                <tr>
+                                    <th></th>
+                                    <th>DNI</th>
+                                    <th>CARGO</th>
+                                    <th>NOMBRE</th>
+                                    <th>APELLIDO PATERNO</th>
+                                    <th>APELLIDO MATERNO</th>
+                                    <th>ELIMINAR</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModalInformation" tabindex="-1" role="dialog" aria-labelledby="myModalInformation">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header mod">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true" style="color:#fff;">&times;</span></button>
+                    <h4 class="modal-title modtitle" id="myModalInformation">[ INFORMACIÓN ] </h4>
+                </div>
+                <div class="modal-body">
+                    cargando contenido...espere un momento por favor
+                </div>
+                <div class="msg"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="ModalSolicitudes" tabindex="-1" role="dialog" aria-labelledby="JuntaDirectiva">
+        <div class="modal-dialog modal-info fade in  modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header mod">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"
+                                                                                                      style="color:#fff;">&times;</span>
+                    </button>
+                    <h4 class="modal-title modtitle" id="VerHistorial"><strong>cargando...</strong></h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="content">
+
+                        <div id="validaexistencia">
+                            <div id="interno">
+                            </div>
+                        </div>
+
+                        <!----------------------------LISTADO DE SOLICITUDES------------------------>
+                        <div class="section teacher-course">
+                            <div class="teacher-course-wrapper">
+
+                                <table id="ListaSolicitudes"
+                                       class="display compact table table-striped table-bordered dt-responsive nowrap"
+                                       width="100%">
+                                    <thead>
+                                    <tr class="heading-table">
+                                        <th></th>
+                                        <th>Código interno</th>
+                                        <th>Número de resolución</th>
+                                        <th>Tipo de Solicitud</th>
+                                        <th>Junta </br>Directiva</th>
+                                        <th>Resolución</th>
+                                        <th>Archivar</th>
+                                        <th>Estado</th>
+                                    </tr>
+                                    </thead>
+
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="ModalDocumentos" tabindex="-1" role="dialog" aria-labelledby="Documentos">
+        <div class="modal-dialog modal-info fade in" role="document">
+            <div class="modal-content">
+                <div class="modal-header mod">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title modtitle">SOLICITUD</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div class="col-sm-12" style="padding-bottom: 2%; display: none;" id="RES_DIS">
+                                <p style="float: left;width: 100%;">RESOLUCIÓN DE RECONOCIMIENTO DE SU DISTRITO*</p>
+                                <form name="resdis" id="resdis" method="post" enctype="multipart/form-data">
+                                    <div class="col-sm-10">
+                                        <input type="hidden" name="idsoldis" id="idsoldis" value="">
+                                        <input type="hidden" name="tipo_doc" id="tipo_doc" value="">
+                                        <input type="hidden" name="codigoorghelpn" id="codigoorghelpn" value="">
+                                        <input class="form-control obligate2" type="file" name="file" id="file"
+                                               data-content="Usted debe elegir un documento"/>
+                                        {{ csrf.field | raw }}
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <div class="subirresmun">
+                                                <button type="reset" class="btn btn-primary"
+                                                        data-loading-text="Eliminando...">Subir<i
+                                                            class="fa fa-cloud-upload"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 barra2 mybarra">
+                                    </div>
+                                    <div class="col-sm-12 msgu2"></div>
+                                </form>
+                            </div>
+
+                            <div class="col-sm-12" id="RES_DIS_SI" style="padding-bottom: 2%; display: none;">
+
+                                <div class="col-sm-6 col-lg-offset-3">
+                                    <a href="" target="_blank" id="urlimagen">
+                                        <button type="reset" class="btn btn-primary" style="width: 100%"><i
+                                                    class="fa fa-folder-open"></i> Ver documento
+                                        </button>
+                                    </a>
+                                </div>
+
+
+                                <div class="col-md-6 col-lg-offset-3">
+                                    <form name="delresdis" id="delresdis" method="post" enctype="multipart/form-data">
+                                        <input type="hidden" type="text" name="codigoorghelp" id="codigoorghelp"
+                                               value="">
+                                        <input type="hidden" type="text" name="codigodelete" id="codigodelete" value="">
+                                        <button type="submit" class="btn btn-danger  deletresmun" style="width: 100%"><i
+                                                    class="fa fa-trash"></i> Eliminar documento
+                                        </button>
+                                        {{ csrf.field | raw }}
+                                    </form>
+                                    <div class="col-sm-12 barra2 mybarra">
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="ModalArchivar" tabindex="-1" role="dialog" aria-labelledby="Archivar">
+        <div class="modal-dialog modal-info fade in" role="document">
+            <div class="modal-content">
+                <div class="modal-header mod">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title modtitle">ARCHIVAR</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+
+
+                        <form name="enviar" id="enviar" method="post" class="bg-w-form" enctype="multipart/form-data">
+                            <input type="hidden" type="text" name="codorghelapro" id="codorghelapro" value="">
+                            <input type="hidden" name="idsoldisaprob" id="idsoldisaprob" value="">
+
+                            <div class="col-md-12">
+                                <div class="contact-question">
+                                    <label class="control-label form-label">MOTIVO <span
+                                                class="highlight">*</span></label>
+                                    <textarea class="form-control form-input" id="motivo"
+                                              name="motivo"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-12 barra2"></div>
+
+                            <div class="col-md-6 col-lg-offset-3">
+                                <div class="archivarolicitud">
+                                    {{ csrf.field | raw }}
+                                    <button style="width: 100%;" type="reset"
+                                            class="btn btn-danger registrar center"
+                                            data-loading-text="Archivando...">Archivar
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="ModalSolNuevo" tabindex="-1" role="dialog" aria-labelledby="ModalSolNuevo">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true" style="color:#fff;">&times;</span></button>
+                    <h4 class="modal-title" id="myModalInformation"></h4>
+                </div>
+                <div class="modal-body">
+                    <h5 class="proceso"></h5>
+                    <form method="post" id="FormNuevaSolicitud" class="bg-w-form ">
+
+                        <input type="hidden" type="text" name="cod_org_sol" id="cod_org_sol" value="">
+                        <input type="hidden" type="text" name="tipo_solicitud" id="tipo_solicitud" value="">
+
+                        <div class="row">
+
+
+                            <div class="col-md-12">
+                                <div class="contact-question">
+                                    <label class="control-label form-label">Número de Resolución distrital
+                                        <span class="highlight">*</span></label>
+                                    <input type="text" class="form-control form-select obligate4" id="res_dis" placeholder="Ejemplo: 000-0000-GMXX-XXXX"
+                                            data-content="Usted debe ingresar el número de Resolución distrital."
+                                           name="res_dis" value="">
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="contact-question">
+                                    <label class="control-label form-label">Inicio de vigencia <span
+                                                class="highlight">*</span></label>
+                                    <input type="date" class="form-control form-select obligate4" id="inicio"
+                                           data-content="Usted debe ingresar el inicio de vigencia."
+                                           name="inicio" value="">
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="contact-question">
+                                    <label class="control-label form-label">Fin de vigencia <span
+                                                class="highlight">*</span></label>
+                                    <input type="date" class="form-control form-select obligate4" id="fin" name="fin"
+                                           data-content="Usted debe ingresar el fin de vigencia."
+                                           value="">
+                                </div>
+                            </div>
+
+
+                            <div id="actualizacion">
+                                <div class="col-md-12">
+                                    <label class="control-label form-label">Tipo de actualización</label>
+                                    <select class="form-control form-select " id="tipo_mod" name="tipo_mod"
+                                            data-content="Usted debe seleccionar un tipo de actualización.">
+                                        <option value="">Seleccionar un tipo de actualización</option>
+                                        <option value="1">Cambio de nombre o denominación</option>
+                                        <option value="2">Cambio de domicilio</option>
+                                        <option value="3">Aumento o disminución del número de miembros</option>
+                                        <option value="4">Renovación del órgano Directivo y entrega de credenciales
+                                        </option>
+                                        <option value="5">Constitución de comisiones u órganos de apoyo</option>
+                                        <option value="6">Cambio del nivel y tipo de organización</option>
+                                        <option value="7">Señalamiento del cambio de los fines y de objetivo social en
+                                            el Estatuto
+                                        </option>
+                                        <option value="8">Transformación de la forma jurídica que haya adoptado la
+                                            organización
+                                        </option>
+                                        <option value="9">Fecha de disolución de la Organización aprobada por Asamblea
+                                            General
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="contact-question">
+                                        <label class="control-label form-label">Comentario <span
+                                                    class="highlight">*</span></label>
+                                        <textarea class="form-control form-input" id="comentario"
+                                                  name="comentario"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="msg5 col-md-12"></div>
+                            {{ csrf.field | raw }}
+
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">CERRAR</button>
+                    <button type="button" id="RegistrarSolicitud" class="btn btn-primary"><span>REGISTRAR</span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="felicitaciones" tabindex="-1" role="dialog" aria-labelledby="felicitaciones">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myModalInformation">ATENCIÓN</h4>
+                </div>
+                <div class="modal-body">
+                    <h2 class="center">¡Buenas noticias!</h2>
+                    <p style="font-size: 15px;color: #0076a3;text-align: center;">Todos los documentos fueron subidos
+                        con éxito.</p>
+
+                    <img src="{{ base_url() }}/images/exito.gif" style="width: 100%">
+                    <div style="display: table;">
+
+                        <p>
+                            El siguiente paso es enviar tus documentos para su aprobación y aceptar los términos y
+                            condiciones. Recuerda que después de realizar el envío para su aprobación ya no podrás
+                            editar las mismas.
+                        </p>
+
+
+                        <form name="enviar" id="enviar" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="codigosol" id="codigosol" value="147">
+                            <div class="col-sm-12">
+                                <div class="form-group row">
+                                    <div class="col-sm-12 bottom-padding">
+                                        <input type="checkbox" name="check" id="check" value="1" autocomplete="off">
+                                        {{ csrf.field | raw }}
+                                        <div class="btn-group">
+                                            <label for="check" class="btn btn-default">
+                                                <span class="fa fa-check-square-o fa-lg"></span>
+                                                <span class="fa fa-square-o fa-lg"></span>
+                                                <span class="content">Acepto los términos y condiciones.</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="enviarsolicitud">
+                                        <button type="reset" class="btn btn-warning-dinamic registrar center"
+                                                data-loading-text="Eliminando...">Enviar para aprobación
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div class="col-sm-12 barraregistro mybarra">
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="DocumentoMensual" tabindex="-1" role="dialog" aria-labelledby="DocumentoMensual">
+        <div class="modal-dialog modal-info" role="document">
+            <div class="modal-content">
+                <div class="modal-header mod">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"
+                                                                                                      style="color:#fff;">&times;</span>
+                    </button>
+                    <h4 class="modal-title modtitle"><strong>SOLICITUD DE REGISTRO MENSUAL</strong></h4>
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="contact-main-wrapper">
+                        <form class="bg-w-form contact-form" method="post" autccomplete="off"
+                              id="FormAgregarOrganizacion">
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <label class="control-label form-label">SOLICITUD MENSUAL<span
+                                                class="highlight">*</span></label>
+                                    <input type="text" id="periodo3" name="periodo3"
+                                           class="form-control form-input" DISABLED value="MAYO-2020">
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label class="control-label form-label">RESOLUCIÓN NENSUAL<span
+                                                class="highlight">*</span>
+                                    </label>
+                                    <input type="file" id="reso" name="reso"
+                                           class="form-control form-input" value="">
+                                </div>
+
+                            </div>
+
+                            <div class="msg2 col-md-12"></div>
+
+                            <div class="contact-submit">
+                                <button disabled type="button" id="RegistrarOrganizacion"
+                                        class="btn btn-contact btn-green">
+                      <span>
+                        ENVIAR DOCUMENTO
+                      </span>
+                                </button>
+                            </div>
+                            {{ csrf.field | raw }}
+                        </form>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock content %}

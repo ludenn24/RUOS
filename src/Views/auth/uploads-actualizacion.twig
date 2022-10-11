@@ -1,0 +1,433 @@
+{% block content %}
+  <div class="section-padding">
+    <div class="container">
+
+      <div class="group-title-index">
+        <h2 class="center-title"> 3. SUBIR DOCUMENTOS </h2>
+
+                <h4 class="top-title">
+                    <b>{{ AuthController.usuario.nombres }} </b>,
+                    selecciona y sube los <b>documentos</b> requeridos
+                    acontinuación:
+                </h4>
+                {% if JuntaDirectivaController.representantes|length > 0 %}
+                    {% if (DocumentoController.getdocumentos|length >= 4 ) %}
+                        <button type="button" data-toggle="modal" data-target="#felicitaciones"
+                                class="btn btn-info-dinamic btn-lg btn3d"> ENVIAR SOLICITUD PARA APROBRACIÓN
+                        </button>
+            	{% endif %}
+                {% endif %}
+
+      </div>
+
+      <div class="intro-edu-wrapper">
+        <div class="row">
+          <div class="col-sm-12">
+
+            <div class="col-md-6">
+
+              <!--------------------------SOLICITUD DIRIGIDA A LA GERENCIA DE PARTICIPACIÓN VECINAL *------------------------------->
+                <div class="documentos">
+                  <p style="float: left;width: 100%;">SOLICITUD DIRIGIDA A LA GERENCIA DE PARTICIPACIÓN VECINAL *</p>
+
+
+                  {% if  DocumentoController.getsolicitudgpv.codigo is empty %}
+
+                    <div class="col-sm-12" style="padding-bottom: 2%;">
+                      <a target="_blank" href="../modelos/MODELO_SOLICITUD_NUEVO_GPV.docx">
+                        <img style="width:30px" src="../images/pdf.png"> Descargar modelo
+                      </a>
+                    </div>
+
+                    <div class="col-sm-12" style="padding-bottom: 2%;">
+                      <a target="_blank" href="../modelos/MODELO_SOLICITUD_NUEVO_GPV.docx">
+                        <img style="width:30px" src="../images/word.png"> Descargar modelo para llenar
+                      </a>
+                    </div>
+
+                      <div class="col-sm-12" style="padding-bottom: 2%;">
+                        <form name="doc10" id="doc10" method="post" enctype="multipart/form-data">
+                          <div class="col-sm-10 not">
+                            <input type="hidden" name="idsol" id="idsol" value="{{ SolicitudController.solicitud.codigo }}">
+                            <input type="hidden" name="tiposol" id="tiposol" value="{{ SolicitudController.solicitud.tipo_sol }}">
+                            <input type="hidden" name="user" id="user" value="{{ AuthController.usuario.codigo }}">
+                            <input type="hidden" name="tipo_doc" id="tipo_doc" value="SOL_GPV">
+                            <input class="form-control obligate10" type="file" name="file" id="file" data-content="Usted debe elegir un documento" />
+                            {{ csrf.field | raw }}
+                          </div>
+                          <div class="col-sm-2">
+                            <div class="form-group">
+                              <div class="subir10">
+                                <button type="reset" class="btn btn-primary" data-loading-text="Eliminando...">Subir <i class="fa fa-cloud-upload"></i> </button>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-sm-12 barra10 mybarra"></div>
+                          <div  class="col-sm-12 msgu10"></div>
+                        </form>
+                      </div>
+
+                      {% if errors.file %}
+                        <div class="col-sm-12">
+                          <div class="alert alert-warning">
+                            {{ errors.file | first }}
+                          </div>
+                        </div>
+                      {% endif %}
+
+                  {% else %}
+
+                      <div class="col-md-6  col-xs-6">
+                        <a href="../{{ DocumentoController.getsolicitudgpv.urldoc }}" target="_new">
+                          <button type="reset" class="btn btn-primary"><i class="fa fa-folder-open"></i> Ver documento
+                          </button>
+                        </a>
+                      </div>
+
+                      <div class="col-md-6  col-xs-6">
+                        <form action="{{ path_for('documento.eliminar') }}" method="post" autccomplete="off">
+                          <input hidden type="text" name="codigo" value="{{ DocumentoController.getsolicitudgpv.codigo }}">
+                          <button type="submit" class="btn btn-danger pull-right"><i class="fa fa-trash"></i> Eliminar
+                          </button>
+                          {{ csrf.field | raw }}
+                        </form>
+                      </div>
+                        
+                 
+                  {% endif %}
+                </div>
+                  
+                  
+                  
+              <!--------------------------ACTA DE ASAMBLEA GENERAL *------------------------------->
+              <div class="documentos">
+                <p style="float: left;width: 100%;">ACTA DE ASAMBLEA GENERAL *</p>
+
+                {% if  DocumentoController.getasambleageneral.codigo is empty %}
+
+                  <div class="col-sm-12" style="padding-bottom: 2%;">
+                    <a target="_blank" href="../modelos/MODELO_ACTA_CONSTITUCION_ASOCIACION.pdf">
+                      <img style="width:30px" src="../images/pdf.png"> Descargar modelo
+                    </a>
+                  </div>
+
+                  <div class="col-sm-12" style="padding-bottom: 2%;">
+                    <a target="_blank" href="">
+                      <img style="width:30px" src="../images/word.png"> Descargar modelo para llenar
+                    </a>
+                  </div>
+
+                  <div class="col-sm-12" style="padding-bottom: 2%;">
+                    <form name="doc11" id="doc11" method="post" enctype="multipart/form-data">
+                      <div class="col-sm-10 not">
+                        <input type="hidden" name="idsol" id="idsol" value="{{ SolicitudController.solicitud.codigo }}">
+                        <input type="hidden" name="tiposol" id="tiposol" value="{{ SolicitudController.solicitud.tipo_sol }}">
+                        <input type="hidden" name="user" id="user" value="{{ AuthController.usuario.codigo }}">
+                        <input type="hidden" name="tipo_doc" id="tipo_doc" value="ACT_ASAM">
+                        <input class="form-control obligate11" type="file" name="file" id="file" data-content="Usted debe elegir un documento" />
+                        {{ csrf.field | raw }}
+                      </div>
+                      
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <div class="subir11">
+                            <button type="reset" class="btn btn-primary" data-loading-text="Eliminando...">Subir <i class="fa fa-cloud-upload"></i> </button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-12 barra11 mybarra"></div>
+                      <div  class="col-sm-12 msgu11"></div>
+                    </form>
+                  </div>
+
+                  {% if errors.file %}
+                    <div class="col-sm-12">
+                      <div class="alert alert-warning">
+                        {{ errors.file | first }}
+                      </div>
+                    </div>
+                  {% endif %}
+
+
+
+
+                {% else %}
+
+                  <div class="form-group">
+                    <div class="col-md-6  col-xs-6">
+                      <a href="../{{ DocumentoController.getasambleageneral.urldoc }}" target="_new">
+                        <button type="reset" class="btn btn-primary"><i class="fa fa-folder-open"></i> Ver documento
+                        </button>
+                      </a>
+                    </div>
+
+                    <div class="col-md-6  col-xs-6">
+                      <?php if($estado==1){?>
+                      <form action="{{ path_for('documento.eliminar') }}" method="post" autccomplete="off">
+                        <input hidden type="text" name="codigo" value="{{ DocumentoController.getasambleageneral.codigo }}">
+                        <button type="submit" class="btn btn-danger pull-right"><i class="fa fa-trash"></i> Eliminar
+                        </button>
+                        {{ csrf.field | raw }}
+                      </form>
+                      <?php } ?>
+                    </div>
+                  </div>
+
+                {% endif %}
+
+              </div>
+              <!--------------------------CONVOCATORIA O ESQUELA DE INVITACIÓN A LA ASAMBLEA GENERAL *------------------------------->
+              <div class="documentos">
+                <p style="float: left;width: 100%;">CONVOCATORIA O ESQUELA DE INVITACIÓN A LA ASAMBLEA GENERAL *</p>
+
+                {% if  DocumentoController.getconvocatoria.codigo is empty %}
+
+                  <div class="col-sm-12" style="padding-bottom: 2%;">
+                    <a target="_blank" href="../modelos/MODELO_ESTATUTO_ACTA_APROBACION.pdf">
+                      <img style="width:30px" src="../images/pdf.png"> Descargar modelo
+                    </a>
+                  </div>
+
+                  <div class="col-sm-12" style="padding-bottom: 2%;">
+                    <a target="_blank" href="">
+                      <img style="width:30px" src="../images/word.png"> Descargar modelo para llenar
+                    </a>
+                  </div>
+
+                    <div class="col-sm-12" style="padding-bottom: 2%;">
+                      <form name="doc12" id="doc12" method="post" enctype="multipart/form-data">
+                        <div class="col-sm-10 not">
+                          <input type="hidden" name="idsol" id="idsol" value="{{ SolicitudController.solicitud.codigo }}">
+                          <input type="hidden" name="tiposol" id="tiposol" value="{{ SolicitudController.solicitud.tipo_sol }}">
+                          <input type="hidden" name="user" id="user" value="{{ AuthController.usuario.codigo }}">
+                          <input type="hidden" name="tipo_doc" id="tipo_doc" value="CONV_INVI">
+                          <input class="form-control obligate12" type="file" name="file" id="file" data-content="Usted debe elegir un documento" />
+                          {{ csrf.field | raw }}
+                        </div>
+                        <div class="col-sm-2">
+                          <div class="form-group">
+                            <div class="subir12">
+                              <button type="reset" class="btn btn-primary" data-loading-text="Eliminando...">Subir <i class="fa fa-cloud-upload"></i> </button>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 barra12 mybarra"></div>
+                        <div  class="col-sm-12 msgu12"></div>
+                      </form>
+                    </div>
+
+                    {% if errors.file %}
+                      <div class="col-sm-12">
+                        <div class="alert alert-warning">
+                          {{ errors.file | first }}
+                        </div>
+                      </div>
+                    {% endif %}
+
+
+
+                {% else %}
+
+                  <div class="form-group">
+                    <div class="col-md-6  col-xs-6">
+                      <a href="../{{ DocumentoController.getconvocatoria.urldoc }}" target="_new">
+                        <button type="reset" class="btn btn-primary"><i class="fa fa-folder-open"></i> Ver documento
+                        </button>
+                      </a>
+                    </div>
+
+                    <div class="col-md-6  col-xs-6">
+                      <?php if($estado==1){?>
+                      <form action="{{ path_for('documento.eliminar') }}" method="post" autccomplete="off">
+                        <input hidden type="text" name="codigo" value="{{ DocumentoController.getconvocatoria.codigo }}">
+                        <button type="submit" class="btn btn-danger pull-right"><i class="fa fa-trash"></i> Eliminar
+                        </button>
+                        {{ csrf.field | raw }}
+                      </form>
+                      <?php } ?>
+                    </div>
+                  </div>
+
+                {% endif %}
+
+
+              </div>
+
+            </div>
+
+            <div class="col-md-6">
+              <!--------------------------PADRÓN O NÓMINA ACTUALIZADA DE LOS MIEMBROS DE LA ORGANIZACIÓN *------------------------------->
+              <div class="documentos" >
+                <p style="float: left;width: 100%;">PADRÓN O NÓMINA ACTUALIZADA DE LOS MIEMBROS DE LA ORGANIZACIÓN *</p>
+
+                {% if  DocumentoController.getpadronactualizado.codigo is empty %}
+
+                  <div class="col-sm-12" style="padding-bottom: 2%;">
+                    <a target="_blank" href="../modelos/MODELO_ELECCION_ORGANO_DIRECTIVO.pdf">
+                      <img style="width:30px" src="../images/pdf.png"> Descargar modelo
+                    </a>
+                  </div>
+
+                  <div class="col-sm-12" style="padding-bottom: 2%;">
+                    <a target="_blank" href="">
+                      <img style="width:30px" src="../images/word.png"> Descargar modelo para llenar
+                    </a>
+                  </div>
+
+                    <div class="col-sm-12" style="padding-bottom: 2%;">
+                      <form name="doc13" id="doc13" method="post" enctype="multipart/form-data">
+                        <div class="col-sm-10 not">
+                          <input type="hidden" name="idsol" id="idsol" value="{{ SolicitudController.solicitud.codigo }}">
+                          <input type="hidden" name="tiposol" id="tiposol" value="{{ SolicitudController.solicitud.tipo_sol }}">
+                          <input type="hidden" name="user" id="user" value="{{ AuthController.usuario.codigo }}">
+                          <input type="hidden" name="tipo_doc" id="tipo_doc" value="PAD_ACT">
+                          <input class="form-control obligate13" type="file" name="file" id="file" data-content="Usted debe elegir un documento" />
+                          {{ csrf.field | raw }}
+                        </div>
+                        <div class="col-sm-2">
+                          <div class="form-group">
+                            <div class="subir13">
+                              <button type="reset" class="btn btn-primary" data-loading-text="Eliminando...">Subir <i class="fa fa-cloud-upload"></i> </button>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 barra13 mybarra"></div>
+                        <div  class="col-sm-12 msgu13"></div>
+                      </form>
+                    </div>
+
+                    {% if errors.file %}
+                      <div class="col-sm-12">
+                        <div class="alert alert-warning">
+                          {{ errors.file | first }}
+                        </div>
+                      </div>
+                    {% endif %}
+
+                {% else %}
+
+                  <div class="form-group">
+                    <div class="col-md-6  col-xs-6">
+                      <a href="../{{ DocumentoController.getpadronactualizado.urldoc }}" target="_new">
+                        <button type="reset" class="btn btn-primary"><i class="fa fa-folder-open"></i> Ver documento
+                        </button>
+                      </a>
+                    </div>
+
+                    <div class="col-md-6  col-xs-6">
+                      <form action="{{ path_for('documento.eliminar') }}" method="post" autccomplete="off">
+                        <input hidden type="text" name="codigo" value="{{ DocumentoController.getpadronactualizado.codigo }}">
+                        <button type="submit" class="btn btn-danger pull-right"><i class="fa fa-trash"></i> Eliminar
+                        </button>
+                        {{ csrf.field | raw }}
+                      </form>
+                    </div>
+                  </div>
+
+                {% endif %}
+
+              </div>
+              <!--------------------------                  *------------------------------->
+              <div class="documentos">
+                <p style="    float: left; width: 100%;">ESTATUTO DE LA ORGANIZACIÓN EN CASO HAYA MODIFICACIÓN PARCIAL O TOTAL *</p>
+
+                {% if  DocumentoController.getpestatutoorg.codigo is empty %}
+                  <div class="col-sm-12" style="padding-bottom: 2%;">
+                    <a target="_blank" href="../modelos/MODELO_NOMINA_JUNTA_DIRECTIVA.pdf">
+                      <img style="width:30px" src="../images/pdf.png"> Descargar modelo
+                    </a>
+                  </div>
+
+                  <div class="col-sm-12" style="padding-bottom: 2%;">
+                    <a target="_blank" href="">
+                      <img style="width:30px" src="../images/word.png"> Descargar modelo para llenar
+                    </a>
+                  </div>
+
+                  <div class="col-sm-12" style="padding-bottom: 2%;">
+                    <form name="doc14" id="doc14" method="post" enctype="multipart/form-data">
+                      <div class="col-md-9  col-xs-9 not">
+                        <input type="hidden" name="idsol" id="idsol" value="{{ SolicitudController.solicitud.codigo }}">
+                        <input type="hidden" name="tiposol" id="tiposol" value="{{ SolicitudController.solicitud.tipo_sol }}">
+                        <input type="hidden" name="user" id="user" value="{{ AuthController.usuario.codigo }}">
+                        <input type="hidden" name="tipo_doc" id="tipo_doc" value="EST_ORG">
+                        <input class="form-control obligate14" type="file" name="file" id="file" data-content="Usted debe elegir un documento" />
+                        {{ csrf.field | raw }}
+                      </div>
+                      
+                      <div class="col-md-3  col-xs-3">
+                        <div class="form-group">
+                          <div class="subir14">
+                            <button type="reset" class="btn btn-primary" data-loading-text="Eliminando...">Subir <i class="fa fa-cloud-upload"></i> </button>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div class="col-sm-12 barra14 mybarra"></div>
+                      <div  class="col-sm-12 msgu14"></div>
+                    </form>
+                  </div>
+
+                  {% if errors.file %}
+                    <div class="col-sm-12">
+                      <div class="alert alert-warning">
+                        {{ errors.file | first }}
+                      </div>
+                    </div>
+                {% endif %}
+
+                {% else %}
+                  <div class="form-group">
+                    <div class="col-md-6  col-xs-6">
+                      <a href="../{{ DocumentoController.getpestatutoorg.urldoc }}" target="_new">
+                        <button type="reset" class="btn btn-primary"><i class="fa fa-folder-open"></i> Ver documento
+                        </button>
+                      </a>
+                    </div>
+
+                    <div class="col-md-6  col-xs-6">
+                      <form action="{{ path_for('documento.eliminar') }}" method="post" autccomplete="off">
+                        <input hidden type="text" name="codigo" value="{{ DocumentoController.getpestatutoorg.codigo }}">
+                        <button type="submit" class="btn btn-danger pull-right"><i class="fa fa-trash"></i> Eliminar
+                        </button>
+                        {{ csrf.field | raw }}
+                      </form>
+                    </div>
+
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+
+
+            <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModal2">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header modalert">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title modtitle" id="myModal2">[ Confirmación ] </h4>
+                  </div>
+                  <div class="modal-body">
+                    <h3 style='text-align:center;'> ¿Seguro que deseas eliminar el documento<i class='fa fa-trash'></i>
+                      ?</h3>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="button" id="delete-btn" data-loading-text="Eliminando..." class="btn btn-danger"
+                            autocomplete="off">Eliminar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="{{ base_url() }}/js/custom.js"></script>
+
+{% endblock content %}

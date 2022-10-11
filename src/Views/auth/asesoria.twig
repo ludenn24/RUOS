@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <title>RUOS - MUNICIPALIDAD DE LIMA</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- LIBRARY FONT-->
+  <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,400italic,700,900,300">
+  <!-- LIBRARY CSS-->
+  <link type="text/css" rel="stylesheet" href="{{ base_url() }}/css/jquery.selectbox.css">
+
+  <link type="text/css" rel="stylesheet" href="{{ base_url() }}/css/jquery.fancybox.css">
+  <link type="text/css" rel="stylesheet" href="{{ base_url() }}/css/jquery.fancybox-buttons.css">
+  <link type="text/css" rel="stylesheet" href="{{ base_url() }}/css/mediaelementplayer.min.css">
+
+  <link type="text/css" rel="stylesheet" href="{{ base_url() }}/css/animate.css">
+  <link type="text/css" rel="stylesheet" href="{{ base_url() }}/css/Glyphter.css">
+  <link type="text/css" rel="stylesheet" href="{{ base_url() }}/css/font-awesome.css">
+  <link type="text/css" rel="stylesheet" href="{{ base_url() }}/css/bootstrap.css">
+  <link type="text/css" rel="stylesheet" href="{{ base_url() }}/css/style.css">
+  <link type="text/css" rel="stylesheet" href="{{ base_url() }}/css/owl.carousel.css">
+  <link type="text/css" rel="stylesheet" href="{{ base_url() }}/css/modals.css">
+  <link type="text/css" rel="stylesheet" href="{{ base_url() }}/css/jquery.dataTables.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/locale/es.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/locale/es.js"></script>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166932182-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-166932182-1');
+  </script>
+
+</head>
+<body>
+
+  <div id="page-wrapper">
+    <div class="main-content">
+      <div class="content">
+        <div class="page-login rlp" style="background: #ededed;">
+          <div class="container">
+            <div class="login-wrapper rlp-wrapper" style="width:750px;">
+              <div style="margin-top: 57px;" class="login-table rlp-table">
+                <a href="..">
+                  <img src="{{ base_url() }}/images/logo-color-4.png" alt="" class="login"/>
+                </a>
+                <div class="login-title rlp-title">ASESORIA LEGAL RUOS</div>
+                <hr>
+
+                <div id="load" class>
+                </div>
+                <form  class="bg-w-form contact-form" method="post" autccomplete="off" id="FormAgregarAsesoria">
+                  <div class="login-form bg-w-form rlp-form">
+
+                    <div class="col-md-6">
+                      <label class="control-label form-label">D.N.I <span class="highlight">*</span>
+                      </label>
+                      <input name="dni" id="dni" type="text" placeholder="Ingrese su número de DNI" maxlength="8" onkeyup="buscarDni()"
+                       value=""  class="form-control form-input obligatev2" data-content="Usted debe ingresar su número de DNI.">
+                    </div>
+
+                    <div class="col-md-6">
+                      <label class="control-label form-label">NOMBRES <span class="highlight">*</span>
+                      </label>
+                      <input name="nombres" id="nombres" type="text" placeholder="Nombres completos" data-content="Usted debe ingresar sus nombres completos."
+                      class="form-control form-input obligatev2" value="">
+                    </div>
+
+                    <div class="col-md-6">
+                      <label for="regpassword" class="control-label form-label">APELLIDO PATERNO <span
+                          class="highlight">*</span>
+                      </label>
+                      <input name="apellido_pat" id="apellido_pat" type="text" placeholder="Apellido paterno" data-content="Usted debe ingresar su apellido paterno"
+                             value="" class="form-control form-input obligatev2"/>
+                    </div>
+
+                    <div class="col-md-6">
+                      <label for="regpassword" class="control-label form-label">APELLIDO MATERNO <span
+                          class="highlight">*</span>
+                      </label>
+                      <input name="apellido_mat" id="apellido_mat" type="text" placeholder="Apellido materno" data-content="Usted debe ingresar su apellido materno"
+                             value="" class="form-control form-input obligatev2"/>
+                    </div>
+
+                    <div class="col-md-6">
+                      <label class="control-label form-label">CORREO <span class="highlight">*</span>
+                      </label>
+                      <input name="correo" id="correo" type="email" placeholder="Correo electrónico" data-content="Usted debe ingresar su correo"
+                             class="form-control form-input obligatev2" value=""/>
+                    </div>
+
+                    <div class="col-md-6">
+                      <label class="control-label form-label">TELÉFONO <span class="highlight">*</span>
+                      </label>
+                      <input name="telefono" id="telefono" type="text" placeholder="Teléfono"
+                        value="" data-content="Usted debe ingresar su número de teléfono"
+                             class="form-control form-input obligatev2"/>
+                    </div>
+
+
+
+                      <input type="hidden" name="distrito" id="distrito" value="" />
+                      <input type="hidden" name="departamento" id="departamento" value="" />
+                      <input type="hidden" name="provincia" id="provincia" value="" />
+                      <input type="hidden" name="foto" id="foto" value="" />
+
+                    <div class="col-md-12">
+                      <label for="regpassword" class="control-label form-label">Tipo de asesoría<span
+                          class="highlight">*</span>
+                      </label>
+                      <select id="tipo_asesoria" name="tipo_asesoria" class="form-control obligatev2" data-content="Usted debe seleccionar el tipo de asesoría">
+                        <option value="">Seleccione un tipo</option>
+                        <option value="1">Quiero formar una nueva organización</option>
+                        <option value="2">Soy parte de una organización del Cercado de Lima</option>
+
+                      </select>
+                    </div>
+
+                    <div class="col-md-6">
+                      <label class="control-label form-label">NOMBRE DE LA ORGANIZACIÓN
+                      </label>
+                      <input name="nom_org" id="nom_org" type="text" placeholder="Nombre de la organización"
+                             value="" class="form-control form-input"/>
+                    </div>
+
+                    <div class="col-md-6">
+                      <label for="regpassword" class="control-label form-label">DISTRITO DE LA ORGANIZACIÓN
+                      </label>
+                      <select id="dist_org" name="dist_org" class="form-control form-select">
+                        <option value="">Distrito de la organización</option>
+                        <option selected value="150101">Cercado de Lima</option>
+                        <!--<option value="150102">Ancón</option>
+                        <option value="150103">Ate</option>
+                        <option value="150104">Barranco</option>
+                        <option value="150105">Breña</option>
+                        <option value="150106">Carabayllo</option>
+                        <option value="150107">Chaclacayo</option>
+                        <option value="150108">Chorrillos</option>
+                        <option value="150109">Cieneguilla</option>
+                        <option value="150110">Comas</option>
+                        <option value="150111">El Agustino</option>
+                        <option value="150112">Independencia</option>
+                        <option value="150113">Jesús María</option>
+                        <option value="150114">La Molina</option>
+                        <option value="150115">La Victoria</option>
+                        <option value="150116">Lince</option>
+                        <option value="150117">Los Olivos</option>
+                        <option value="150118">Lurigancho</option>
+                        <option value="150119">Lurin</option>
+                        <option value="150120">Magdalena del Mar</option>
+                        <option value="150121">Pueblo Libre</option>
+                        <option value="150122">Miraflores</option>
+                        <option value="150123">Pachacamac</option>
+                        <option value="150124">Pucusana</option>
+                        <option value="150125">Puente Piedra</option>
+                        <option value="150126">Punta Hermosa</option>
+                        <option value="150127">Punta Negra</option>
+                        <option value="150128">Rímac</option>
+                        <option value="150129">San Bartolo</option>
+                        <option value="150130">San Borja</option>
+                        <option value="150131">San Isidro</option>
+                        <option value="150132">San Juan de Lurigancho</option>
+                        <option value="150133">San Juan de Miraflores</option>
+                        <option value="150134">San Luis</option>
+                        <option value="150135">San Martín de Porres</option>
+                        <option value="150136">San Miguel</option>
+                        <option value="150137">Santa Anita</option>
+                        <option value="150138">Santa María del Mar</option>
+                        <option value="150139">Santa Rosa</option>
+                        <option value="150140">Santiago de Surco</option>
+                        <option value="150141">Surquillo</option>
+                        <option value="150142">Villa El Salvador</option>
+                        <option value="150143">Villa María del Triunfo</option>-->
+                      </select>
+                    </div>
+
+                    <div class="col-md-6">
+                      <label class="control-label form-label">FECHA DE ASESORÍA<span class="highlight">*</span>
+                      </label>
+                      <input name="fecha_ase" id="fecha_ase" readonly type="text"  data-content="Usted debe seleccionar la fecha de asesoria"
+                             value="" class="form-control form-input obligatev2"/>
+                    </div>
+
+                    <div class="col-md-6">
+                      <label for="regpassword" class="control-label form-label">HORA DE ASESORIA<span
+                          class="highlight">*</span>
+                      </label>
+                      <select id="hora_ase" name="hora_ase" class="form-control form-select obligatev2" data-content="Usted debe seleccionar la hora de asesoria">
+                        <option value=""> Elija un horario</option>
+                        <option disabled>-----------------</option>
+                        <option value="08:45 - 09:30">08:45 - 09:30</option>
+                        <option value="09:45 - 10:30">09:45 - 10:30</option>
+                        <option value="10:45 - 11:30">10:45 - 11:30</option>
+                        <option value="11:45 - 12:30">11:45 - 12:30</option>
+                        <option disabled>-----------------</option>
+                        <option value="14:45 - 15:30">14:45 - 15:30</option>
+                        <option value="15:45 - 16:30">15:45 - 16:30</option>
+                        <option value="16:45 - 17:30">16:45 - 17:30</option>
+                      </select>
+                    </div>
+
+                    <div class="col-md-12">
+                      <label for="regpassword" class="control-label form-label">¿CÓMO QUIERES QUE SE REALICE LA ASESORÍA?<span
+                          class="highlight">*</span>
+                      </label>
+                      <select id="medio" name="medio" class="form-control form-select obligatev2" data-content="Usted debe seleccionar el medio para la asesoría">
+                        <option value=""> Elija un medio</option>
+                        <option value="1">Telefónico</option>
+                        <option value="2">Hangouts</option>
+                        <option value="3">Zoom</option>
+                      </select>
+                    </div>
+
+                    <div class="msg2 col-md-12"></div>
+
+                    <div class="col-md-12">
+                      <center>
+                        <div class="login-submit">
+
+                          <button type="button" id="RegistrarAsesoria" class="btn btn-contact btn-green">
+                              <span>
+                                  REGISTRAR ASESORÍA
+                              </span>
+                        </button>
+
+                        </div>
+                      </center>
+                    </div>
+
+                    {{ csrf.field | raw }}
+
+                  </div>
+
+                </form>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="myModalInformation" tabindex="-1" role="dialog" aria-labelledby="myModalInformation">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header mod">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+              aria-hidden="true" style="color:#fff;">&times;</span></button>
+          <h4 class="modal-title modtitle" id="myModalInformation">[ REGISTRO EXITOSO ] </h4>
+        </div>
+        <div class="modal-body">
+          cargando contenido...espere un momento por favor
+        </div>
+        <div class="msg"></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--doble prueba de subida-->
+
+
+    <script>
+
+
+    $(function () {
+      var date = new Date();
+      date.setDate(date.getDate()+1);
+
+          $('#fecha_ase').datetimepicker({
+                format: 'DD/MM/YYYY',
+                daysOfWeekDisabled: [0,6],
+                minDate: date,
+
+                locale: 'es',
+                ignoreReadonly: true
+          });
+      });
+
+      !function(a){
+        "use strict";
+
+        a(function(){
+          var b=a(window),
+            c=a(document.body),
+            mensaje='',
+            tipo='',
+            codigo='';
+
+          a("#RegistrarAsesoria").on("click",function(){
+
+            $( "#distrito_orgv2" ).prop( "disabled", false );
+
+            var b=a(this),dataString;
+            var holder='';
+            var exito=true;
+            $(".obligatev2").each(function(){
+              if($(this).val()==''){
+                $(this).focus();
+                holder=$(this).attr("data-content");
+                exito=false;
+                $(".msg2").html("").show();
+                $(".msg2").html("<div class='alert alert-danger'><i class='fa fa-exclamation-triangle'></i> "+holder+"</div>");
+                setTimeout(function() {
+                  $(".msg2").fadeOut(1500);
+                },1500);
+                return false;
+              }
+            });
+            if(!exito)
+              return false;
+
+
+            dataString=$('#FormAgregarAsesoria').serialize();
+            $.ajax({
+              type:"POST",
+              url:"{{base_url()}}/asesoria/registrar",
+              data:dataString,
+              dataType: 'json',
+
+              success: function(data){
+                if(data.response=='si'){
+                  $(".msg2").html("").show();
+                  $(".msg2").html(data.message);
+
+                  b.button("reset");
+                  setTimeout(function() {
+                    $(".msg2").fadeOut(1500);
+                  },1500);
+                }else{
+                  var position=data.indexOf('?');
+                  var number=data.substr(0,position).replace(/\s+/g, '');
+                  //alert(data + "=>" + position + " =>" + number + " =>"+number.length);
+                  if(number>0){
+                    b.button("reset");
+                    $('#myModalInformation').find(".modal-body").html("<center>"+data.substr(position+1,data.length)+"</center>");
+                    $('#myModalInformation').modal('show');
+                  }else{
+                    $(".msg2").html("").show();
+                    $(".msg2").html(data.message);
+                    setTimeout(function() {
+                      $(".msg2").fadeOut(3500);
+                    },1000);
+                    b.button("reset");
+                  }
+                }
+
+              },
+              error: function(){
+                console.log("It failed");
+              }
+            })
+          });
+
+
+
+        })}
+
+      (jQuery),function(){"use strict";
+        $('#telefono').keyup(function (){
+          this.value = (this.value + '').replace(/[^0-9]/g, '');
+        });
+      }();
+
+
+
+
+    </script>
+
+  <script>
+    function myFunction() {
+      var x = document.getElementById("fname");
+      x.value = x.value.toUpperCase();
+    }
+  </script>
+
+  <script>
+
+    function buscarDni(){
+      var dni;
+      dni = $("#dni").val();
+      if (dni.length == 8){
+        BuscarPersonaDNI_WS_propietario('',dni,'','');
+      }else{
+      limpiar_propietario();
+      bloquear_datosPropietario('0');
+      }
+    }
+
+
+    function BuscarPersonaDNI_WS_propietario(key,dni,NROTAR,FECH){
+
+      $.ajax({
+        url:'https://pide.munlima.gob.pe/CWS/BuscarDatosPersonalesPIDE',
+        type:'post',
+        data:
+                {
+                  usuario:'GPV01',
+                  pass: '$GPV.2019',
+                  nuDniConsulta:dni
+              },
+        beforeSend: function(e){
+          //$('#load').addClass('load');
+        },
+        success: function(data){
+          var c = JSON.parse(data);
+
+          if( c.valor.return.coResultado = '0000' ){
+            if (c.valor.return.datosPersona){
+              bloquear_datosPropietario('1');
+              var a = c.valor.return.datosPersona;
+
+              var ubi = a.ubigeo.split("/");
+              $('#nombres').val(a.prenombres);
+              $('#apellido_pat').val(a.apPrimer);
+              $('#apellido_mat').val(a.apSegundo);
+              $('#direccion').val(a.direccion);
+              $('#departamento').val(ubi[0]);
+              $('#provincia').val(ubi[1]);
+              $('#distrito').val(ubi[2]);
+              $('#foto').val(a.foto);
+
+            }else{
+              limpiar_propietario();
+              bloquear_datosPropietario('0');
+            }
+          }else{
+           limpiar_propietario();
+           bloquear_datosPropietario('0');
+          }
+          $('#load').removeClass('load');
+        },
+        error: function(xhr, err){
+          $('#load').removeClass('load');
+        }
+      });
+
+    }
+
+    function limpiar_propietario(){
+
+      $('#nombres').val('');
+      $('#apellidopaterno').val('');
+      $('#apellidomaterno').val('');
+      $('#tel').val('');
+      $('#direccion').val('');
+      $('#distrito').val('');
+
+    }
+
+
+    function bloquear_datosPropietario(con){
+      if(con=='1'){
+        $('#nombres').attr('disabled');
+        $('#apellidopaterno').attr('disabled');
+        $('#apellidomaterno').attr('disabled');
+
+      }else{
+        $('#nombres').removeAttr('disabled');
+        $('#apellidopaterno').removeAttr('disabled');
+        $('#apellidomaterno').removeAttr('disabled');
+
+      }
+    }
+
+  </script>
+
+</body>
+<script src="{{ base_url() }}/js/bootstrap.min.js"></script>
+<script src="{{ base_url() }}/js/owl.carousel.min.js"></script>
+<script src="{{ base_url() }}/js/jquery.appear.js"></script>
+<script src="{{ base_url() }}/js/jquery.countTo.js"></script>
+<script src="{{ base_url() }}/js/wow.min.js"></script>
+<script src="{{ base_url() }}/js/jquery.selectbox-0.2.min.js"></script>
+<script src="{{ base_url() }}/js/jquery.fancybox.js"></script>
+<script src="{{ base_url() }}/js/jquery.fancybox-buttons.js"></script>
+<!-- MAIN JS-->
+<script src="{{ base_url() }}/js/main.js"></script>
+<!-- LOADING SCRIPTS FOR PAGE-->
+<script src="{{ base_url() }}/js/isotope.pkgd.min.js"></script>
+<script src="{{ base_url() }}/js/fit-columns.js"></script>
+<script src="{{ base_url() }}/js/homepage.js"></script>
+<script src="{{ base_url() }}/js/jquery.form.min.js"></script>
+
+
+
+
+
+</html>

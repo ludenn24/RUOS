@@ -1,0 +1,86 @@
+{% extends 'templates/app.twig' %}
+
+
+{% block content %}
+
+  <div id="wrapper-content">
+    <div id="page-wrapper">
+      <div class="main-content">
+        <div class="content">
+          <div class="page-login rlp">
+            <div class="container">
+              <div class="login-wrapper rlp-wrapper">
+                <div class="login-table rlp-table">
+
+                  <a href="">
+                    <img style="max-width: 220px;" src="../images/logo-color-4.png" alt="" class="login"
+                         autccomplete="off"/>
+                  </a>
+
+                  <div class="login-title rlp-title">Ingreso</div>
+
+                  <form action="{{ path_for('auth.signin') }}" method="post">
+
+                    <div class="login-form bg-w-form rlp-form">
+                      <div class="row">
+
+                        <div class="col-md-12{{ errors.dni ? ' has-error' : '' }}">
+                          <label class="control-label form-label">D.N.I <span class="highlight">*</span>
+                          </label>
+                          <input name="dni" id="dni" type="text" placeholder="Ingrese su número de DNI" maxlength="8"
+                                 value="{{ old.dni }}" class="form-control form-input"/>
+                          {% if errors.dni %}
+                            <span class="help-block">{{ errors.dni | first }}</span>
+                          {% endif %}
+
+                        </div>
+
+                        <div class="col-md-12{{ errors.clave ? ' has-error' : '' }}">
+                          <label class="control-label form-label">CONTRASEÑA <span class="highlight">*</span>
+                          </label>
+                          <input name="clave" id="clave" type="password" placeholder="Ingrese su contraseña"
+                                 maxlength="50" class="form-control form-input"/><!-- p.help-block Warning !-->
+                          {% if errors.clave %}
+                            <span class="help-block">{{ errors.clave | first }}</span>
+                          {% endif %}
+                        </div>
+
+                      </div>
+
+                      {% include 'templates/partials/flash.twig' %}
+
+
+                    </div>
+
+
+                    <div class="login-submit">
+                      <button type="submit" class="btn btn-green "><span>Iniciar Sesión</span></button>
+                    </div>
+
+                    <br>
+
+                    {{ csrf.field | raw }}
+
+                  </form>
+
+                  <div class="">
+                    <a type="submit" href="{{ path_for('auth.signup') }}" value="Reg&#237;strate">¿No tienes una
+                      cuenta?</a>
+                  </div>
+
+                  <hr>
+
+                  <div class="col-md-12 message"></div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--doble prueba de subida-->
+
+
+{% endblock content %}

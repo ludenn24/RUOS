@@ -1,0 +1,491 @@
+{% extends 'templates/app.twig' %}
+{% block content %}
+
+    <div id="wrapper-content">
+        <div id="page-wrapper">
+            <div class="main-content">
+                <div class="content">
+                    <div class="section background-opacity page-title set-height-top">
+                        <div class="container">
+                            <div class="page-title-wrapper">
+                                <h2 class="captions">SOLICITUD GENERAL</h2>
+                                <h4 class="top-title"><strong>[{{ AuthController.usuario.nombres }}]</strong></h4>
+
+                                <ol class="breadcrumb">
+                                    <li><a href="../auth/solicitud">Solicitudes</a></li>
+                                    <li class="active"><a href="#">Solicitud General</a></li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="section teacher-course">
+                        <div class="container">
+                            {% if ReconocimientoController.getreconocimiento is not null %}
+                                <div class="section section-padding choose-course">
+                                    <div class="group-title-index">
+                                        <h2 class="center-title">
+                                            [{{ ReconocimientoController.getreconocimiento.num_rec }}]</h2>
+                                        <h4 class="top-title">NÚMERO DE SOLICITUD</h4>
+                                        <div class="bottom-title"><i class="bottom-icon icon-icon-05"></i></div>
+                                        <div class="contact-submit" style="text-align: center">
+                                            <button data-target="#EnviarSolicitud" data-toggle="modal"
+                                                    class="btn btn-contact btn-green"><span>ENVIAR A REVISIÓN</span>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="teacher-course-wrapper">
+                                        <table id="SolicitudesApro" class="table table-bordered table-hover mayus"
+                                               width="100%">
+                                            <thead>
+                                            <tr>
+                                                <th colspan="5" style="text-align: center;">AGREGADOS</th>
+                                            </tr>
+                                            <tr class="heading-table">
+                                                <th>Nº DE SOLICITUD</th>
+                                                <th>TIPO</th>
+                                                <th>DOCUMENTO</th>
+                                                <th>ORGANIZACIÓN</th>
+                                                <th>ESTADO</th>
+                                            </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+
+                                    <div class="teacher-course-wrapper">
+                                        <table id="Solicitudes" class="table table-bordered table-hover mayus"
+                                               width="100%">
+                                            <thead>
+                                            <tr>
+                                                <th colspan="6" style="text-align: center;">PENDIENTES</th>
+                                            </tr>
+                                            <tr>
+                                                <th>Nº DE SOLICITUD</th>
+                                                <th>TIPO</th>
+                                                <th>DOCUMENTO</th>
+                                                <th>ORGANIZACIÓN</th>
+                                                <th>ESTADO</th>
+                                                <th>AGREGAR</th>
+                                            </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+
+
+                                </div>
+
+                            {% else %}
+
+                                <div class="section section-padding choose-course">
+                                    <form action="{{ path_for('envio.reconocimiento') }}" method="post"
+                                          autccomplete="off">
+                                        <button type="submit" class="btn btn-404"><span>INICIAR NUEVO ENVIO</span>
+                                        </button>
+                                        {{ csrf.field | raw }}
+                                    </form>
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="EnviarSolicitud" tabindex="-1" role="dialog" aria-labelledby="EnviarSolicitud">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"
+                                                                                                      style="color:#fff;">&times;</span>
+                    </button>
+                    <h4 class="modal-title modtitle"><strong>[ENVIAR SOLICITUD]</strong></h4>
+                </div>
+
+                <div class="modal-body">
+                    <div class="box-body row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <p>¿ESTÁ SEGURO DE ENVIAR SOLICITUD PARA SU REVISIÓN?</p>
+                                <form name="enviar_form" id="enviar_form" method="post">
+                                    <input type="hidden" name="codigo" id="codigo"
+                                           value="{{ ReconocimientoController.getreconocimiento.codigo }}">
+                                    {{ csrf.field | raw }}
+                                </form>
+                            </div>
+                            <div class="msg"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="button" id="postenviarsolicitud" data-loading-text="Guardando..."
+                            class="btn btn-primary pull-left" autocomplete="off">Enviar
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModalInformation" tabindex="-1" role="dialog"
+         aria-labelledby="myModalInformation">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header mod">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true" style="color:#fff;">&times;</span></button>
+                    <h4 class="modal-title modtitle" id="myModalInformation">[ INFORMACIÓN ] </h4>
+                </div>
+                <div class="modal-body">
+                    cargando contenido...espere un momento por favor
+                </div>
+                <div class="msg"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+
+        $('.searchRes').click(function () {
+            estado = $('.obj_estado').val();
+            cod_mes = $('.obj_mes').val();
+            cod_anio = $('.obj_anio').val();
+            ListarSolicitudes(estado, cod_anio, cod_mes);
+        })
+
+        //APROBAR SOLICITUD DE DISTRITOS
+        function aprobarsolicitud(codigo, estado) {
+            col = $(this);
+            var id = "#" + codigo;
+            $(id).html('<img src="../dist/img/loader.gif"  style="margin-left:-3px;"/>');
+            dataString = "codigo=" + codigo + "&estado=" + estado + "&recc=" + {{ ReconocimientoController.getreconocimiento.codigo }} ;
+            $.ajax({
+                type: "get",
+                url: "{{ base_url() }}/solicitud/enviarsoldistrito",
+                data: dataString,
+                dataType: 'json',
+                success: function (datos) {
+                    if (datos.response == 'aprobado') {
+                        ListarSolicitudes();
+                        ListarSolicitudesApro();
+                    } else if (datos.response == 'existe') {
+                        alert("La solicitud ya fue aprobada.");
+                        $(id).html('<i class="fa fa-check"></i>');
+                    } else {
+                        alert("Ocurrió un error");
+                    }
+                },
+                error: function () {
+                    alert("Ocurrió un error");
+                }
+
+            });
+        };
+
+
+        $(document).ready(function () {
+            ListarSolicitudes();
+            ListarSolicitudesApro();
+        })
+
+
+        var childRows = null;
+
+        function ListarSolicitudes() {
+            responsive: true
+            var dt = $('#Solicitudes').DataTable({
+                destroy: true,
+
+                "searching": false,
+                "paging": false,
+                "ordering": false,
+                "info": false,
+
+                "language": {
+                    "lengthMenu": "Ver _MENU_ registros por página",
+                    "zeroRecords": "NO SE ENCONTRARON SOLICITUDES PENDIENTES",
+                    "info": "Viendo página _PAGE_ de _PAGES_",
+                    "infoEmpty": "No se encontraron responsables",
+                    "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "search": "Buscar:",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Último",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    },
+                },
+
+                "ajax": {
+                    "type": "get",
+                    "url": "{{ base_url() }}/solicitud/listasolicitudesdistritalesPend",
+                    "data": {
+                        estado: 1
+                    }
+                },
+
+                "columns": [
+
+                    {
+                        "data": "num_sol",
+                        render: function (data) {
+                            if (data == null) {
+                                return '---';
+                            } else {
+                                return data;
+                            }
+
+                        },
+                    },
+                    {
+                        "data": "tipo_sol",
+                        render: function (data) {
+                            if (data == "1") {
+                                return '[NUEVO]';
+                            } else {
+                                return '[ACTUALIZACIÓN]';
+                            }
+
+                        },
+                    },
+                    {
+                        "data": "urldoc",
+                        render: function (data) {
+                            return "<a class='' target='blank_'" +
+                                "style='cursor:pointer;overflow: visible;'" +
+                                "href='{{ base_url() }}/" + data + "'>" +
+                                "<i class='fa fa-eye'></i></a>"
+                        }
+
+                    },
+                    {"data": "nombre_org"},
+
+                    {
+                        "data": "flag",
+                        render: function (data) {
+                            return "<span class='label label-warning'>SIN ENVIAR</span>";
+                        },
+                    },
+                    {
+                        "data": "codsol",
+                        render: function (data) {
+                            return "<button type='button' title='Aprobar' id='" + data + "' onclick='aprobarsolicitud(" + data + ",2)'" +
+                                "class=''>" +
+                                "<i class='fa fa-check'></i>" +
+                                "</button>"
+
+                        },
+                    },
+
+                ],
+
+                columnDefs: [
+                    {
+                        className: 'text-center',
+                        targets: [0, 1, 2, 4 , 5],
+                    },
+
+                    {
+                        width: "15%",
+                        targets: [0]
+                    },
+
+                    {
+                        width: "4%",
+                        targets: [2, 5]
+                    },
+
+                    {
+                        width: "25%",
+                        targets: [3]
+                    },
+                ]
+            });
+
+        }
+
+        function ListarSolicitudesApro() {
+            responsive: true
+            var dt = $('#SolicitudesApro').DataTable({
+                destroy: true,
+
+                "searching": false,
+                "paging": false,
+                "ordering": false,
+                "info": false,
+
+                "language": {
+                    "lengthMenu": "Ver _MENU_ registros por página",
+                    "zeroRecords": "No se agregaron solicitudes",
+                    "info": "Viendo página _PAGE_ de _PAGES_",
+                    "infoEmpty": "No se encontraron responsables",
+                    "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "search": "Buscar:",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Último",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    },
+                },
+
+                "ajax": {
+                    "type": "get",
+                    "url": "{{ base_url() }}/solicitud/listasolicitudesxdetallereconocimiento",
+                    "data": {
+                        codigo: {{ ReconocimientoController.getreconocimiento.codigo }},
+                        estado: 2
+                    }
+                },
+
+                "columns": [
+
+                    {
+                        "data": "num_sol",
+                        render: function (data) {
+                            if (data == null) {
+                                return '---';
+                            } else {
+                                return data;
+                            }
+
+                        },
+                    },
+                    {
+                        "data": "tipo_sol",
+                        render: function (data) {
+                            if (data == "1") {
+                                return '[NUEVO]';
+                            } else {
+                                return '[ACTUALIZACIÓN]';
+                            }
+
+                        },
+                    },
+                    {
+                        "data": "urldoc",
+                        render: function (data) {
+                            return "<a class='' target='blank_'" +
+                                "style='cursor:pointer;overflow: visible;'" +
+                                "href='{{ base_url() }}/" + data + "'>" +
+                                "<i class='fa fa-eye'></i></a>"
+                        }
+
+                    },
+                    {"data": "nombre_org"},
+
+                    {
+                        "data": "flag",
+                        render: function (data) {
+                            return "<span class='label label-success'>Agregado</span>";
+                        },
+                    },
+
+                ],
+
+                columnDefs: [
+                    {
+                        className: 'text-center',
+                        targets: [0, 1, 2, 4],
+                    },
+
+                    {
+                        width: "15%",
+                        targets: [0]
+                    },
+
+                    {
+                        width: "4%",
+                        targets: [2, 4]
+                    },
+
+                    {
+                        width: "25%",
+                        targets: [3]
+                    },
+                ]
+            });
+
+        }
+
+        !function (a) {
+            "use strict";
+
+            a(function () {
+                var b = a(window),
+                    c = a(document.body),
+                    content = '',
+                    mycod = '',
+                    operation = '',
+                    form = '',
+                    f = '',
+                    mycodigo = '',
+                    flag = '',
+                    comentario = '',
+                    codigo = '';
+
+                a("#postenviarsolicitud").on("click", function () {
+                    var b = a(this), dataString;
+                    dataString = $('#enviar_form').serialize();
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ base_url() }}/envio/finalizar",
+                        data: dataString,
+                        beforeSend: function () {
+                            b.button("loading");
+                        },
+                        success: function (data) {
+                            var position = data.indexOf('?');
+                            var number = data.substr(0, position).replace(/\s+/g, '');
+
+                            if (number > 0) {
+                                b.button("reset");
+                                $('#EnviarSolicitud').modal('hide')
+                                $('#myModalInformation').find(".modal-body").html("<center>" + data.substr(position + 1, data.length) + "</center>");
+                                $('#myModalInformation').modal('show');
+                                setTimeout(function () {
+                                    location.reload();
+                                }, 1500);
+                                b.button("reset");
+
+                            } else {
+                                $(".msg").html("").show();
+                                $(".msg").html("<div class='alert alert-danger'><i class='fa fa-exclamation-triangle'></i> " + holder + "</div>");
+                                setTimeout(function () {
+                                    $(".msg").fadeOut(1500);
+                                }, 1500);
+                                b.button("reset");
+                            }
+
+                        },
+                        error: function () {
+                            console.log("It failed");
+                        }
+                    })
+                });
+
+
+            })
+        }
+        (jQuery), function () {
+            "use strict";
+            $('#fono').keyup(function () {
+                this.value = (this.value + '').replace(/[^0-9]/g, '');
+            });
+
+        }();
+    </script>
+
+
+{% endblock content %}
