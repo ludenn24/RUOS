@@ -9,7 +9,44 @@ use Respect\Validation\Validator as v;
 
 Class AuthController extends Controller
 {
-    
+
+    //VARIANTE DE ALERTAS
+    function show($type,$string)
+    {
+        $div='';
+        if($type==1){
+            $div='<div class="alert alert-danger" role="alert">
+                  <a href="#" class="alert-link">'.$string.'</a>
+                </div>';
+        }
+        if($type==2){
+            $div='<div id="login-status" class="warn-notice">
+            <div class="content-wrapper">
+                <div id="login-detail">
+                    <div id="login-status-icon-container"><i class="fa fa-exclamation-triangle"></i></div>
+                    <div id="login-status-message">'.$string.'</div>
+                </div>
+            </div>
+        </div>';
+        }
+
+        if($type==3){
+            $div='<div id="login-status" class="info-notice">
+            <div class="content-wrapper">
+                <div id="login-detail">
+                    <div id="login-status-icon-container"><span class="login-status-icon"></span></div>
+                    <div id="login-status-message">'.$string.'</div>
+                </div>
+            </div>
+        </div>';
+        }
+
+        if($type==4){
+            $div='<div class="alert alert-success"><i class="fa fa-check"></i> '.$string.'</div>';
+        }
+        return $div;
+    }
+
     public function getAll($limit = -1, $page = -1)
     {
         if ($limit < 0 && $page < 0) {
@@ -146,6 +183,13 @@ Class AuthController extends Controller
         $this->flash->addMessage('info', 'Tu te haz registrado exitosamente');
         $this->AuthController->attempt($usuario->dni, $request->getParam('clave'));
         return $response->withRedirect($this->router->pathFor('auth.solicitud'));
+    }
 
+    //ACTUALIZAR SOLICITANTE
+    public function ActualizarSolicitante($request, $response, $args){
+        $codigo = $request->getParam('cod_solicitante');
+        Usuarios::where('codigo', '=', $codigo)->update(['casa' => $request->getParam('sol_casa')]);
+        $mensaje = $codigo . '?' . $this->show('4', 'Lo datos del solicitante se han guardado correctamnente');
+        echo json_encode($mensaje);
     }
 }

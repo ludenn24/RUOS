@@ -71,11 +71,8 @@ Class AdminController extends Controller
     public function getViewSolicitud($request, $response, $args)
     {
         $codigo = $args['cod'];
-
         $ses_codigo = isset($_SESSION['codigo']) ? $_SESSION['codigo'] : '';
         $admin = Admin::where('codigo', $ses_codigo)->first();
-
-
         $data = Solicitudes::select('tb_solicitudes.codigo as codsol',
             'tb_solicitudes.num_sol',
             'tb_organizacion.codigo',
@@ -96,6 +93,7 @@ Class AdminController extends Controller
             'tb_solicitudes.fin',
             'tb_solicitudes.tipo_sol',
             'tb_solicitudes.flag',
+            'tb_solicitante.codigo as cod_solicitante',
             'tb_solicitante.dni',
             'tb_solicitante.nombres',
             'tb_solicitante.apellidopaterno',

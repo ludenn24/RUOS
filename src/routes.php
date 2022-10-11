@@ -66,7 +66,8 @@ $app->group('/admin', function () {
     $this->post('/aprobarverificacion', 'AdminController:aprobarVerificacion');
     $this->post('/eliminarreconocimiento', 'AdminController:eliminarReconocimiento');
     $this->get('/adminsolicitud', 'SolicitudController:getAdminSolicitud');
-     $this->post('/actualizarfechas', 'SolicitudController:GuardarSolicitud');
+    $this->post('/actualizarfechas', 'SolicitudController:GuardarSolicitud');
+    $this->post('/actualizarsolicitante', 'AuthController:ActualizarSolicitante');
 })->add(new AuthMiddleware($container));
 
 $app->group('', function () {

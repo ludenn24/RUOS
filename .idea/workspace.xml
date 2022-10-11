@@ -1,7 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2ab812ac-eece-4077-875b-047bc7fc223e" name="Default Changelist" comment="" />
+    <list default="true" id="2ab812ac-eece-4077-875b-047bc7fc223e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/okruos.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/okruos.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/dist/js/docs.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/dist/js/docs.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/Admin/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/Admin/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/Auth/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/Auth/AuthController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/Organizacion/OrganizacionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/Organizacion/OrganizacionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers_/Admin/AdminController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers_/Asesoria/AsesoriaController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers_/Auth/AuthController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers_/Constataciones/ConstatacionesController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers_/Controller.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers_/DetalleReconocimiento/DetalleReconocimientoController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers_/Documento/DocumentoController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers_/Export/ExportController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers_/HomeController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers_/JuntaDirectiva/JuntaDirectivaController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers_/MenuCategoria/MenuCategoriaController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers_/MenuItem/MenuItemController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers_/Notificacion/NotificacionController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers_/Organizacion/OrganizacionController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers_/Reconocimiento/ReconocimientoController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers_/Resolucion/ResolucionController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers_/Solicitud/SolicitudController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/Modelos/TipoOrganizacionDen.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Modelos/TipoOrganizacionDen.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/admin/auth/solicitud.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/admin/auth/solicitud.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes_.php" beforeDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,135 +58,140 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Views/auth/solicitud-dis.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="17" selection-start-line="17" selection-end-line="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Views/auth/reconocimiento.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="15" column="84" selection-start-line="15" selection-start-column="84" selection-end-line="15" selection-end-column="84" />
-              <folding>
-                <element signature="n#style#0;n#img#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Views/auth/solicitudesdistritales.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1076">
-              <caret line="151" column="7" selection-start-line="151" selection-start-column="7" selection-end-line="151" selection-end-column="7" />
-              <folding>
-                <element signature="n#style#0;n#p#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#p#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#p#0;n#div#2;n#div#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/settings.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="384">
-              <caret line="16" column="2" lean-forward="true" selection-start-line="16" selection-start-column="2" selection-end-line="16" selection-end-column="2" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Views/home.twig">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Views/templates/partials/home.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="596">
-              <caret line="314" column="44" lean-forward="true" selection-start-line="314" selection-start-column="44" selection-end-line="314" selection-end-column="44" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Controllers/Reconocimiento/ReconocimientoController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1293">
-              <caret line="161" column="69" selection-start-line="161" selection-start-column="69" selection-end-line="161" selection-end-column="69" />
-              <folding>
-                <element signature="e#52#97#0#PHP" expanded="true" />
-                <element signature="n#style#0;n#h4#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Controllers/Solicitud/SolicitudController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4920">
-              <caret line="831" column="40" selection-start-line="831" selection-start-column="40" selection-end-line="831" selection-end-column="40" />
-              <folding>
-                <element signature="e#46#80#0#PHP" expanded="true" />
-                <element signature="n#style#0;n#h3#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Controllers/Admin/AdminController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="422">
-              <caret line="331" column="40" selection-start-line="331" selection-start-column="40" selection-end-line="331" selection-end-column="40" />
-              <folding>
-                <element signature="e#41#70#0#PHP" expanded="true" />
-                <element signature="n#style#0;n#h3#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/routes.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
-              <caret line="87" column="108" selection-start-line="87" selection-start-column="94" selection-end-line="87" selection-end-column="108" />
-              <folding>
-                <element signature="e#7#41#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.38668296">
+      <split-first>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/Views/admin/auth/solicitud.twig">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-28">
+                  <caret line="283" column="55" selection-start-line="283" selection-start-column="55" selection-end-line="283" selection-end-column="55" />
+                  <folding>
+                    <element signature="n#style#0;n#img#0;n#!!top" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/Models/Modelos/Solicitudes.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="144">
+                  <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/public/dist/js/app.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-28">
+                  <caret line="76" column="49" selection-start-line="76" selection-start-column="49" selection-end-line="76" selection-end-column="49" />
+                  <folding>
+                    <element signature="n#!!doc" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/public/dist/js/docs.min.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-37">
+                  <caret line="130" column="30" selection-start-line="130" selection-start-column="30" selection-end-line="130" selection-end-column="30" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/routes.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="565">
+                  <caret line="69" column="79" selection-start-line="69" selection-start-column="58" selection-end-line="69" selection-end-column="79" />
+                  <folding>
+                    <element signature="e#7#41#0#PHP" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/Models/Modelos/Usuarios.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="144">
+                  <caret line="6" column="14" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="14" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/Controllers/Organizacion/OrganizacionController.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="233">
+                  <caret line="197" column="1" selection-start-line="197" selection-start-column="1" selection-end-line="225" selection-end-column="5" />
+                  <folding>
+                    <element signature="e#48#82#0#PHP" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/Controllers/Admin/AdminController.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="281">
+                  <caret line="89" column="42" selection-start-line="89" selection-start-column="42" selection-end-line="89" selection-end-column="42" />
+                  <folding>
+                    <element signature="e#41#70#0#PHP" expanded="true" />
+                    <element signature="n#style#0;n#h3#0;n#!!top" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/Controllers/Organizacion/OrganizacionController.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="168">
+                  <caret line="7" column="33" selection-start-line="7" selection-start-column="33" selection-end-line="7" selection-end-column="33" />
+                  <folding>
+                    <element signature="n#style#0;n#h3#0;n#!!top" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/Models/Modelos/TipoOrganizacionDen.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="216">
+                  <caret line="9" column="22" lean-forward="true" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/Controllers/Auth/AuthController.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="4464">
+                  <caret line="186" lean-forward="true" selection-start-line="186" selection-end-line="186" />
+                  <folding>
+                    <element signature="e#40#72#0#PHP" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>EliminarResolucion</find>
-      <find>loader.gif</find>
-      <find>reconoc</find>
-      <find>listareconocimientodistritales</find>
-      <find>getAdmReconocimientoDistritoPend</find>
-      <find>Solicitud</find>
-      <find>Buscardocumento</find>
-      <find>ORGANIZACION</find>
-      <find>FIN</find>
-      <find>ModalSolicitudes</find>
-      <find>ListaSolicitudes</find>
-      <find>enviar</find>
-      <find>UpdateSolicitudDis</find>
-      <find>textarea</find>
-      <find>enviarsolicitud</find>
       <find>archivarolicitud</find>
       <find>listasolicitudesdistritalesPend</find>
       <find>getAdmSolicitudesDistritoPend</find>
@@ -171,8 +205,23 @@
       <find>r</find>
       <find>archivar</find>
       <find>where</find>
-      <find>solicitud</find>
       <find>envio</find>
+      <find>solicitud</find>
+      <find>&lt;/div&gt;</find>
+      <find>updat</find>
+      <find>admin</find>
+      <find>solicitante</find>
+      <find>organizacion</find>
+      <find>getViewSolicitud</find>
+      <find>ActualizarOrgLima</find>
+      <find>Usuarios</find>
+      <find>actualizarorgl</find>
+      <find>updatesolicitante</find>
+      <find>show</find>
+      <find>Organizaciones</find>
+      <find>updateorg</find>
+      <find>ActualizarSolicitante</find>
+      <find>Documentos</find>
     </findStrings>
     <replaceStrings>
       <replace>{{ base_url() }}/dist/</replace>
@@ -196,10 +245,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Views/mapa.twig" />
-        <option value="$PROJECT_DIR$/src/Views/admin/dash.twig" />
-        <option value="$PROJECT_DIR$/src/Controllers/HomeController.php" />
-        <option value="$PROJECT_DIR$/src/Views/auth/almacenamiento.twig" />
         <option value="$PROJECT_DIR$/public/js/custom.js" />
         <option value="$PROJECT_DIR$/src/Views/auth/asesoria.twig" />
         <option value="$PROJECT_DIR$/public/css/style.css" />
@@ -214,8 +259,6 @@
         <option value="$PROJECT_DIR$/src/Controllers/Resolucion/ResolucionController.php" />
         <option value="$PROJECT_DIR$/src/Views/auth/resoluciones.twig" />
         <option value="$PROJECT_DIR$/src/Models/Modelos/Organizaciones.php" />
-        <option value="$PROJECT_DIR$/src/Controllers/Organizacion/OrganizacionController.php" />
-        <option value="$PROJECT_DIR$/src/Controllers/Auth/AuthController.php" />
         <option value="$PROJECT_DIR$/src/Models/Modelos/Solicitudes.php" />
         <option value="$PROJECT_DIR$/src/Views/auth/signup.twig" />
         <option value="$PROJECT_DIR$/src/Controllers/Reconocimiento/ReconocimientoCotroller.php" />
@@ -233,20 +276,26 @@
         <option value="$PROJECT_DIR$/src/Views/admin/auth/m-d-principal.twig" />
         <option value="$PROJECT_DIR$/src/Models/Modelos/Verificacion.php" />
         <option value="$PROJECT_DIR$/src/Models/Modelos/Reconocimiento.php" />
-        <option value="$PROJECT_DIR$/public/dist/js/docs.min.js" />
         <option value="$PROJECT_DIR$/src/Views/admin/auth/detalle.twig" />
         <option value="$PROJECT_DIR$/src/Controllers/Reconocimiento/ReconocimientoController.php" />
         <option value="$PROJECT_DIR$/src/Views/admin/auth/solicitudes.twig" />
-        <option value="$PROJECT_DIR$/src/routes.php" />
         <option value="$PROJECT_DIR$/src/Views/auth/modals/modals.twig" />
         <option value="$PROJECT_DIR$/src/Controllers/Solicitud/SolicitudController.php" />
-        <option value="$PROJECT_DIR$/public/js/solicitud.js" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/src/Controllers/Admin/AdminController.php" />
         <option value="$PROJECT_DIR$/src/Views/auth/reconocimiento.twig" />
         <option value="$PROJECT_DIR$/src/settings.php" />
         <option value="$PROJECT_DIR$/src/Views/templates/partials/home.twig" />
+        <option value="$PROJECT_DIR$/src/Controllers/Admin/AdminController.php" />
+        <option value="$PROJECT_DIR$/public/js/doc.min.js" />
+        <option value="$PROJECT_DIR$/public/js/main.js" />
+        <option value="$PROJECT_DIR$/public/js/solicitud.js" />
+        <option value="$PROJECT_DIR$/src/routes.php" />
+        <option value="$PROJECT_DIR$/public/dist/js/docs.min.js" />
+        <option value="$PROJECT_DIR$/src/Views/admin/auth/solicitud.twig" />
+        <option value="$PROJECT_DIR$/src/Controllers/Auth/AuthController.php" />
+        <option value="$PROJECT_DIR$/src/Models/Modelos/TipoOrganizacionDen.php" />
+        <option value="$PROJECT_DIR$/src/Controllers/Organizacion/OrganizacionController.php" />
       </list>
     </option>
   </component>
@@ -276,9 +325,16 @@
       <path value="$PROJECT_DIR$/vendor/twig/twig" />
       <path value="$PROJECT_DIR$/vendor/psr/http-message" />
       <path value="$PROJECT_DIR$/vendor/psr/simple-cache" />
+      <path value="$PROJECT_DIR$/vendor/maennchen/zipstream-php" />
+      <path value="$PROJECT_DIR$/vendor/myclabs/php-enum" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-client" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/vendor/phpoffice/phpspreadsheet" />
+      <path value="$PROJECT_DIR$/vendor/markbaker/complex" />
+      <path value="$PROJECT_DIR$/vendor/markbaker/matrix" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1920" />
@@ -297,142 +353,98 @@
         <subPane>
           <expand>
             <path>
-              <item name="ruosgit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ruosgit" type="462c0819:PsiDirectoryNode" />
+              <item name="ruos" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ruos" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="ruosgit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ruosgit" type="462c0819:PsiDirectoryNode" />
+              <item name="ruos" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ruos" type="462c0819:PsiDirectoryNode" />
               <item name="public" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="ruosgit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ruosgit" type="462c0819:PsiDirectoryNode" />
+              <item name="ruos" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ruos" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="dist" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ruos" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ruos" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="dist" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ruos" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ruos" type="462c0819:PsiDirectoryNode" />
               <item name="public" type="462c0819:PsiDirectoryNode" />
               <item name="js" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="ruosgit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ruosgit" type="462c0819:PsiDirectoryNode" />
+              <item name="ruos" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ruos" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="ruosgit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ruosgit" type="462c0819:PsiDirectoryNode" />
+              <item name="ruos" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ruos" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Controllers" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="ruosgit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ruosgit" type="462c0819:PsiDirectoryNode" />
+              <item name="ruos" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ruos" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Controllers" type="462c0819:PsiDirectoryNode" />
               <item name="Admin" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="ruosgit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ruosgit" type="462c0819:PsiDirectoryNode" />
+              <item name="ruos" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ruos" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Controllers" type="462c0819:PsiDirectoryNode" />
-              <item name="Reconocimiento" type="462c0819:PsiDirectoryNode" />
+              <item name="Auth" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="ruosgit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ruosgit" type="462c0819:PsiDirectoryNode" />
+              <item name="ruos" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ruos" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Controllers" type="462c0819:PsiDirectoryNode" />
-              <item name="Solicitud" type="462c0819:PsiDirectoryNode" />
+              <item name="Organizacion" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="ruosgit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ruosgit" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Helpers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ruosgit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ruosgit" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Middleware" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ruosgit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ruosgit" type="462c0819:PsiDirectoryNode" />
+              <item name="ruos" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ruos" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Models" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="ruosgit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ruosgit" type="462c0819:PsiDirectoryNode" />
+              <item name="ruos" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ruos" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Models" type="462c0819:PsiDirectoryNode" />
-              <item name="Base" type="462c0819:PsiDirectoryNode" />
+              <item name="Modelos" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="ruosgit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ruosgit" type="462c0819:PsiDirectoryNode" />
+              <item name="ruos" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ruos" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Views" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="ruosgit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ruosgit" type="462c0819:PsiDirectoryNode" />
+              <item name="ruos" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ruos" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Views" type="462c0819:PsiDirectoryNode" />
               <item name="admin" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="ruosgit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ruosgit" type="462c0819:PsiDirectoryNode" />
+              <item name="ruos" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ruos" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Views" type="462c0819:PsiDirectoryNode" />
               <item name="admin" type="462c0819:PsiDirectoryNode" />
               <item name="auth" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ruosgit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ruosgit" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Views" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ruosgit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ruosgit" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Views" type="462c0819:PsiDirectoryNode" />
-              <item name="auth" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ruosgit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ruosgit" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Views" type="462c0819:PsiDirectoryNode" />
-              <item name="auth" type="462c0819:PsiDirectoryNode" />
-              <item name="modals" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ruosgit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ruosgit" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Views" type="462c0819:PsiDirectoryNode" />
-              <item name="organizacion" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ruosgit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ruosgit" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Views" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ruosgit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ruosgit" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Views" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="partials" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -444,7 +456,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="editor.config.ad.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Models/Base" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -503,17 +515,18 @@
       <workItem from="1593933017702" duration="42000" />
       <workItem from="1594050717557" duration="66709000" />
       <workItem from="1594611249621" duration="33752000" />
+      <workItem from="1665525577156" duration="6784000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="548021000" />
+    <option name="totallyTimeSpent" value="554805000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1066" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24360341" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21771611" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -533,27 +546,6 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Database" order="3" weight="0.32995737" />
     </layout>
-    <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1684435" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3293348" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" order="8" />
-      <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.3293348" />
-      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" weight="0.3290461" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Database" order="3" weight="0.32995737" />
-    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -583,67 +575,28 @@
         </entry>
       </map>
     </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Helpers/Rules/DniDisponible.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controllers/Auth/AuthController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1563">
-          <caret line="45" column="64" selection-start-line="45" selection-start-column="59" selection-end-line="45" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Middleware/AuthMiddleware.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Models/Modelos/DatalleReconocimiento.php" />
-    <entry file="file://$PROJECT_DIR$/src/Models/Modelos/JuntasDirectivas.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/bootstrap.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1512">
-          <caret line="64" column="36" lean-forward="true" selection-start-line="64" selection-start-column="36" selection-end-line="64" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Middleware/CsrfViewMiddleware.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controllers/JuntaDirectiva/JuntaDirectivaController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="284">
           <caret line="59" column="47" selection-start-line="59" selection-start-column="41" selection-end-line="59" selection-end-column="47" />
           <folding>
             <element signature="e#48#88#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controllers/Organizacion/OrganizacionController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1920">
-          <caret line="88" column="44" selection-start-line="88" selection-start-column="38" selection-end-line="88" selection-end-column="44" />
-          <folding>
-            <element signature="e#48#82#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -721,13 +674,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/dist/js/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-624">
-          <caret line="10" column="52" lean-forward="true" selection-start-line="10" selection-start-column="52" selection-end-line="10" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/dist/js/script-solicitudes.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -735,13 +681,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/doc.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="13" column="52" selection-start-line="13" selection-start-column="52" selection-end-line="13" selection-end-column="52" />
         </state>
       </provider>
     </entry>
@@ -766,13 +705,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/dist/js/docs.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="371">
-          <caret line="613" column="32" selection-start-line="613" selection-start-column="16" selection-end-line="613" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Views/admin/auth/detalle.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="86">
@@ -783,18 +715,6 @@
             <element signature="e#9806#11906#0#HTML" />
             <element signature="e#9484#12183#0#HTML" />
             <element signature="e#19805#21222#0#HTML" />
-            <element signature="n#style#0;n#img#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Views/admin/auth/solicitud.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-20942">
-          <caret line="307" column="72" selection-start-line="307" selection-start-column="72" selection-end-line="307" selection-end-column="72" />
-          <folding>
-            <element signature="n#style#0;n#img#0;n#!!top" expanded="true" />
-            <element signature="n#src#0;n#img#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#img#0;n#!!top" expanded="true" />
           </folding>
         </state>
@@ -837,9 +757,108 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Views/auth/solicitud-lc.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="10" column="72" selection-start-line="10" selection-start-column="72" selection-end-line="10" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Models/Base/proyruos_bd.sql" />
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="739">
+            <caret line="76" selection-start-line="76" selection-end-line="76" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/php.ini" />
+    <entry file="file://$PROJECT_DIR$/index.php" />
+    <entry file="file://$PROJECT_DIR$/src/Models/Base/proyecto_ruos.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-19197">
+          <caret line="2116" column="27" selection-start-line="2116" selection-start-column="27" selection-end-line="2116" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Views/auth/solicitud-dis.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Views/auth/reconocimiento.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="15" column="84" selection-start-line="15" selection-start-column="84" selection-end-line="15" selection-end-column="84" />
+          <folding>
+            <element signature="n#style#0;n#img#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Views/home.twig">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controllers/Reconocimiento/ReconocimientoController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3720">
+          <caret line="161" column="21" selection-start-line="161" selection-start-column="21" selection-end-line="161" selection-end-column="21" />
+          <folding>
+            <element signature="e#52#97#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controllers/Solicitud/SolicitudController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19824">
+          <caret line="831" column="23" selection-start-line="831" selection-start-column="23" selection-end-line="831" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Views/templates/partials/home.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="596">
+          <caret line="314" column="44" selection-start-line="314" selection-start-column="44" selection-end-line="314" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Views/auth/solicitudesdistritales.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="784">
+          <caret line="151" column="7" selection-start-line="151" selection-start-column="7" selection-end-line="151" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/settings.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="9" column="42" lean-forward="true" selection-start-line="9" selection-start-column="42" selection-end-line="9" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="251">
+          <caret line="14" column="34" lean-forward="true" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/public/js/custom.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
+        <state relative-caret-position="175">
           <caret line="834" column="68" selection-start-line="834" selection-start-column="68" selection-end-line="834" selection-end-column="68" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
@@ -857,107 +876,27 @@
             <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Views/auth/solicitud-lc.twig">
+    <entry file="file://$PROJECT_DIR$/public/dist/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="10" column="72" selection-start-line="10" selection-start-column="72" selection-end-line="10" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Models/Base/proyruos_bd.sql">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="739">
-            <caret line="76" selection-start-line="76" selection-end-line="76" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/php.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="3" column="43" selection-start-line="3" selection-start-column="43" selection-end-line="3" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="2" column="2" lean-forward="true" selection-start-line="2" selection-start-column="2" selection-end-line="2" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/solicitud.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-10">
-          <caret line="305" column="112" selection-start-line="305" selection-start-column="112" selection-end-line="305" selection-end-column="112" />
+        <state relative-caret-position="-28">
+          <caret line="76" column="49" selection-start-line="76" selection-start-column="49" selection-end-line="76" selection-end-column="49" />
           <folding>
-            <element signature="n#style#0;n#a#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#src#0;n#img#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#!!block;n#ListarMiebros#0" />
-            <element signature="n#style#0;n#img#0;n#!!top" expanded="true" />
-            <element signature="n#src#0;n#img#0;n#!!top" expanded="true" />
-            <element signature="n#!!block;n#EliminarMiembro#0" />
-            <element signature="n#!!block;n#ExportarExcelCasos#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Models/Base/proyecto_ruos.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-19197">
-          <caret line="2116" column="27" selection-start-line="2116" selection-start-column="27" selection-end-line="2116" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controllers/Reconocimiento/ReconocimientoController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1293">
-          <caret line="161" column="69" selection-start-line="161" selection-start-column="69" selection-end-line="161" selection-end-column="69" />
-          <folding>
-            <element signature="e#52#97#0#PHP" expanded="true" />
-            <element signature="n#style#0;n#h4#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controllers/Solicitud/SolicitudController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4920">
-          <caret line="831" column="40" selection-start-line="831" selection-start-column="40" selection-end-line="831" selection-end-column="40" />
-          <folding>
-            <element signature="e#46#80#0#PHP" expanded="true" />
-            <element signature="n#style#0;n#h3#0;n#!!top" expanded="true" />
+            <element signature="n#!!doc" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controllers/Admin/AdminController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="422">
-          <caret line="331" column="40" selection-start-line="331" selection-start-column="40" selection-end-line="331" selection-end-column="40" />
+        <state relative-caret-position="281">
+          <caret line="89" column="42" selection-start-line="89" selection-start-column="42" selection-end-line="89" selection-end-column="42" />
           <folding>
             <element signature="e#41#70#0#PHP" expanded="true" />
             <element signature="n#style#0;n#h3#0;n#!!top" expanded="true" />
@@ -965,59 +904,112 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Views/auth/solicitud-dis.twig">
+    <entry file="file://$PROJECT_DIR$/public/js/doc.min.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        <state relative-caret-position="367">
+          <caret line="24" column="17" lean-forward="true" selection-start-line="24" selection-start-column="17" selection-end-line="24" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Views/auth/solicitudesdistritales.twig">
+    <entry file="file://$PROJECT_DIR$/public/js/solicitud.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1076">
-          <caret line="151" column="7" selection-start-line="151" selection-start-column="7" selection-end-line="151" selection-end-column="7" />
+        <state relative-caret-position="216">
+          <caret line="9" column="19" lean-forward="true" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
           <folding>
-            <element signature="n#style#0;n#p#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#0;n#div#2;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#!!block;n#ListarMiebros#0" />
+            <element signature="n#!!block;n#EliminarMiembro#0" />
+            <element signature="n#!!block;n#ExportarExcelCasos#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Models/Modelos/Usuarios.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="6" column="14" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="14" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/routes.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="87" column="108" selection-start-line="87" selection-start-column="94" selection-end-line="87" selection-end-column="108" />
+        <state relative-caret-position="565">
+          <caret line="69" column="79" selection-start-line="69" selection-start-column="58" selection-end-line="69" selection-end-column="79" />
           <folding>
             <element signature="e#7#41#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Views/auth/reconocimiento.twig">
+    <entry file="file://$PROJECT_DIR$/public/dist/js/docs.min.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="15" column="84" selection-start-line="15" selection-start-column="84" selection-end-line="15" selection-end-column="84" />
+        <state relative-caret-position="-37">
+          <caret line="130" column="30" selection-start-line="130" selection-start-column="30" selection-end-line="130" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Views/admin/auth/solicitud.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-28">
+          <caret line="283" column="55" selection-start-line="283" selection-start-column="55" selection-end-line="283" selection-end-column="55" />
           <folding>
             <element signature="n#style#0;n#img#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/settings.php">
+    <entry file="file://$PROJECT_DIR$/src/Models/Modelos/Solicitudes.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="16" column="2" lean-forward="true" selection-start-line="16" selection-start-column="2" selection-end-line="16" selection-end-column="2" />
+        <state relative-caret-position="144">
+          <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Views/home.twig">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Views/templates/partials/home.twig">
+    <entry file="file://$PROJECT_DIR$/src/Models/Modelos/Distritos.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="596">
-          <caret line="314" column="44" lean-forward="true" selection-start-line="314" selection-start-column="44" selection-end-line="314" selection-end-column="44" />
+        <state relative-caret-position="192">
+          <caret line="8" column="38" lean-forward="true" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Models/Modelos/Documentos.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controllers/Auth/AuthController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4464">
+          <caret line="186" lean-forward="true" selection-start-line="186" selection-end-line="186" />
+          <folding>
+            <element signature="e#40#72#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Models/Modelos/TipoOrganizacionDen.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="9" column="22" lean-forward="true" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controllers/Organizacion/OrganizacionController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="7" column="33" selection-start-line="7" selection-start-column="33" selection-end-line="7" selection-end-column="33" />
+          <folding>
+            <element signature="n#style#0;n#h3#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

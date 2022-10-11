@@ -248,6 +248,7 @@
                         </div>
                      </div>
                   </div>
+
                   <div class="col-md-6">
                      <div class="col-md-6">
                         <div class="box box-solid">
@@ -256,39 +257,53 @@
                               <h3 class="box-title">Solicitante</h3>
                            </div>
                            <div class="box-body">
-                              <table class="table table-bordered" cellpadding="5">
-                                 <tbody>
-                                    <tr>
-                                       <th>DNI:</th>
-                                       <td>
-                                          {{ model.dni }}
-                                       </td>
-                                    </tr>
-                                    <tr>
-                                       <th><b>NOMBRES:</b></th>
-                                       <td>
-                                          <dd>{{ model.nombres }}</dd>
-                                       </td>
-                                    </tr>
-                                    <tr>
-                                       <th><b>APELLIDOS:</b></th>
-                                       <td>
-                                          {{ model.apellidopaterno }} {{ model.apellidomaterno }}
-                                       </td>
-                                    </tr>
-                                    <tr>
-                                       <th><b>CORREO:</b> </th>
-                                       <td>
-                                          {{ model.correo }}
-                                       </td>
-                                    </tr>
-                                    <tr>
-                                       <th><b>TELÉFONO:</b> </th>
-                                       <td>{{ model.telefono }}</td>
-                                    </tr>
-                                 </tbody>
-                              </table>
+                             <form name="FormActualizarSolicitante" id="FormActualizarSolicitante" method="post">
+
+                               <input type="hidden" value="{{ model.cod_solicitante }}" id="cod_solicitante" name="cod_solicitante">
+
+                               <div class="col-md-12">
+                                 <div class="form-group">
+                                   <label>DNI</label>
+                                   <input type="text" value="{{ model.dni }}" class="form-control form-input obligate-org" disabled>
+                                 </div>
+                               </div>
+                               <div class="col-md-5">
+                                 <div class="form-group">
+                                   <label>Nombre</label>
+                                   <input type="text" value="{{ model.nombres }}" class="form-control form-input obligate-org" disabled>
+                                 </div>
+                               </div>
+                               <div class="col-md-7">
+                                 <div class="form-group">
+                                   <label>Apellidos</label>
+                                   <input type="text" value="{{ model.apellidopaterno }} {{ model.apellidomaterno }}" class="form-control form-input obligate-org" disabled>
+                                 </div>
+                               </div>
+                               <div class="col-md-6">
+                                 <div class="form-group">
+                                   <label>Teléfono</label>
+                                   <input type="text" value="{{ model.telefono }}" class="form-control form-input obligate-org" disabled>
+                                 </div>
+                               </div>
+                               <div class="col-md-6">
+                                 <div class="form-group">
+                                   <label>Casa Vecinal</label>
+                                   <input type="number" value="{{ model.casa }}" id="sol_casa" name="sol_casa"
+                                          data-content="Debe ingresar una casa vecinal"
+                                          class="form-control form-input obligate-sol">
+                                 </div>
+                               </div>
+
+                               <div class="col-md-12">
+                                 <div  class="msgsol"></div>
+                               </div>
+                               {{ csrf.field | raw }}
+                             </form>
+
                            </div>
+                          <div class="box-footer">
+                            <button type="button" id="updatesolicitante" class="btn bg-olive margin">Guardar</button>
+                          </div>
                         </div>
                      </div>
                      <div class="col-md-6">
