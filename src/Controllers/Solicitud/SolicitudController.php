@@ -455,6 +455,45 @@ Class SolicitudController extends Controller {
         }
     }
 
+    //Organizaciones aprobadas
+    public function getOrganizacionesAprobadasCercado($request, $response, $args) {
+        try {
+            $data = Solicitudes::select('tb_solicitudes.codigo as codsol',
+                'tb_solicitudes.num_sol',
+                'tb_tipos_orgs.descripcion',
+                'tb_tipos_orgs_denom.descripcion as subtipo',
+                'tb_organizacion.codigo',
+                'tb_organizacion.nombre_org',
+                'tb_organizacion.fecha_constitucion',
+                'tb_organizacion.domicilio_org',
+                'tb_solicitudes.fec_revision',
+                'tb_solicitudes.fec_venci',
+                'tb_solicitudes.tipo_sol',
+                'tb_solicitudes.flag',
+                'tb_solicitante.telefono',
+                'tb_solicitante.correo',
+                'tb_resolucion.num_res',
+                'tb_resolucion.ruta',
+                'tb_solicitante.casa')
+                ->join('tb_organizacion', 'tb_solicitudes.cod_org', '=', 'tb_organizacion.codigo')
+                ->join('tb_solicitante', 'tb_solicitudes.cod_usuario', '=', 'tb_solicitante.codigo')
+                ->join('tb_resolucion', 'tb_solicitudes.codigo', '=', 'tb_resolucion.cod_solicitud')
+                ->join('tb_tipos_orgs', 'tb_organizacion.tipo_org','=','tb_tipos_orgs.codigo')
+                ->leftJoin('tb_tipos_orgs_denom','tb_organizacion.tipo_den','=','tb_tipos_orgs_denom.codigo')
+                ->where('tb_organizacion.distrito', 1251)
+                ->where('tb_solicitudes.flag', 3)
+                ->where('tb_resolucion.estado', 1)
+                ->orderBy('tb_solicitudes.codigo', 'ASC')
+                ->groupBy('tb_organizacion.codigo')
+                ->get();
+            $arreglo["data"] = $data;
+            return $this->response->withJson($arreglo);
+        } catch (ErrorException $e) {
+            $data = "Hubo un error al listar los datos.";
+            return $this->response->withJson($data, 500);
+        }
+    }
+
     public function getAdmSolicitudesJuveniles($request, $response, $args) {
         $estado = $request->getParam('estado');
         try {

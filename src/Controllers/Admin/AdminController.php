@@ -336,6 +336,11 @@ Class AdminController extends Controller
         return $this->view->render($response, 'admin/auth/m-c-principal.twig');
     }
 
+    public function getViewOrgCerAprob($request, $response)
+    {
+        return $this->view->render($response, 'admin/auth/o-c-a.twig');
+    }
+
     public function getViewListmdprincipal($request, $response)
     {
         return $this->view->render($response, 'admin/auth/m-d-principal.twig');

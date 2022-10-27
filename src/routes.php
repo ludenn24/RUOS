@@ -59,6 +59,7 @@ $app->group('/admin', function () {
     $this->get('/listareconocimientodistritales', 'ReconocimientoController:getAdmReconocimientoDistritoPend');
     //VALIDAR
     $this->get('/listadetallereconocimientodistritales', 'AdminController:getAdmDetalleSolicitudesDistrito');
+    $this->get('/listaorganizacionescercadoaprobadas', 'SolicitudController:getOrganizacionesAprobadasCercado');
     //VALIDAR
     $this->get('/listaconsolidadoreconocimiento', 'AdminController:getConsilidadoDetalleSolicitudesDistrito');
     $this->post('/atenderasesoria', 'AsesoriaController:Antederasesoria');
@@ -68,6 +69,9 @@ $app->group('/admin', function () {
     $this->get('/adminsolicitud', 'SolicitudController:getAdminSolicitud');
     $this->post('/actualizarfechas', 'SolicitudController:GuardarSolicitud');
     $this->post('/actualizarsolicitante', 'AuthController:ActualizarSolicitante');
+    //Reportes
+    $this->get('/organizaciones-cercado-aprobadas', 'AdminController:getViewOrgCerAprob')->setName('admin.o-c-a');
+
 })->add(new AuthMiddleware($container));
 
 $app->group('', function () {
